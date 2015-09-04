@@ -1,0 +1,12 @@
+-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main([Ljava/lang/String;)
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.reduction.ReductionExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.inline.InlineExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.devirtualization.DevirtualizerExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.out.JarGenerationExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.out.ClassGenerationExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.obfuscation.NameCompressionExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.load.LoadExtension 
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.coldMethod.ColdMethodExtension
+-includeLibraryClass method:com.ibm.ive.tools.japt.commandLine.options.ExtensionOption.createExtension(Ljava/lang/String;Lcom/ibm/ive/tools/japt/MessageLogger;):com.ibm.ive.tools.japt.startupPerformance.StartupPerformanceExtension
+-includeResource *.properties 
+-startupClass com.ibm.ive.tools.japt.commandLine.Main

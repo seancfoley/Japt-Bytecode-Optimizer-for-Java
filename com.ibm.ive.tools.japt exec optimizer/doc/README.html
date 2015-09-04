@@ -1,0 +1,85 @@
+<html>
+<title>IBM Real Time Application Execution Optimizer for Java</title>
+<body>
+<h1>IBM Real Time Application Execution Optimizer for Java</h1>
+<p>
+<h2>Sean Foley</h2></p><p>
+Sean_Foley@ca.ibm.com</p><p>
+May 20, 2009</p><p>
+<h2>To run</h2>
+Run the jar file with:<br>
+java -jar &lt;jar file&gt;<br>
+or <br>
+java -cp &lt;jar file&gt; AppExecOptimizer<br>
+<p>
+Running it with no options produces help information.
+</p>
+<h2>Technologies</h2>
+<p>
+The tool provides the following technologies:<br>
+<ul>
+<li>escape analysis on a per method-invocation basis</li>
+<li>control flow analysis that splits an application into archives according to thread accessibility</li>
+<li>control flow analysis that detects potental occurrences of runtime errors MemoryAccessError, IllegalAssignmentError, IllegalThreadStateException</li>
+<li>control flow analysis that determines entry points into an application</li>
+<li>removal of unwanted attributes from Java&#153; class files</li>
+<li>addition of stackmaps to Java class files</li>
+<li>verification of Java class files</li>
+<li>auto-generation of classes that when initialized will load and initialize all other classes within the same archive</li>
+<li>specialized packaging of Java applications into deployable archives by packaging all referenced classes from a dual class path</li>
+</ul>
+</p>
+
+
+<h2>Description</h2>
+<p>
+The tool eases development and deployment of Java applications.  
+It aids with the verification of the integrity of a compiled Java application while preparing the application for optimized deployment in specific environments.
+</p>
+<p>
+The tool performs the following functions for optimized deployment and application behaviour:
+</p>
+<p>
+1. While loading the application, all classes needed for deployment of the application are identified and loaded recursively by the tool.  Also identified are all unresolved references (classes, methods or fields that cannot be found) to ensure no application components are missing.  While loading it checks each class for all possible class format, resolution, and verification errors that would be identified by a virtual machine at run-time, which can be helpful to verify classes that are not produced by standard compilers.  
+</p>
+<p>
+2. It verifies the integrity of real-time Java memory usage in the application, by detecting the potential run-time errors MemoryAccessError, IllegalAssignmentError and IllegalThreadStateException which are common errors that are difficult to eliminate when developing real-time Java.
+</p>
+<p>
+3. It separates application classes and resources into the following categories:<br>
+<ul>
+<li>NoHeapRealtimeThread (NHRT) accessible classes</li>
+<li>RealtimeThread accessible classes</li>
+<li>regular thread accessible classes</li>
+<li>inaccessible: classes not accessible to any thread</li>
+<li>resources</li>
+</ul>
+The separated items are written to separate archives on disk.  
+</p>
+<p>
+4. It can determine the persistent memory characteristics of allocated objects on a per-invocation basis with the use of escape analysis.  For each method, an  escape analysis determines whether the objects created by invocations of the method can persist. This helps identify memory requirements for the heap, for scopes, and for other memory areas in use.
+</p>
+<p>
+5. The tool can identify all possible entry points into the application (which are all classes, methods or fields that can be accessed from outside the application classes).  For example, it will detect methods that can be invoked in application classes from external classes because they override external methods. 
+</p>
+<p>
+6. When writing classes the tool can remove unwanted class file attributes (such as attributes needed only for debugging, reducing run-time memory usage), and it can add stackmaps to classes to improve class load times for Java classes compiled for Java 5 or earlier. 
+</p>
+<p>
+7. The tool can add to each archive an auto-loader class that when loaded, will load and initialize all other classes within the same archive, in order to trigger early class initialization for an application.
+</p>
+
+<h2>Trademarks</h2>
+<p>
+IBM, the IBM logo, and ibm.com are trademarks or registered trademarks of International Business Machines Corporation in the United States, other countries, or both.
+</p>
+<p>
+Java and all Java-based trademarks are trademarks of Sun Microsystems, Inc. in the United States, other countries, or both.
+</p>
+<p>
+Other company, product, or service names may be trademarks or service marks of others.
+</p>
+
+
+</body>
+</html>

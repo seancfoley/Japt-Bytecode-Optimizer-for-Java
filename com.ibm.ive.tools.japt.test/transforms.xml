@@ -1,0 +1,324 @@
+<?xml version="1.0" ?>
+<transforms>
+
+<transformation>
+-optimize
+</transformation>
+
+<transformation>
+-verify
+</transformation>
+
+<!-- a transformation specifically designed test case for the upcast optmization and the test application TestUpcast.
+  The upcast extension eliminates the need for the app to load the classes SomeException and SomeInterface.  These classes are therefore removed to confirm they are no longer needed. -->
+<transformation>
+-deferClassLoads -optimizeTypeChecks -optimizeCatches -reduce -noRemoveUnused -removeClass ?com.ibm.ive.tools.japt.testcase.SomeInterface -removeClass ?com.ibm.ive.tools.japt.testcase.SomeException
+</transformation>
+
+<transformation>
+-deferClassLoads -optimizeTypeChecks
+</transformation>
+
+<transformation>
+-deferClassLoads -optimizeCatches -optimizeThrows
+</transformation>
+
+<transformation>
+-deferClassLoads -optimizeThrows
+</transformation>
+
+<transformation>
+-deferClassLoads -optimizeCatches -optimizeTypeChecks -load -verify
+</transformation>
+
+<transformation>
+</transformation>
+
+
+
+
+<transformation>
+-verify -load -optimize -load -verify
+</transformation>
+
+<transformation>
+-reduce -ita
+</transformation>
+
+<transformation>
+-reduce -ita -reduce -xta
+</transformation>
+
+<transformation>
+-reduce -xta -reduce -ita
+</transformation>
+
+<transformation>
+-reduce -xta
+</transformation>
+
+<transformation>
+-reduce -rta
+</transformation>
+
+<transformation>
+-reduce -bta
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *t* -allowAccessors
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod * -allowAccessors -expandPermissions
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *t* -warmMethod *s* -allowAccessors -expandPermissions -load -optimize -verify
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *t* -warmMethod *s* -expandPermissions
+</transformation>
+
+<!-- This transformation means that the classes with previously migrated methods are marked completely warm.
+So there should be no migrations during the second japt run. -->
+<transformation>
+-migrateMethodBodies -coldMethod *t* -warmMethod ?*$$Cold* -expandPermissions -allowAccessors
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *t* -warmMethod *s* -allowAccessors
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *t* -warmMethod *s* -notWarmIsCold -allowAccessors -expandPermissions
+</transformation>
+
+<transformation>
+-migrateMethodBodies -coldMethod *m* -obfuscate -expandPermissions -devirtualize -devirtualizeToStatic -devirtualizeToSpecial -optimize -inline -performanceInline -expandPermissions -reduce -bta -load -verify
+</transformation>
+
+<transformation>
+-reduce -bta -inline -performanceInline -devirtualize -devirtualizeToStatic -obfuscate -expandPermissions
+</transformation>
+
+<transformation>
+-reduce -bta -inline -performanceInline -expandPermissions -devirtualize -devirtualizeToSpecial -obfuscate -expandPermissions
+</transformation>
+
+<transformation>
+-optimize -reduce -bta -inline -performanceInline -expandPermissions -devirtualize -devirtualizeToStatic -obfuscate -expandPermissions
+</transformation>
+
+<transformation>
+-reduce -ita -obfuscate -devirtualize -devirtualizeToStatic -inline -compressionInline -makeFinal -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-obfuscate -expandPermissions -devirtualize -devirtualizeToStatic -devirtualizeToSpecial -optimize -inline -performanceInline -expandPermissions -reduce -bta -load -verify
+</transformation>
+
+<transformation>
+-reduce -ita -obfuscate -devirtualize -devirtualizeToStatic -inline -compressionInline -makeFinal -assumeUnknownVirtuals -migrateMethodBodies -coldMethod *m* 
+</transformation>
+
+<transformation>
+-obfuscate -devirtualize -devirtualizeToStatic -reduce -xta -inline -compressionInline -expandPermissions -load -verify
+</transformation>
+
+<transformation>
+-obfuscate -reduce -xta -inline -compressionInline -expandPermissions
+</transformation>
+
+<transformation>
+-inline -compressionInline -obfuscate -reduce -xta -expandPermissions
+</transformation>
+
+<transformation>
+-optimize -devirtualize -devirtualizeToStatic -devirtualizeToSpecial
+</transformation>
+
+<transformation>
+-devirtualize -devirtualizeToStatic -devirtualizeToSpecial
+</transformation>
+
+<transformation>
+-devirtualize -makeFinal
+</transformation>
+
+<transformation>
+-obfuscate -devirtualize -devirtualizeToStatic -reduce -xta -inline -compressionInline -makeFinal -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-reduce -xta -inline -compressionInline -expandPermissions -assumeUnknownVirtuals -devirtualize -makeFinal -devirtualizeToStatic -deferClassLoads -optimizeCatches -optimizeThrows
+</transformation>
+
+<transformation>
+-obfuscate -expandPermissions -devirtualize -devirtualizeToStatic -reduce -xta -inline -compressionInline -expandPermissions -makeFinal -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-obfuscate -expandPermissions -devirtualize -devirtualizeToStatic -reduce -ita -inline -compressionInline -expandPermissions -makeFinal -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-reduce -xta -noMakeClassesAbstract
+</transformation>
+
+<transformation>
+-reduce -ita -noMakeClassesAbstract
+</transformation>
+
+<transformation>
+-obfuscate -obfuscatedClsBaseName abcd
+</transformation>
+
+<transformation>
+-obfuscate -obfuscatedPackageName z
+</transformation>
+
+<xtransformation>
+-obfuscate -obfuscatedClsBaseName xxx -obfuscatedPackageName yyy -caseSensitiveClassNames
+</xtransformation>
+
+<transformation>
+-obfuscate -obfuscate
+</transformation>
+
+<xtransformation>
+-obfuscate -caseSensitiveClassNames
+</xtransformation>
+
+<transformation>
+-obfuscate -expandPermissions
+</transformation>
+
+<transformation>
+-obfuscate -reuseStrings
+</transformation>
+
+<transformation>
+-inline -inlineAllJSRs
+</transformation>
+
+<transformation>
+-optimize -inline -inlineMethodJSRs *
+</transformation>
+
+<transformation>
+-inline -inlineMethodJSRs *
+</transformation>
+
+<transformation>
+-inline -inlineMethodJSRs * -noInlineMethodJSRs *
+</transformation>
+
+<transformation>
+-inline -inlineMethodJSRs *e* -noInlineMethodJSRs *f*
+</transformation>
+
+<transformation>
+-inline -inlineMethod * -noInlineMethod *
+</transformation>
+
+<transformation>
+-inline -compressionInline -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-optimize -inline -compressionInline -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-inline -compressionInline -noInlineMethod *
+</transformation>
+
+<transformation>
+-inline -compressionInline -noInlineMethod *v* -noinlineMethod *w*
+</transformation>
+
+<transformation>
+-inline -performanceInline -noInlineMethod *
+</transformation>
+
+<transformation>
+-inline -inlineMethod *t* -noInlineMethod *s*
+</transformation>
+
+<transformation>
+-optimize -inline -inlineMethod *t* -noInlineMethod *s*
+</transformation>
+
+<transformation>
+-inline -inlineMethod *t* -noInlineMethod *s* -inlineFromAnywhere
+</transformation>
+
+<transformation>
+-inline -inlineMethod java.lang.Math.max  -inlineMethod java.lang.Math.min
+</transformation>
+
+<transformation>
+-inline -compressionInline
+</transformation>
+
+<transformation>
+-inline -compressionInline -inlineFromAnywhere
+</transformation>
+
+<transformation>
+-inline -performanceInline -compressionInline
+</transformation>
+
+<transformation>
+-inline -compressionInline -performanceInline
+</transformation>
+
+<transformation>
+-inline -performanceInline
+</transformation>
+
+<transformation>
+-inline -performanceInline -inlineFromAnywhere
+</transformation>
+
+<transformation>
+-optimize -deferClassLoads -optimizeCatches -optimizeThrows -reduce -bta -inline -performanceInline -expandPermissions -devirtualize -makeFinal -devirtualizeToSpecial -devirtualizeToStatic -obfuscate -expandPermissions
+</transformation>
+
+<transformation>
+-obfuscate -deferClassLoads -optimizeCatches -optimizeThrows  -reduce -xta -inline -compressionInline -expandPermissions
+</transformation>
+
+<transformation>
+-deferClassLoads -optimizeCatches -optimizeThrows  -obfuscate -expandPermissions -devirtualize -devirtualizeToStatic -reduce -xta -inline -compressionInline -expandPermissions -makeFinal -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-obfuscate -expandPermissions -reduce -xta -inline -compressionInline -expandPermissions -assumeUnknownVirtuals -devirtualize -makeFinal -devirtualizeToStatic -deferClassLoads -optimizeCatches -optimizeThrows
+</transformation>
+
+<transformation>
+-devirtualize -devirtualizeToStatic -devirtualizeToSpecial -optimize -inline -performanceInline -expandPermissions -reduce -bta -load -verify
+</transformation>
+
+<transformation>
+-devirtualize -devirtualizeToStatic -reduce -xta -inline -compressionInline -expandPermissions -load -verify
+</transformation>
+
+<transformation>
+-devirtualize -devirtualizeToStatic -devirtualizeToSpecial -inline -performanceInline
+</transformation>
+
+<transformation>
+-obfuscate -devirtualize -devirtualizeToStatic -devirtualizeToSpecial -optimize -inline -performanceInline -expandPermissions -reduce -bta -load -verify -optimize
+</transformation>
+
+
+
+</transforms>

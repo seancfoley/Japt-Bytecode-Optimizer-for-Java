@@ -1,0 +1,186 @@
+<?xml version="1.0" ?>
+<tests>
+
+
+<testApp log="c:\temp\japtedchessBM.log" jar="c:\temp\japtedchessBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\chessBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.sun.mep.bench.Chess.ChessBenchmark</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedcryptoBM.log" jar="c:\\temp\\japtedcryptoBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\cryptoBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.parthus.CryptoBench.CryptoBench</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedkxmlBM.log" jar="c:\\temp\\japtedkxmlBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\kxmlBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.xml -includeResource *.cmd -includeLibraryClass com.hp.kXML.kxmlBenchmark</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedparallelBM.log" jar="c:\\temp\\japtedparallelBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\parallelBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.motorola.bench.parallel.ParallelBench -includeWholeClass com.motorola.bench.parallel.data^ -includeMethod com.motorola.bench.parallel.ParallelBench$workerThread.run()</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\temp\japtedregexpBM.log" jar="c:\temp\japtedregexpBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\regexpBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.inp -includeLibraryClass com.sun.mep.bench.RegExp.RegExp</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedpngdecodeBM.log" jar="c:\\temp\\japtedpngdecodeBM.jar" outputStartIndex="0" outputEndIndex="170" dir="c:\\temp\\japtTests">
+	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
+	<classPath>c:\temp\eembc\pngdecodeBM.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.png -includeLibraryClass com.sun.mep.bench.png.PNGBenchmark</japtApplicationArgs>
+</testApp>
+
+
+<!-- need test apps with stack map tables, annotations, signature attributes, enclosing method attributes -->
+
+<testApp log="c:\\temp\\japtedJaptJava6.log" jar="c:\\temp\\japtedJaptJava6.jar" outputIndexFromEnd="42" dir="c:\\temp\\japtTests\\java6">
+	<commandLine>
+		com.ibm.ive.tools.japt.commandLine.Main
+		-loadFile "c:\\temp\\test jars\\hanoi.jar"
+		-includeMainMethod com/ibm/ivj/examples/hanoi/Hanoi
+		-cp c:\java\2.3\ive\lib\jclMax\classes.zip 
+		-obfuscate -reduce -xta -inline -inlineAllJSRs 
+		-compressionInline -expandPermissions -deferClassLoads 
+		-optimizeCatches -optimizeThrows -optimizeTypeChecks
+		-migrateMethodBodies -coldMethod *t* -allowAccessors -expandPermissions -load -verify 
+		-jarOutput -output c:\\temp\\hanoiOptimized.jar 
+		-noStripDebugInfo -noStripSourceInfo -noStripAnnotations -noCompress
+		-includeResource *.properties
+	</commandLine>
+	<classPath>c:\temp\test jars\japt.java6.jar</classPath>
+	<japtApplicationArgs>
+		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main
+		-includeLibraryClass com.ibm.ive.tools.japt.*Extension 
+		-includeResource *.properties
+		-includeMethod com.ibm.ive.tools.japt.MsgHelp$1.run()
+		-includeMethod com.ibm.jikesbt.MsgHelp$1.run()
+		
+	</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedJapt.log" jar="c:\\temp\\japtedJapt.jar" outputIndexFromEnd="42" dir="c:\\temp\\japtTests">
+	<commandLine>
+		com.ibm.ive.tools.japt.commandLine.Main
+		-icp "c:\\temp\\test jars\\Japt.jar" 
+		-cp c:\java\2.3\ive\lib\jclMax\classes.zip 
+		-obfuscate -reduce -xta -inline -inlineMethodJSRs ?*parseCommandLine -inlineAllJSRs 
+		-compressionInline -expandPermissions -jarOutput -output c:\\temp\\japtFinalized.jar 
+		-noStripDebugInfo 
+		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main 
+		-includeLibraryClass *.load.*Extension 
+		-includeLibraryClass *.reduction.*Extension 
+		-includeLibraryClass *.inline.*Extension 
+		-includeLibraryClass *.commandLine.*Extension 
+		-includeLibraryClass *.devirtualization.*Extension 
+		-includeLibraryClass *.out.*Extension 
+		-includeLibraryClass *.obfuscation.*Extension 
+		-includeLibraryClass com.ibm.ive.tools.japt.MsgHelp*
+		-includeResource *.properties
+	</commandLine>
+	<classPath>c:\temp\test jars\Japt.jar</classPath>
+	<japtApplicationArgs>
+		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main
+		-includeLibraryClass com.ibm.ive.tools.japt.*Extension 
+		-includeResource *.properties
+		-includeMethod com.ibm.ive.tools.japt.MsgHelp$1.run()
+		-includeMethod com.ibm.jikesbt.MsgHelp$1.run()
+	</japtApplicationArgs>
+</testApp>
+
+
+<!-- the following tests are java 6 and hence have stack map tables and expanded ldc instructions -->
+
+
+
+
+
+<testApp log="c:\\temp\\japtedMergeCandidatesJava6.log" jar="c:\\temp\\japtedMergeCandidatesJava6.jar" dir="c:\\temp\\japtTests\\java6">
+	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates "c:\\temp\\test jars\\java6"</commandLine>
+	<classPath>c:\\temp\\test jars\\java6</classPath>
+	<japtApplicationArgs>-includeClass com.ibm.ive.tools.japt.testcase.mergeCandidates.* -includeMainMethod com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedTestUpcastJava6.log" jar="c:\\temp\\japtedTestUpcastJava6.jar" dir="c:\\temp\\japtTests\\java6">
+	<commandLine>com.ibm.ive.tools.japt.testcase.TestUpcast</commandLine>
+	<classPath>c:\\temp\\test jars\\java6</classPath>
+	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestUpcast.main(java.lang.String[])</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedTestJSRJava6.log" jar="c:\\temp\\japtedTestJSRJava6.jar" dir="c:\\temp\\japtTests\\java6">
+	<commandLine>com.ibm.ive.tools.japt.testcase.TestJSR</commandLine>
+	<classPath>c:\\temp\\test jars\\java6</classPath>
+	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestJSR.main(java.lang.String[])</japtApplicationArgs>
+</testApp>
+
+
+
+
+
+
+
+
+
+
+<!-- the following tests are not java 6 and hence have no stack maps -->
+
+<testApp log="c:\\temp\\japtedMergeCandidates.log" jar="c:\\temp\\japtedMergeCandidates.jar" dir="c:\\temp\\japtTests">
+	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates "c:\\temp\\test jars"</commandLine>
+	<classPath>c:\\temp\\test jars</classPath>
+	<japtApplicationArgs>-includeClass com.ibm.ive.tools.japt.testcase.mergeCandidates.* -includeMainMethod com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedTestUpcast.log" jar="c:\\temp\\japtedTestUpcast.jar" dir="c:\\temp\\japtTests">
+	<commandLine>com.ibm.ive.tools.japt.testcase.TestUpcast</commandLine>
+	<classPath>c:\\temp\\test jars</classPath>
+	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestUpcast.main(java.lang.String[])</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedTestJSR.log" jar="c:\\temp\\japtedTestJSR.jar" dir="c:\\temp\\japtTests">
+	<commandLine>com.ibm.ive.tools.japt.testcase.TestJSR</commandLine>
+	<classPath>c:\\temp\\test jars</classPath>
+	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestJSR.main(java.lang.String[])</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedFloatSanity.log" jar="c:\\temp\\japtedFloatsanity.jar" dir="c:\\temp\\japtTests">
+	<commandLine>j9vm.floatsanity.Runner</commandLine>
+	<classPath>c:\\temp\\test jars\\floatsanity.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod j9vm.floatsanity.Runner</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedHanoi.log" jar="c:\\temp\\japtedHanoi.jar" dir="c:\\temp\\japtTests">
+	<commandLine>com/ibm/ivj/examples/hanoi/Hanoi 12</commandLine>
+	<classPath>c:\\temp\\test jars\\hanoi.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod com/ibm/ivj/examples/hanoi/Hanoi</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedPhilosophers.log" jar="c:\\temp\\japtedPhilosophers.jar" dir="c:\\temp\\japtTests">
+	<commandLine>VMBench.diningphilosophers.DiningPhilosophers</commandLine>
+	<classPath>c:\\temp\\test jars\\philosophers.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod VMBench.diningphilosophers.DiningPhilosophers -includeMethodEx VMBench.diningphilosophers.DiningPhilosophers.run</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedVich.log" jar="c:\\temp\\japtedVich.jar" outputIndexFromEnd="24" dir="c:\\temp\\japtTests">
+	<commandLine>vich/runner/Menu 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 8</commandLine>
+	<classPath>c:\\temp\\test jars\\vich.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod vich.runner.Menu -includeMethod vich.bench.^.run</japtApplicationArgs>
+</testApp>
+
+<testApp log="c:\\temp\\japtedCaffeine.log" jar="c:\\temp\\japtedCaffeine.jar" outputStartIndex="0" outputEndIndex="13" dir="c:\\temp\\japtTests">
+	<commandLine>CaffeineMarkEmbeddedApp</commandLine>
+	<classPath>c:\\temp\\test jars\\caffeine.jar</classPath>
+	<japtApplicationArgs>-includeMainMethod CaffeineMarkEmbeddedApp</japtApplicationArgs>
+</testApp>
+
+
+
+
+
+</tests>

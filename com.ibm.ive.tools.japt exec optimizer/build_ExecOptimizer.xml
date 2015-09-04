@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<project name="RTSJ analysis" basedir="." default="dist">
+	<property name="CMD" value="com/ibm/ive/tools/commandLine" />
+	<property name="JIKESBT" value="com/ibm/jikesbt" />
+	<property name="JAPT" value="com/ibm/ive/tools/japt" />
+	<property name="PROXY1" value="javax/realtime" />
+	<property name="PROXY2" value="java/lang" />
+	<property name="BASE" value=".." />
+	<property name="DISTDIR" value="${BASE}/dist" />
+	<property name="DIST" value="${DISTDIR}/AppExecOptimizer.jar" />
+	<property name="DIST_NO_PROXIES" value="${DISTDIR}/AppExecOptimizerNoProxies.jar" />
+	<property name="SRC_DIST" value="${DISTDIR}/AppExecOptimizerSrc.jar" />
+	<property name="PROXYEXT" value="proxy" />
+	
+	<target name="dist">
+		<!-- the proxies -->
+		<copy todir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin" includeemptydirs="false">
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+		    	<patternset id="japt.proxy">
+					<include name="${PROXY1}/*" />
+					<include name="${PROXY2}/*" />
+				</patternset>
+		    </fileset>
+		   <mapper type="glob" from="*.class" to="*.${PROXYEXT}"/>
+		</copy>
+		<mkdir dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/newbin"/>
+		<copy todir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/newbin" includeemptydirs="false">
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+		    	<patternset>
+					<include name="${PROXY1}/*" />
+					<include name="${PROXY2}/*" />
+		    		<exclude name="${PROXY1}/*.class" />
+		    		<exclude name="${PROXY2}/*.class" />
+				</patternset>
+		    </fileset>
+		</copy>
+			
+		<mkdir dir="${DISTDIR}"/>
+		<jar jarfile="${DIST}" filesonly="true">
+			<manifest>
+				<attribute name="Main-class" value="AppExecOptimizer"/>
+				<attribute name="Implementation-Version" value="1.0.0"/> 
+			</manifest>
+			<fileset dir="${BASE}">
+				<patternset id="extra">
+					<include name="license/*" />
+					<include name="doc/*" />
+				</patternset>
+			</fileset>
+			<fileset dir="${BASE}/../JikesBT/bin">
+				<patternset id="jikesbt">
+					<include name="${JIKESBT}/*" />
+				</patternset>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt/bin">
+				<patternset id="japt">
+					<include name="${CMD}/**/*" />
+					<include name="${JAPT}/*" />
+					<include name="${JAPT}/commandLine/**/*" />
+					<!-- include name="${JAPT}/commandLine/Main.*" /-->
+					<include name="${JAPT}/load/*" />
+					<include name="${JAPT}/out/*" />
+					<include name="${JAPT}/reduction/*" />
+					<exclude name="${JAPT}/reduction/ReductionExtension.*" />
+					<include name="${JAPT}/reduction/ita/*" />
+					<exclude name="**/jxelink.rules" />
+					<exclude name="${JAPT}/commandLine/Main.*" />
+				</patternset>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+				<patternset id="japt.supplement">
+					<include name="${JAPT}/memoryAreaCheck/*" />
+					<include name="${JAPT}/escape/*" />
+					<exclude name="${JAPT}/escape/Main*" />
+				</patternset>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+				<patternset id="japt.execOpt">
+					<include name="PreLoader*" />
+					<include name="AppExecOptimizer*" />
+					<include name="${JAPT}/execOpt/**/*" />
+				</patternset>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/newbin">
+				<patternset refid="japt.proxy"/>
+		    </fileset>
+		</jar>
+		<jar jarfile="${DIST_NO_PROXIES}" filesonly="true">
+			<manifest>
+				<attribute name="Main-class" value="AppExecOptimizer"/>
+				<attribute name="Implementation-Version" value="1.0.0"/> 
+				<attribute name="Implementation-Vendor" value="IBM Corp."/>
+			</manifest>
+			<fileset dir="${BASE}/../JikesBT/bin">
+				<patternset refid="jikesbt"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt/bin">
+				<patternset refid="japt"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+				<patternset refid="japt.supplement"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/bin">
+				<patternset refid="japt.execOpt"/>
+			</fileset>
+		</jar>
+		<jar jarfile="${SRC_DIST}" filesonly="true">
+			<fileset dir="${BASE}/../JikesBT/src">
+				<patternset refid="jikesbt"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt/src">
+				<patternset refid="japt"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/src">
+				<patternset refid="japt.supplement"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/src">
+				<patternset refid="japt.execOpt"/>
+			</fileset>
+			<fileset dir="${BASE}/../com.ibm.ive.tools.japt exec optimizer/src">
+				<patternset refid="japt.proxy"/>
+			</fileset>
+		</jar>
+	</target>
+	<target name="runHelp" depends="dist">
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			>
+			<arg value="-help"/>
+	         <classpath>
+	           <pathelement location="${DIST}"/>
+	         </classpath>
+		</java>
+	</target>
+	<target name="runTests" depends="dist">
+		<echo>running general test</echo>
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			<arg value="-icp"/>
+			<arg value="${BASE}/../TestRTJ/bin"/>
+			<arg value="-mainMethod"/>
+			<arg value="MemTest"/>
+			<arg value="-load"/>
+			<arg value="${DIST_NO_PROXIES}"/>
+			<arg value="-log"/>
+			<arg value="rtsj1.log"/>
+			<arg value="-errorFile"/>
+			<arg value="errorFile1.txt"/>
+			<arg value="-output"/>
+			<arg value="c:\temp\bla"/>
+			<arg value="-split"/>
+			<arg value="-unresolvedRefFile"/>
+			<arg value="unres.txt"/>
+			<arg value="-entryPointFile"/>
+			<arg value="entries.txt"/>
+			<arg value="-escapeDepth"/>
+			<arg value="11"/>
+			<arg value="-escapeReport"/>
+			<arg value="escaped.txt"/>
+			<arg value="-escapeMethod"/>
+			<arg value="*.^.^a^y^"/>
+			
+		</java>
+		
+		<echo>running another general test</echo>
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			<arg value="-icp"/>
+			<arg value="${BASE}/../TestRTJ/bin"/>
+			<arg value="-mainMethod"/>
+			<arg value="MemTest"/>
+			<arg value="-load"/>
+			<arg value="${DIST_NO_PROXIES}"/>
+			<arg value="-log"/>
+			<arg value="rtsj.log"/>
+			<arg value="-errorFile"/>
+			<arg value="errorFile.txt"/>
+			<arg value="-jre"/>
+			<arg value="C:\java\latest realtime"/>
+			<arg value="-output"/>
+			<arg value="c:\temp"/>
+			<arg value="-split"/>
+			<arg value="-unresolvedRefFile"/>
+			<arg value="unres.txt"/>
+			<arg value="-entryPointFile"/>
+			<arg value="entries.txt"/>
+			<arg value="-escapeDepth"/>
+			<arg value="11"/>
+			<arg value="-escapeReport"/>
+			<arg value="unescaped.txt"/>
+			<arg value="-escapeMethod"/>
+			<arg value="com.ibm.jikesbt.^.^x^"/>
+			<arg value="-createAutoLoaders"/>
+		</java>
+		
+		<echo>running preloader test to verify loading of MemTest classes</echo>
+		<java classname="PreLoader" 
+					fork="true" 
+					failonerror="true"
+					maxmemory="1500m"
+					jvm="C:\java\latest realtime\jre\bin\java.exe"
+					>
+			<classpath>
+				<pathelement location="${DIST}"/>
+				<pathelement location="c:\temp\execOptOut-t.jar"/>
+				<pathelement location="c:\temp\execOptOut-rt.jar"/>
+				<pathelement location="c:\temp\execOptOut-nhrt.jar"/>
+			</classpath>
+			<jvmarg value="-Xrealtime"/>
+			<jvmarg value="-verbose:class"/>
+			<!--arg value="appExecOptimizer.Loader1"/-->
+			<arg value="appExecOptimizer.Loader2"/>
+			<!--arg value="appExecOptimizer.Loader3"/-->
+			<!--arg value="appExecOptimizer.Loader4"/-->
+		</java>
+		
+		<echo>running autoloader test loading something with an auto-loader class in it, which should cause an error writing</echo>
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			
+			<arg value="-load"/>
+			<arg value="c:\temp\execOptOut-nhrt.jar"/>
+			<arg value="-jre"/>
+			<arg value="C:\java\latest realtime"/>
+			<arg value="-output"/>
+			<arg value="c:\temp\again"/>
+			<arg value="-createAutoLoaders"/>
+		</java>
+		
+		<echo message="running autoloader test loading something with an auto-loader class in it, but which excludes writing the previous auto-loaders" />
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			
+			<arg value="-load"/>
+			<arg value="c:\temp\execOptOut-nhrt.jar"/>
+			<arg value="-jre"/>
+			<arg value="C:\java\latest realtime"/>
+			<arg value="-output"/>
+			<arg value="c:\temp\again2"/>
+			<arg value="-excludeClass"/>
+			<arg value="app*"/>
+			<arg value="-createAutoLoaders"/>
+		</java>
+		
+		<echo message="running same test but writing to a different jar and not loading supporting classes (check autoloader works with stubs)" />
+		<java classname="AppExecOptimizer" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			
+			<arg value="-load"/>
+			<arg value="c:\temp\execOptOut-nhrt.jar"/>
+			<arg value="-output"/>
+			<arg value="c:\temp\again3"/>
+			<arg value="-excludeClass"/>
+			<arg value="app*"/>
+			<arg value="-createAutoLoaders"/>
+		</java>
+		
+		<echo>re-running preloader test to verify loading of MemTest classes</echo>
+		<java classname="PreLoader" 
+					fork="true" 
+					failonerror="true"
+					maxmemory="1500m"
+					jvm="C:\java\latest realtime\jre\bin\java.exe"
+					>
+			<classpath>
+				<pathelement location="${DIST}"/>
+				<pathelement location="c:\temp\again3.jar"/>
+				<pathelement location="c:\temp\execOptOut-t.jar"/>
+				<pathelement location="c:\temp\execOptOut-rt.jar"/>
+			</classpath>
+			<jvmarg value="-Xrealtime"/>
+			<jvmarg value="-verbose:class"/>
+			<arg value="appExecOptimizer.Loader1"/>
+			<!--arg value="appExecOptimizer.Loader2"/-->
+			<!--arg value="appExecOptimizer.Loader3"/-->
+			<!--arg value="appExecOptimizer.Loader4"/-->
+		</java>
+	</target>
+	<target name="version" depends="dist">
+		<java classname="AppExecOptimizer" 
+				fork="true" 
+				failonerror="true"
+				maxmemory="1500m"
+				>
+				<classpath>
+					<pathelement location="${DIST}"/>
+				</classpath>
+				<arg value="-version"/>
+		</java>
+	</target>
+	<target name="doAll" depends="dist,runHelp,runTests,version" />
+</project>

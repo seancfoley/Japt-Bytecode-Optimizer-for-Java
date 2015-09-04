@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<project name="escape" basedir="." default="dist">
+	<property name="CMD" value="com/ibm/ive/tools/commandLine" />
+	<property name="JIKESBT" value="com/ibm/jikesbt" />
+	<property name="JAPT" value="com/ibm/ive/tools/japt" />
+	<property name="DISTDIR" value="dist" />
+	<property name="DIST" value="${DISTDIR}/escapetool.jar" />
+	
+	<target name="dist">
+		<mkdir dir="${DISTDIR}"/>
+		<jar jarfile="${DIST}" filesonly="true">
+			<fileset dir="../JikesBT/bin">
+				<patternset id="jikesbt">
+					<include name="${JIKESBT}/*" />
+				</patternset>
+			</fileset>
+			<fileset dir="../com.ibm.ive.tools.japt/bin">
+				<patternset id="japt">
+					<include name="${CMD}/**/*" />
+					<include name="${JAPT}/*" />
+					<include name="${JAPT}/commandLine/**/*" />
+					<include name="${JAPT}/commandLine/Main.*" />
+					<include name="${JAPT}/load/*" />
+					<include name="${JAPT}/reduction/*" />
+					<exclude name="${JAPT}/reduction/ReductionExtension.*" />
+					<include name="${JAPT}/reduction/ita/*" />
+				</patternset>
+			</fileset>
+			<fileset dir="bin">
+				<patternset id="japt.supplement">
+					<include name="${JAPT}/escape/**/*" />
+				</patternset>
+			</fileset>
+		</jar>
+		<jar jarfile="dist/escapetoolsrc.jar" filesonly="true">
+			<fileset dir="../JikesBT/src">
+				<patternset refid="jikesbt"/>
+			</fileset>
+			<fileset dir="../com.ibm.ive.tools.japt/src">
+				<patternset refid="japt"/>
+			</fileset>
+			<fileset dir="src">
+				<patternset refid="japt.supplement"/>
+			</fileset>
+		</jar>
+	</target>
+	
+	
+	<target name="run" depends="dist">
+		<property name="CHESS_BM" value="C:\temp\eembc\chessBM.jar" />
+		<property name="JME_JRE_CLASSES" value="C:\temp\eembc\chessBM.jar" />
+		<java classname="com.ibm.ive.tools.japt.escape.Main" 
+			fork="true" 
+			failonerror="true"
+			>
+			<arg value="-help"/>
+	         <classpath>
+	           <pathelement location="${DIST}"/>
+	         </classpath>
+		</java>
+		
+		<java classname="com.ibm.ive.tools.japt.escape.Main" 
+			fork="true" 
+			failonerror="true"
+			maxmemory="1500m"
+			>
+			<classpath>
+				<pathelement location="${DIST}"/>
+			</classpath>
+			<arg value="-loadFile"/>
+			<arg value="${CHESS_BM}"/>
+			<arg value="-cp"/>
+			<arg value="${JME_JRE_CLASSES}"/>
+			<arg value="-log"/>
+			<arg value="chessBM.log"/>
+			<arg value="-extension"/>
+			<arg value="com.ibm.ive.tools.japt.escape.EscapeAnalysisExtension"/>
+			<arg value="-escapeReport"/>
+			<arg value="chessBM.txt"/>
+		</java>
+		
+		
+	</target>
+</project>

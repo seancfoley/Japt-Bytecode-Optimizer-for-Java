@@ -1,0 +1,397 @@
+<html>
+<title>IBM Real Time Application Execution Optimizer for Java FAQ</title>
+<body>
+<div id="ibm-content">
+<h1>IBM Real Time Application Execution Optimizer for Java</h1>
+<p>
+<h2>Sean Foley</h2></p><p>
+Sean_Foley@ca.ibm.com</p><p>
+May 20, 2009</p><p>
+
+<!-- ANCHOR LINK LIST BEGIN -->
+<div class="ibm-tab-section ibm-text"><h2 class="ibm-access">Frequently Asked Questions</h2>
+
+<ul class="ibm-tabs ibm-link-list">
+<li><a class="ibm-anchor-down-em-link"  href="#01">1. How does the tool work?</a></li><li><a class="ibm-anchor-down-em-link"  href="#02">2. What options are available to me?</a></li><li><a class="ibm-anchor-down-em-link"  href="#03">3. What is a macro?</a></li><li><a class="ibm-anchor-down-em-link"  href="#04">4. What is in the log file?</a></li><li><a class="ibm-anchor-down-em-link"  href="#05">5. How does the class path work?</a></li><li><a class="ibm-anchor-down-em-link"  href="#06">6. How do I tell the tool about java archives that are not ".jar" or ".zip" files?</a></li><li><a class="ibm-anchor-down-em-link"  href="#07">7. How do I cause classes to be loaded?</a></li><li><a class="ibm-anchor-down-em-link"  href="#08">8. When loading a class, what additional classes are loaded?</a></li><li><a class="ibm-anchor-down-em-link"  href="#09">9. How do I load all classes found within an archive or directory?</a></li><li><a class="ibm-anchor-down-em-link"  href="#10">10. How do I load classes, methods or fields by name?</a></li><li><a class="ibm-anchor-down-em-link"  href="#11">11. Why would I load classes, methods or fields by name?</a></li><li><a class="ibm-anchor-down-em-link"  href="#12">12. How do I cause resources to be loaded?</a></li><li><a class="ibm-anchor-down-em-link"  href="#13">13. What is an entry point?</a></li><li><a class="ibm-anchor-down-em-link"  href="#14">14. Do I need to mark the points of entry?</a></li><li><a class="ibm-anchor-down-em-link"  href="#15">15. What is the difference between the external and internal class path, and external and internal classes?</a></li><li><a class="ibm-anchor-down-em-link"  href="#16">16. Is it necessary to have the classes from a Java Runtime Environment (JRE) on the class path?</a></li><li><a class="ibm-anchor-down-em-link"  href="#17">17. How do I specify multiple classes, methods, fields or resources at once?</a></li><li><a class="ibm-anchor-down-em-link"  href="#18">18. What is an unresolved reference?</a></li><li><a class="ibm-anchor-down-em-link"  href="#19">19. What is the difference between -entryMethod and -entryMethodEx?</a></li><li><a class="ibm-anchor-down-em-link"  href="#20">20. Can a private method or field be an entry point?</a></li><li><a class="ibm-anchor-down-em-link"  href="#21">21. What is listed in the entry point file?</a></li><li><a class="ibm-anchor-down-em-link"  href="#22">22. What is a path analysis?</a></li><li><a class="ibm-anchor-down-em-link"  href="#23">23. Should the path analysis follow paths into external classes with the -followExternal option?</a></li><li><a class="ibm-anchor-down-em-link"  href="#24">24. How are loaded classes and resources categorized according to thread type?</a></li><li><a class="ibm-anchor-down-em-link"  href="#25">25. How are the classes verified for runtime errors?</a></li><li><a class="ibm-anchor-down-em-link"  href="#26">26. How does the tool locate potential runtime errors?</a></li><li><a class="ibm-anchor-down-em-link"  href="#27">27. What are the limitations of the path analysis?</a></li><li><a class="ibm-anchor-down-em-link"  href="#28">28. How do I use the auto-load classes?</a></li><li><a class="ibm-anchor-down-em-link"  href="#29">29. What is escape analysis?</a></li><li><a class="ibm-anchor-down-em-link"  href="#30">30. How can the escape analysis be used?</a></li><li><a class="ibm-anchor-down-em-link"  href="#31">31. How should the escape analysis results be interpreted?</a></li><li><a class="ibm-anchor-down-em-link"  href="#32">32. What is the effect of limiting the depth of escape analysis?</a></li><li><a class="ibm-anchor-down-em-link"  href="#33">33. How are classes written to disk?</a></li><li><a class="ibm-anchor-down-em-link"  href="#34">34. What are the consequences of removing debug info from classes?</a></li><li><a class="ibm-anchor-down-em-link"  href="#35">35. What are the consequences of removing source info or annotation info from classes?</a></li><li><a class="ibm-anchor-down-em-link"  href="#37">37. What are stackmaps?</a></li><li><a class="ibm-anchor-down-em-link"  href="#38">38. What attributes can be removed from class files?</a></li><li><a class="ibm-anchor-down-em-link"  href="#39">39. What does an example command line look like?</a></li>
+</ul>
+</div>
+<!-- ANCHOR LINK LIST END -->
+<!-- FAQ CORE LIST BEGIN -->
+<style>
+.displaycode, 
+pre.displaycode, 
+pre.code530 {
+white-space: pre-wrap; /* css-3 */
+white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+white-space: -pre-wrap; /* Opera 4-6 */
+white-space: -o-pre-wrap; /* Opera 7 */
+word-wrap: break-word; /* Internet Explorer 5.5+ */
+background-color: #efefef;
+width: 520px;
+border: 1px ridge #999999;
+text-align: left;
+padding: 5px;
+}
+</style>
+
+
+<p><a name=01>1</a>. How does the tool work?</p><p>
+IBM Real Time Application Execution Optimizer for Java is a command-line tool that loads classes using the load options, then it analyzes or modifies the classes, then it writes the classes to disk 
+along with any requested analysis files.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=02>2</a>. What options are available to me?</p><p>
+You can use -help to get the following list of options:
+<p/>
+
+IBM Real Time Application Execution Optimizer for Java<br/>
+usage: java AppExecOptimizer [[-version|-help] | [basic options] [load options] [analysis options] [jar generation options]]
+
+
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-help: print out this message</li>
+ <li>-version: print out program version</li>
+</ul></small>
+ 
+
+basic options:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-log xxx: write to the named log file</li>
+<li>-macro xxx xxx: define a macro with the given name and value</li>
+ <li>@xxx: read named file for additional options</li>
+</ul></small>
+
+
+load options:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-icp xxx: append named jar/dir to internal class path</li>
+<li>-icpAll xxx: append jars in named dir to internal cls path</li>
+<li>-cp xxx: append named jar/dir to external class path</li>
+<li>-cpAll xxx: append jars in named dir to external cls path</li>
+<li>-jre xxx: append named jdk/jre to external class path</li>
+<li>-jarExtension xxx: recognize files with named extension as jars</li>
+</ul></small>
+
+
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-loadClass xxx: load named class(es) from class path</li>
+<li>-loadResource xxx: load named resource(s) from class path</li>
+</ul></small>
+
+
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-load xxx: load named jar/dir/class/resource on internal cp</li>
+<li>-loadAll xxx: load jars in named dir on internal class path</li>
+</ul></small>
+
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-unresolvedRefFile xxx: create named file listing unresolved references</li>
+</ul></small>
+
+
+options to load and mark points of entry:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-entryClass xxx: class(es)</li>
+<li>-entryWholeClass xxx: class(es) and members within</li>
+<li>-entryLibraryClass xxx: class(es) and non-private members within</li>
+<li>-entryAccessibleClass xxx: class(es) and public/protected members within</li>
+<li>-entryField xxx: field(s) and their declaring class(es)</li>
+<li>-entryMethod xxx: method(s) and their declaring class(es)</li>
+<li>-mainMethod xxx: class(es) and main methods within</li>
+<li>-entryMethodEx xxx: method(s) independent of declaring class(es)</li>
+<li>-entryExtLibraryClass xxx: class(es), non-prvt members and overriding meths</li>
+ <li>-entryExtAccClass xxx: class(es), pub/prot members and overriding meths</li>
+</ul></small>
+
+
+path analysis options:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-split: split jars according to thread type</li>
+<li>-errorFile xxx: create named file listing errors</li>
+<li>-checkExternal: report errors in external classes</li>
+<li>-followExternal: follow path analysis into external classes</li>
+<li>-entryPointFile xxx: create named file listing points of entry</li>
+</ul></small>
+
+
+escape analysis options:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>-escapeReport xxx: create named file listing objects not escaping</li>
+<li>-escapeMethod xxx: analyze object escape from named method(s)</li>
+<li>-escapeDepth xxx: constrain escape analysis to given call depth</li>
+</ul></small>
+
+
+jar generation options:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+
+<li>-output xxx: write to named jar file or directory</li>
+<li>-removeDebugInfo: remove debug attributes from classes</li>
+<li>-removeSourceInfo: remove source file info from classes</li>
+<li>-removeAnnotations: remove annotations from classes</li>
+<li>-removeAttribute xxx: remove named attribute(s) from classes</li>
+<li>-removeStackMaps: remove stackmap table attributes from code</li>
+<li>-addStackMaps: add stackmap table attributes to code</li>
+<li>-excludeResource xxx: exclude the named resource(s) from archives</li>
+<li>-excludeClass xxx: exclude the named class(es) from archives</li>
+<li>-createAutoLoaders: create auto load class within each archive</li>
+</ul></small>
+
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=03>3</a>. What is a macro?</p><p>
+If you use "-macro name value", this will cause any appearance of "{{name}}" on the command line or in options files to be replaced with "value". </p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=04>4</a>. What is in the log file?</p><p>
+Actions performed by the tool are logged to the log file.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=05>5</a>. How does the class path work?</p><p>The tool uses a class path in the exact same way as a java application, except that the class path is divided between external and internal class path locations. Class path locations are either directories or java archives, although some options cause the tool to identify numerous class path locations at once (icpAll, cpAll).
+
+The class path is specified in order to tell the tool where the class files used by the application or library may be found. Some options (-icp, -icpAll, -cp, -cpAll, -jre) specify locations on the class path, others (-loadFile, -loadAll) specify locations and additionally cause all classes found at these locations to be loaded.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=06>6</a>. How do I tell the tool about java archives that are not ".jar" or ".zip" files?</p><p>Use the -jarExtension option to tell japt that a given file extension (such as ".war") of a file on the class path is in fact an archive.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=07>7</a>. How do I cause classes to be loaded?</p><p>
+You have several choices:
+<ol><small>
+<li>specify a class path and then specify classes to load (which loads only those classes that are needed)</li>
+<li>explicitly load all classes found within archives or directories (which automatically adds to the internal class path)</li>
+<li>a combination of both</li>
+</ol></small>
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=08>8</a>. When loading a class, what additional classes are loaded?</p><p>
+Classes loaded include all classes required by the loaded classes at runtime. The tool will continue loading classes as it attempts to resolve all class references. This includes:
+
+
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>classes accessed by new, instanceof, checkcast, constant string, constant class, method invoke and field access instructions</li>
+<li>super classes and super interfaces</li>
+<li>classes loaded by enclosing methods</li>
+<li>classes loaded by annotations</li>
+<li>classes loaded by inner class and outer classes</li>
+<li>classes referenced by method signatures and field signatures </li>
+<li>exception classes caught within methods</li>
+<li>exception classes in method declarations </li>
+<li>the element class types of array classes</li>
+<li>classes referenced in the local variable tables of local variable types for debugging</li>
+</ul></small>
+
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=09>9</a>. How do I load all classes found within an archive or directory?</p><p><p/>You load all classes found within a specific location by using -load or -loadAll. 
+
+<ol><small>
+<li>-load will load a class file, all class files within an archive, or all class files within a directory</li>
+<li>-loadAll will load all archives found within a directory</li>
+</ol></small>
+<p/>
+Each class file or class path location (archive or directory) specified this way is considered a part of the internal class path,
+and all classes loaded from these locations will be internal classes. Classes referenced from these locations, but not found within them,will be loaded from the full class path, and will be internal or external classes depending upon where they are found.
+<p/>
+You may optionally wish to specify the rest of the class path to find classes that are referenced and not found within the archives or directories to be 
+loaded, such as JRE classes.
+<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=10>10</a>. How do I load classes, methods or fields by name?</p><p><p/>
+Once you have specified a class path, you can load classes and resources that can be found somewhere on the class path using either:
+<ol><small>
+<li>-loadClass or -loadResource</li>
+<li>Any one of the following options that not only loads the specified item(s) but also marks the item(s) as entry points into the app or library:</li>
+<ul class="ibm-bullet-list ibm-no-links"> 
+<li>-entryClass
+ <li> -entryWholeClass</li>
+<li> -entryLibraryClass </li>
+ <li> -entryAccessibleClass </li>
+<li> -entryAccessibleClass </li>
+<li> -entryField</li>
+<li> -entryMethod</li>
+<li> -mainMethod </li>
+<li> -entryMethodEx</li>
+<li>-entryExtLibraryClass</li>
+<li>-entryExtAccClass</li>
+</ul>
+</ol>
+</small>
+<p/>
+The items wil be loaded, and additionally all items that are referenced by these items or their declaring classes will be loaded from the class path.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=11>11</a>. Why would I load classes, methods or fields by name?</p><p>
+
+This will make the tool load only the classes referenced by the application. It allows you to be selective about what is loaded, and it will not load classes that are unused. It allows you to load classes in a way that is similar to the way classes are loaded by a virtual machine.
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=12>12</a>. How do I cause resources to be loaded?</p><p>
+You can specify the full path name of the resource relative to the class path with -loadResource. You can load a resource explicitly with -load. 
+
+Additionally, archives loaded with -load or -loadAll will have their included resources loaded.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=13>13</a>. What is an entry point?</p><p>An entry point is any method, field or class in the loaded classes that serve as a point of entry into the application. 
+For instance, the main method is an entry point into the application when the application is started. If an application is accessed dynamically with java reflection, java serialization, or accessed from non-Java code with JNI (Java Native Interface), then those points of access are also entry points.
+For a library, any number of non-private fields or methods might be identified as entry points. </p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=14>14</a>. Do I need to mark the points of entry?</p><p>
+The points of entry are used to start the path analysis. Without them, the path analysis does not know how the app is started or the library is accessed. Without them, the path analysis does not know where to start.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=15>15</a>. What is the difference between the external and internal class path, and external and internal classes?</p><p>
+Each class path location is identified as either internal or external. A class that is loaded from an external location is considered an external class, while a class that is loaded from an internal location is considered an internal class. Generally, but not exclusively, an internal class is considered part of the application or library being deployed or analyzed, while an external class is a supporting class. 
+
+
+For instance, you would typically specify the location of your application with the internal class path, and specify the java runtime environment classes with the external class path.
+When the classes are written to disk, only the internal classes are written.
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=16>16</a>. Is it necessary to have the classes from a Java Runtime Environment (JRE) on the class path?</p><p>No, it is not necessary, but it is desirable. You can use the option -jre. 
+
+The tool does not contain an implementation of Java SE or the Real-Time Specification for Java. However, it does contain a minimal set of proxy classes which enable path analysis when a JVM is not on the class path. 
+
+
+If there is an implementation of RTSJ on the class path, then the class path implementation takes precedence over the proxy classes contained within the tool.
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=17>17</a>. How do I specify multiple classes, methods, fields or resources at once?</p><p>Any option used to specify a class, field, method or resource will accept wildcard characters. The available wildcards are:<p/>
+*: any sequence of characters <br/>
+^: any sequence of characters that does not include either of the separators &#8216;/&#8217; or &#8216;.&#8217;
+<p/>
+For example: 
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li> to mark as points of entry all classes in java.lang and subpackages:<br/>
+-entryClass java.lang.*</li>
+
+<li> to mark as points of entry all classes in java.lang:
+-entryClass java.lang.^</li>
+
+
+<li> to mark as points of entry the methods in java.lang.Object:
+-entryMethod java.lang.Object.^</li>
+
+
+<li> to mark as points of entry all methods:
+-entryMethod *</li>
+
+
+<li> to mark as points of entry all methods in the default package:
+-entryMethod ^.^</li>
+
+
+<li> to mark as points of entry all classes and their public, protected and package methods and fields in java.lang and subpackages:<br/>
+-entryLibraryClass java.lang.*</li>
+
+<li> to limit escape analysis to setter and gettermethods:<br/>
+-escapeMethod *.set^ -escapeMethod *.get^</li>
+
+</ul></small>
+<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=18>18</a>. What is an unresolved reference?</p><p> 
+An unresolved reference is a reference to a class not found on the class path, or a reference to a field or method not found within the loaded classes.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=19>19</a>. What is the difference between -entryMethod and -entryMethodEx?</p><p>If a method or field is an entry point, then generally the declaring class is also an entry point, but not necessarily. 
+
+In general, the method or field can only be identified by also specifying the declaring class. However, it is possible for a method to be an entry point while the class declaring the method is not.  If a method overrides a method in an external class, thent the method can be accessed directly through a virtual invocation, while the identity of the class declaring the method is irrelevant. -includeMethodEx can be used to identify the method as an entry 
+point independently of the declaring class.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=20>20</a>. Can a private method or field be an entry point?</p><p>Yes, particularly if the method or field is accessed directly with JNI, the java reflection API, or java serialization.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=21>21</a>. What is listed in the entry point file?</p><p><p/>The file will list methods, fields and classes which serve as points of entry into the internal classes from the external classes.<p/>
+
+This may include entry points not explicitly specified on the command line, these will be points of entry found by the path analysis, such as virtual invocations accessing internal methods from external code.<p/>
+
+If -followExternal is not specified, the list will be limited to the entry points listed on the command line.
+<p/>
+
+If -followExternal is specified, external paths will be followed and any additional entry points found by crossing from external classes back into internal classes through virtual or interface method invocations will be added to the entry point file.
+<p/>
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=22>22</a>. What is a path analysis?</p><p><p/>Some options, namely the options -split, -errorFile, and -entryPointFile, will initiate a path analysis of the analyzed application.
+<p/>
+The path analysis will follow java methods and instantiate objects and to approximate the flow of execution at runtime. The path analysis is by default limited to the internal classes, but it can be extended to all classes loaded by using -followExternal, including the JVM classes, although this may require a considerable amount of memory and time.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=23>23</a>. Should the path analysis follow paths into external classes with the -followExternal option?</p><p>
+Following external paths may sometimes require a large amount of run-time memory, due to the large number of possible paths that can be taken by an application. If an application has no callbacks from external classes to internal classes, external paths need not be followed for a proper analysis of internal classes. However, if callbacks exist, then the analysis may miss some paths into the internal classes if -followExternal is not specified.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=24>24</a>. How are loaded classes and resources categorized according to thread type?</p><p><p/>All loaded classes are divided into the following groups with the -split option, using the path analysis:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>accessible to NoHeapRealtimeThread threads</li>
+<li>accessible to RealtimeThread threads</li>
+<li>accessible to regular java threads</li>
+<li>inaccessible to any thread</li>
+</ul></small>
+<p/>
+Resources are separated into their own group.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=25>25</a>. How are the classes verified for runtime errors?</p><p><p/>
+
+The -errorFile option will cause errors found by the analysis to be reported within the specified file.
+<p/>
+The tool will report potential occurrences of the runtime exceptions MemoryAccessError, IllegalAssignmentError and IllegalThreadStateException. Also reported are any exceptions that can be thrown as a result of the class loading, verification and resolution process. This includes AbstractMethodError, ClassCircularityError, ClassFormatError, IllegalAccessError, IncompatibleClassChangeError, InstantiationError, LinkageError, NoClassDefFoundError, NoSuchFieldError, NoSuchMethodError, UnsupportedClassVersionError, and VerifyError. <p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=26>26</a>. How does the tool locate potential runtime errors?</p><p><p/>
+The path analysis maintains context information that allows the tool to detect the possible occurence of runtime errors such as MemoryAccessError, IllegalAssignmentError and IllegalThreadStateException. The tool also searches for errors in class structure, performing a full verification, when classes are loaded.</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=27>27</a>. What are the limitations of the path analysis?</p><p><p/>
+When reporting the potential errors MemoryAccessError, IllegalAssignmentError and IllegalThreadStateException
+, the tool may report false positives, and it may also miss some potential errors. 
+<p/>
+The static analysis does not attempt to evaluate boolean conditions that are evaluated at runtime, and so it will follow paths within methods that might 
+not be followed at runtime, resulting in errors reported that might not be reachable in runtime conditions. Additionally, the usage of JNI and 
+reflection (java.lang.Class and java.lang.reflection) cannot be followed by the analysis and may result in unreported errors. Unresolved references can 
+also cause unreported errors.
+<p/>
+Class initialization poses a challenge for path analysis. This is because it is not possible to tell during static analysis which thread triggers the 
+initialization of a class. It is possible that initialization could be triggered by a regular thread, an RT, or an NHRT. If class initializers try to 
+make use of scoped memory then problems can result if the initializing thread is a regular thread. If initializers try to make use of the heap, then 
+problems can arise if the intializing thread is an NHRT.
+<p/>
+For the purpose of this analysis, the initializing thread is assumed to be a regular thread running in immortal memory. This includes classes that are 
+loaded by the run-time verifier; it is assumed that such classes are loaded by a regular thread running in immortal memory. 
+<p/>
+In fact, virtual machines which provide aggressive loading will ensure that the initializing thread is a regular thread, by loading when the application 
+starts, so that loading is never performed by user threads.
+<p/>
+Finalization poses another challenge for analysis. This is because it is not possible to tell during static analysis which thread triggers the 
+finalization of an object. 
+ <p/>
+There is no confusion in the case of heap objects, which are typically finalized by a regular thread, while immortal objects are not finalized at all.
+<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=28>28</a>. How do I use the auto-load classes?</p><p>
+When you specify -createAutoLoaders, the tool will create an auto-load class for each archive and tell you their names. When you call the "load()" method in each class in your application, it will load all the other classes in the same archive. However, all you need to do is initialize the class and "load()" will be called automatically, so you can simply pass each auto-loader class name to an invocation of java.lang.Class.forName(java.lang.String).</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=29>29</a>. What is escape analysis?</p><p>
+
+Escape analysis determines if an object can outlive a method invocation that created it. When a method is invoked, it will create objects, and subinvocations will create objects, and some of these objects may not be reachable when the original invocation completes, which means that these objects did not escape the invocation. Objects can escape in numerous ways, such as into static fields, as uncaught exception objects that were thrown, as returned objects, through method arguments, into other threads, into invocations that could not be followed such as native method invocations, into a field of the receiving object of the invocation, or as an object reachable (through fields or array elements) from another object that escapes.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=30>30</a>. How can the escape analysis be used?</p><p><p/>
+Escape analysis can assist with determining the memory requirements of executing a method. It will tell you the number of object instantiation locations in the code and whether the objects instantiated at each location will persist. It can also help to determine whether a method is safe to be executed in a scope, since objects escaping may cause IllegalAssignmentErrors.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=31>31</a>. How should the escape analysis results be interpreted?</p><p><p/>
+"Can potentially escape" means that the analysis has found a path through which an object may escape. This does not necessarily mean that the object will escape, this may mean that there is a route of escape (even though that route might not be chosen at runtime, or possibly cannot be chosen at runtime).<p/>
+"Cannot escape" means that there is simply no route of escape possible, and the object will never escape no matter how the application is executed or how often.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=32>32</a>. What is the effect of limiting the depth of escape analysis?</p><p><p/>
+The context analysis will not enter method invocations if the depth-limit would be exceeded. This will not result in incorrect reports of objects not escaping, rather it would results in more objects being reported as potentially escaping, since objects that can pass into such depth-limited method invocations would be deemed escaping objects.
+<p/>
+Limiting the depth can be useful to avoid long analyses that take a second or more. Most escape analyses take on the order of microseconds. Limiting the depth limit to a value of 11 or more does not significantly affect the results of the escape analyses.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=33>33</a>. How are classes written to disk?</p><p><p/>
+When writing classes to disk, the user may specify either a directory or a jar file with -output. 
+<p/>
+When specifying a directory, the classes will be written to individual archives with names corresponding to the archives from which the classes originated. 
+<p/>
+When specifying an archive, all classes will be written to the same file.
+<p/>
+If the "split" option has been specified, the written archives will each be split into as many as five separate archives, whose names have been altered by applying a suffix to the file name: "nhrt", "rt", "t", "inaccessible", and "resources", for each of the categories listed above.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=34>34</a>. What are the consequences of removing debug info from classes?</p><p>
+When using a debugger, the local variables and line numbers of source files are not available to the debugger. Also, while running the application outside of a debugger, the stack traces of exceptions will not show source code line numbers. A class file remains valid if these items are removed. Removing this information does not change program behaviour.<p/>
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=35>35</a>. What are the consequences of removing source info or annotation info from classes?</p><p><p/>
+Annotations are available through the java reflection library and are used for deploying java applications in specific environments.
+Source info is generally available through the java reflection library. Source info tells the java virtual machine information about items in the class file such as:
+<ul class="ibm-bullet-list ibm-no-links"> <small>
+<li>inner and outer class relationships or the enclosing methods of local classes, </li>
+<li>which items are synthetic items (compiler-generated classes, methods and fields)</li>
+<li>the types of items that are generic (generic class names, generic field types, generic method signatures) </li>
+<li>deprecated items</li>
+</ul></small>
+<p/>
+A class file remains valid if these items are removed. For most java programs, removing this information does not change program behaviour.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=37>37</a>. What are stackmaps?</p><p><p/>Stackmaps are structures introduced in Java 5 to speed up class file verification. They represent the operand stack during execution of a java method.<p/>
+For java 5 virtual machines stackamps are optionally found in the class file. Java 6 virtual machines require them.<p/></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=38>38</a>. What attributes can be removed from class files?</p><p><p/>
+Any class file generator can create proprietary attributes that can be added and removed. Additionally, there are numerous standard attributes defined by the Java Virtual Machine Specification. Most can be removed under various circumstances.
+<p/>
+<b>Stackmaps:</b><br/>
+StackMapTable: Java SE stack maps<br/>
+StackMap: CLDC stack maps<br/>
+<p/>
+<b>Source info attributes:</b><br/>
+EnclosingMethod: Identifies the enclosing method of local classes<br/>
+Signature: Identifies generic signatures for classes, field types and method signatures<br/>
+Deprecated: Identifies deprecated items<br/>
+Synthetic: Identifies a compiler-generated item<br/>
+InnerClasses: Identifies inner and outer class relationships (including nested and anonymous)<br/>
+<p/>
+<b>Annotation attributes:</b><br/>
+AnnotationDefault<br/>
+RuntimeVisibleAnnotations<br/>
+RuntimeInvisibleAnnotations<br/>
+RuntimeVisibleParameterAnnotations<br/>
+RuntimeInvisibleParameterAnnotations<br/>
+<p/>
+<b>Debug:</b><br/>
+SourceFile<br/>
+SourceDebugExtension<br/>
+LineNumberTable<br/>
+LocalVariableTable<br/>
+LocalVariableTypeTable<br/>
+<p/>
+<b>Attributes that will result in an invalid class file when removed:</b><br/>
+Code<br/>
+ConstantValue<br/>
+Exceptions<br/>
+<p/>
+</p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p><p><a name=39>39</a>. What does an example command line look like?</p><p><p/>
+<ol><small>
+<li>Command line:<br/>
+<i>java AppExecOptimizer -log log.txt -load &lt;an additional application jar file&gt; -icp 
+ &lt;application class path directory &gt; -mainMethod &lt;application class&gt; -jre 
+ &lt;the java run-time environment&gt; -output &lt;an output directory&gt; 
+-split -entryPointFile entryPoints.txt -unresolvedRefFile unresolved.txt 
+escapeReport escaped.txt -escapeDepth 5 -escapeMethod "a.package.*" -followExternal</i>
+<p/></small>
+Load an application on the internal class path, loading all classes within a jar file and also specifying a supporting class path directory. Indicate the entry point as the main class and add the supporting JRE to the external class path. Produce the unresolved reference, entry points and escape analysis files. Restrict the escape analysis to all classes in the package "a.package", and limit the escape analysis stack depth to five frames. Write the classes to jar files inside the indicated output directory, and split the jar files according to thread accessibility.</li>
+
+<small>
+<li>Command line:<br/>
+<i>java AppExecOptimizer -load &lt;a class file&gt; -output &lt;a jar file&gt; -removeDebugInfo -addStackMaps
+</i><p/></small>
+Load a class file, strip the debug info, add stackmaps, and write it to a jar file.</li>
+<small>
+
+<li>Command line:<br/>
+<i>java AppExecOptimizer -entryLibraryClass "com.x.*" -icp &lt;app jars&gt;-cp &lt;supporting jars&gt; -entryPointFile entryPoints.txt -followExternal</i>
+<p/></small>
+Mark all public and protected methods in the package com.x of a of an app as entry points, and determine what additional entry points exist from the supporting jars into the application.</li>
+<small>
+<li>Command line:<br/>
+<i>java AppExecOptimizer -mainMethod a.package.Cls -icp &lt;app class path&gt; -split -errorFile errorFile.txt -output output.jar
+</i><p/></small>Split an app according to thread accessibility, where the app's main method is in the class "a.pacakge.Cls", and check the app for any run-time or verification errors. Write the app to the output jar that has been split into several jars according to thread accessibility.</small>
+<ol></p><p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-content">Back to top</a></p>
+<!-- FAQ CORE LIST END -->
+</div>
+
+</body>
+</html>

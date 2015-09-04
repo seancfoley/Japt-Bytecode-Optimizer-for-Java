@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<transforms>
+
+<transformation>
+-reduce -ita
+</transformation>
+
+<transformation>
+-reduce -xta -ita
+</transformation>
+
+<transformation>
+-reduce -bta
+</transformation>
+
+
+
+
+<!--transformation-->
+-inline -compressionInline -obfuscate -reduce -xta -expandPermissions
+<!--/transformation-->
+
+
+<!--transformation-->
+-obfuscate -expandPermissions
+<!--/transformation-->
+
+
+<transformation>
+-inline -inlineMethod *
+</transformation>
+
+<transformation>
+-inline -inlineMethod * -assumeUnknownVirtuals
+</transformation>
+
+<transformation>
+-inline -inlineMethod * -inlineFromAnywhere -load -verify
+</transformation>
+
+
+
+
+
+</transforms>

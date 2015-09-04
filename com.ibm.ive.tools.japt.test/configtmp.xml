@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<config>
+
+
+<firstRun>
+<javaClassPath>
+c:\java\2.3\ive\lib\jclFoundation10\classes.zip
+</javaClassPath>
+<java>
+c:\java\2.3\ive\bin\j9.exe -jcl:foun10 -Xmx1024m -Duser.region=US
+</java>
+<classVersion>
+50.0
+</classVersion>
+</firstRun>
+
+
+<secondRun>
+<javaClassPath>
+c:\java\2.3\ive\lib\jclFoundation10\classes.zip
+</javaClassPath>
+<java>
+c:\java\2.3\ive\bin\j9.exe -jcl:foun10 -Xmx1024m -Duser.region=US
+</java>
+<classVersion>
+50.0
+</classVersion>
+</secondRun>
+
+
+<!-- alternatives are unused by the test framework, but allow the storage of config information for various JREs in the config file -->
+
+<alternative>
+<!-- this must correspond to the jre boot classes that are used by java-->
+<javaClassPath>
+c:\java\2.3\ive\lib\jclFoundation10\classes.zip
+</javaClassPath>
+<java>
+c:\java\2.3\ive\bin\j9.exe -jcl:foun10 -Xmx1024m -Duser.region=US
+</java>
+</alternative>
+
+
+<alternative>
+<!-- at this time I'm getting UnsatisfiedLinkErrors with this one -->
+<javaClassPath>
+c:\java\jdk1.5.0_05\jre\lib\all.jar;c:\java\jdk1.5.0_05\jre\lib\rt.jar;c:\java\jdk1.5.0_05\jre\lib\charsets.jar
+</javaClassPath>
+<java>
+c:\java\jdk1.5.0_05\jre\bin\java -Xmx1024m -Duser.region=US
+</java>
+<classVersion>
+49.0
+</classVersion>
+</alternative>
+
+<alternative>
+<javaClassPath>
+c:\java\jdk6_01\jre\lib\rt.jar;c:\java\jdk6_01\jre\lib\charsets.jar;c:\java\jdk6_01\jre\lib\jce.jar
+</javaClassPath>
+<java>
+c:\java\jdk6_01\jre\bin\java -Xmx1536m -Duser.region=US
+</java>
+<classVersion>
+50.0
+</classVersion>
+</alternative>
+
+
+</config>
+
+
+
