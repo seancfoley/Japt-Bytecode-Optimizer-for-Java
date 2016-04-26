@@ -6,10 +6,10 @@
 
 <firstRun>
 <jre>
-C:\java\java6064sr15\jre
+C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre
 </jre>
 <java>
-C:\java\java6064sr15\jre\bin\java -Xmx2g -Duser.region=US
+C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre\bin\java -Xmx2g -Duser.region=US
 </java>
 <classVersion>
 50.0
@@ -19,10 +19,10 @@ C:\java\java6064sr15\jre\bin\java -Xmx2g -Duser.region=US
 
 <secondRun>
 <jre>
-C:\java\java6064sr15\jre
+C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre
 </jre>
 <java>
-C:\java\java6064sr15\jre\bin\java -Xmx2g -Duser.region=US
+C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre\bin\java -Xmx2g -Duser.region=US
 </java>
 <classVersion>
 50.0
