@@ -238,35 +238,21 @@ public class CallSite {
 			return reason;
 		}
 		if(newTarget.isStatic()) {
-			if(site.instruction.isInvokeStaticIns()) {
-				//just change the target
-				site.instruction.target = newTarget;
-			} else {
-				changeInstruction(newTarget, BT_Opcodes.opc_invokestatic);
-			}
+			//note: we cannot just change the target of the instruction, that will not update callsites vectors
+			changeInstruction(newTarget, BT_Opcodes.opc_invokestatic);
 		} else if(newTarget.cls.isInterface()){
-			if(site.instruction.isInvokeInterfaceIns()) {
-				//just change the target
-				site.instruction.target = newTarget;
-			} else {
-				changeInstruction(newTarget, BT_Opcodes.opc_invokeinterface);
-			}
+			//note: we cannot just change the target of the instruction, that will not update callsites vectors
+			changeInstruction(newTarget, BT_Opcodes.opc_invokeinterface);
 		} else {
 			//Note: when changing from static to virtual, there is a primary
 			//difference in that the first argument to the static method cannot be null, but cases where
 			//this might occur are not detected at this time
 			if(newTarget.isPrivate() || newTarget.isConstructor() || isSuperClassSpecialCall(newTarget)) {
-				if(site.instruction.isInvokeSpecialIns()) {
-					site.instruction.target = newTarget;
-				} else {
-					changeInstruction(newTarget, BT_Opcodes.opc_invokespecial);
-				}
+				//note: we cannot just change the target of the instruction, that will not update callsites vectors
+				changeInstruction(newTarget, BT_Opcodes.opc_invokespecial);
 			} else {
-				if(site.instruction.isInvokeVirtualIns()) {
-					site.instruction.target = newTarget;
-				} else {
-					changeInstruction(newTarget, BT_Opcodes.opc_invokevirtual);
-				}
+				//note: we cannot just change the target of the instruction, that will not update callsites vectors
+				changeInstruction(newTarget, BT_Opcodes.opc_invokevirtual);
 			}
 		}
 		return null;
