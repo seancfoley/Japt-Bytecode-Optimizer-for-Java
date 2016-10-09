@@ -311,8 +311,7 @@ public class SiteMapper {
 			String reason = site.remap((JaptMethod) newTarget);
 			if(reason == null) {
 				messages.MAPPED_CALLSITE.log(logger, new Object[] {target, callSite.getFrom(), newTarget});
-			}
-			else {
+			} else {
 				messages.NOT_MAPPED_CALLSITE.log(logger, new Object[] {target, callSite.getFrom(), newTarget, reason});
 			}
 		}
@@ -378,14 +377,12 @@ public class SiteMapper {
 	 */
 	boolean satisfiesContainment(BT_Method location) {
 		if(containingClasses != null) {
-			if(!containingClasses.contains(location.cls)) {
-				return false;
+			if(containingMethods != null) {
+				return containingMethods.contains(location) || containingClasses.contains(location.cls);
 			}
-		}
-		if(containingMethods != null) {
-			if(!containingMethods.contains(location)) {
-				return false;
-			}
+			return containingClasses.contains(location.cls);
+		} else if(containingMethods != null) {
+			return containingMethods.contains(location);
 		}
 		return true;
 	}
