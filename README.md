@@ -1,18 +1,15 @@
 # Japt Bytecode Optimizer for Java
 Bytecode optimization tool to ease development and deployment of Java
 
+[**View Project Page**](https://seancfoley.github.io/Japt-Bytecode-Optimizer-for-Java/)
+
 Description
-The tools provide the following technologies:
+The tool provides the following technologies and others (see the project pages for a longer list):
 
 * escape analysis on a per method-invocation basis 
-* static control flow analysis that determines entry points into an application or library
-* removal of unwanted attributes from Java™ class files
-* addition or rewrite of stackmaps for Java class files
-* verification of Java class files
-* auto-generation of classes to load all other classes within the same archive 
-* specific remapping of method invocations
-* specific rewrites of bytecodes
+* static control flow analysis
+* addition/removal of class file attributes
+* addition or rewrite of stackmaps for Java class files and class file verification
+* remapping method invocations and rewriting bytecodes
 * obfuscation of class, field and method names
 * assembler and disassembler of bytecodes
-* static control flow analysis for removal of unused methods, classes, fields
-* static control flow analysis that splits an application into archives according to thread accessibility
