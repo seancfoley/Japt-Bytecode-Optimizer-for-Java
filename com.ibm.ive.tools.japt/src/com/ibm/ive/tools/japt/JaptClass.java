@@ -28,6 +28,14 @@ public class JaptClass extends BT_Class {
 		super(repository);
 	}
 	
+	public void acquireClassLock() {
+		super.acquireClassLock();
+	}
+	
+	public void releaseClassLock() {
+		super.releaseClassLock();
+	}
+	
 	/**
 	 * Return the set of all superinterfaces of this class or interface, including the
 	 * class itself if an interface.

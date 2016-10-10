@@ -13,6 +13,7 @@ import java.util.Vector;
 import com.ibm.ive.tools.japt.ClassPathEntry;
 import com.ibm.ive.tools.japt.Identifier;
 import com.ibm.ive.tools.japt.InvalidIdentifierException;
+import com.ibm.ive.tools.japt.JaptClass;
 import com.ibm.ive.tools.japt.JaptRepository;
 import com.ibm.jikesbt.BT_AttributeVector;
 import com.ibm.jikesbt.BT_BasicBlockMarkerIns;
@@ -26,16 +27,16 @@ import com.ibm.jikesbt.BT_Field;
 import com.ibm.jikesbt.BT_Ins;
 import com.ibm.jikesbt.BT_Item;
 import com.ibm.jikesbt.BT_LineNumberAttribute;
+import com.ibm.jikesbt.BT_LineNumberAttribute.DereferencedPCRange;
+import com.ibm.jikesbt.BT_LineNumberAttribute.PcRange;
 import com.ibm.jikesbt.BT_LookupSwitchIns;
 import com.ibm.jikesbt.BT_Method;
 import com.ibm.jikesbt.BT_MethodSignature;
+import com.ibm.jikesbt.BT_NoSuchMemberException.BT_NoSuchFieldException;
+import com.ibm.jikesbt.BT_NoSuchMemberException.BT_NoSuchMethodException;
 import com.ibm.jikesbt.BT_Opcodes;
 import com.ibm.jikesbt.BT_Repository;
 import com.ibm.jikesbt.BT_TableSwitchIns;
-import com.ibm.jikesbt.BT_LineNumberAttribute.DereferencedPCRange;
-import com.ibm.jikesbt.BT_LineNumberAttribute.PcRange;
-import com.ibm.jikesbt.BT_NoSuchMemberException.BT_NoSuchFieldException;
-import com.ibm.jikesbt.BT_NoSuchMemberException.BT_NoSuchMethodException;
 
 /**
  * With a provided {@link Scanner}, read a byte stream and parse the characters that
@@ -76,7 +77,7 @@ public class Parser implements BT_Opcodes {
 		this.classVersion = classVersion;
 	}
 	
-	public BT_Class parse(BT_Class stub) 
+	public JaptClass parse(JaptClass stub) 
 			throws UnexpectedTokenException, 
 				BT_DuplicateClassException, 
 				BT_ClassFileException,
@@ -114,12 +115,16 @@ public class Parser implements BT_Opcodes {
 		return info;
 	}
 	
-	private BT_Class readClassDeclaration(InfoUntilName info, BT_Class cls) 
+	private JaptClass readClassDeclaration(InfoUntilName info, JaptClass cls) 
 			throws UnexpectedTokenException, 
 				BT_DuplicateClassException, 
 				BT_ClassFileException, 
 				InvalidIdentifierException {
-		//TODO sean xxx;
+		
+		/* note: it would have been nice if we had already created the stub.
+		 * But we really cannot until we have confirmed the correct class name,
+		 * which must come from the InfoUntilName object.
+		 */
 		if(cls == null) {
 			cls = repository.getClass(info.name);
 		}
@@ -140,26 +145,40 @@ public class Parser implements BT_Opcodes {
 			}
 		} else if (!cls.isStub()) {
 			throw new BT_DuplicateClassException(cls.getName(), cls);
-		}
-		else {
+		} else {
 			repository.createInternalClass(
 				classPathEntry,
 				info.isInterface,
 				classVersion,
 				cls);
 		}
-		cls.setFlags(info.modifiers);
-		cls.setInProject(repository.getFactory().isProjectClass(info.name, null));
-		//if (DEBUG) System.out.println("reading class "+cls);
 		
-		nextToken();
-		readSuperClass(cls, info.isInterface);
-		readInterfaces(cls, info.isInterface);
-		readClassBody(cls);
-		removeStubFieldsAndMethods(cls);
-		
-		//creates the source file attribute
-		cls.setSourceFile(new File(scanner.fileName).getName());
+		/* 
+		 * much like in BT_Repository, while we are trying to load a class we hold the table
+		 * lock until the stub for the class has been inserted into the class table.
+		 * At that point in time, we can release the table lock.  If we intend to load the class,
+		 * we must acquire the class lock.  By acquiring the class lock before releasing the table lock,
+		 * we can load the class (otherwise we'd need to check if class loaded already).
+		 * 
+		 */
+		cls.acquireClassLock();
+		repository.releaseTableLock(cls);
+		try {
+			cls.setFlags(info.modifiers);
+			cls.setInProject(repository.getFactory().isProjectClass(info.name, null));
+			//if (DEBUG) System.out.println("reading class "+cls);
+			
+			nextToken();
+			readSuperClass(cls, info.isInterface);
+			readInterfaces(cls, info.isInterface);
+			readClassBody(cls);
+			removeStubFieldsAndMethods(cls);
+			
+			//creates the source file attribute
+			cls.setSourceFile(new File(scanner.fileName).getName());
+		} finally {
+			cls.releaseClassLock();
+		}
 		return cls;
 	}
 

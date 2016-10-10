@@ -171,7 +171,7 @@ public class BT_Factory {
 	**/
 	public static boolean strictVerification = true;
 	
-	protected Lock factoryLock = new ReentrantLock();
+	protected ReentrantLock factoryLock = new ReentrantLock();
 
 	/**
 	 Creates a JikesBT "factory"
@@ -218,6 +218,14 @@ public class BT_Factory {
 	**/
 	public BT_Factory() {
 		this(true, true, false, true, false);
+	}
+	
+	protected void acquireFactoryLock() {
+		BT_Class.acquireLock(factoryLock);
+	}
+	
+	protected void releaseFactoryLock() {
+		BT_Class.releaseLock(factoryLock);
 	}
 
 	/**
@@ -294,14 +302,13 @@ public class BT_Factory {
 	public void noteClassLoaded(
 		BT_Class c,
 		String fromFileName) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		if (c.inProject())
-			System.out.println(
-				Messages.getString("JikesBT.__*_Loaded_{0}_{1}_from_{2}_17", new Object[] {c.fullKindName(), c, fromFileName}));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			if (c.inProject())
+				System.out.println(
+					Messages.getString("JikesBT.__*_Loaded_{0}_{1}_from_{2}_17", new Object[] {c.fullKindName(), c, fromFileName}));
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 
@@ -327,14 +334,13 @@ public class BT_Factory {
 	**/
 	//   Warning: This will call fatal if a project class is not found.
 	public BT_Class noteClassNotFound(String className, BT_Repository repo, BT_Class stub, LoadLocation referencedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		if (isProjectClass(className, null)) // An "important" class
-			fatal(Messages.getString("JikesBT.Could_not_find_class_{0}_20", className)); // End execution now
-		warning(Messages.getString("JikesBT.Could_not_find_class_{0}_20", className) + Messages.getString("JikesBT.____will_create_a_stub_22"));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			if (isProjectClass(className, null)) // An "important" class
+				fatal(Messages.getString("JikesBT.Could_not_find_class_{0}_20", className)); // End execution now
+			warning(Messages.getString("JikesBT.Could_not_find_class_{0}_20", className) + Messages.getString("JikesBT.____will_create_a_stub_22"));
+		} finally {
+			releaseFactoryLock();
 		}
 		//we are holding the class table lock when this  method is called, so no locking required before calling createStub
 		if(stub == null) {
@@ -360,13 +366,12 @@ public class BT_Factory {
 	
 	
 	public void noteFileCloseIOException(String resource, IOException e) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		warning(Messages.getString("JikesBT.Exception_closing__{0}_104",
+		acquireFactoryLock();
+		try {
+			warning(Messages.getString("JikesBT.Exception_closing__{0}_104",
 				resource));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 
@@ -389,20 +394,19 @@ public class BT_Factory {
 		String className,
 		String fileName,
 		IOException ex) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		boolean pc = isProjectClass(className, null);
-		String m =
-			Messages.getString("JikesBT.I/O_error_while_reading_{0}_class_{1}{2}_--_From_file_{3}_24", 
-				new Object[] {(pc ? "project" : "external"), className, endl(), fileName});
-		if (pc) // Is an important class
-			fatal(m, ex);
-		else { // Can create a stub to represent the (external) class
-			warning(m + endl() + Messages.getString("JikesBT.____Will_create_a_stub_class_and_continue_29"));
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			boolean pc = isProjectClass(className, null);
+			String m =
+				Messages.getString("JikesBT.I/O_error_while_reading_{0}_class_{1}{2}_--_From_file_{3}_24", 
+					new Object[] {(pc ? "project" : "external"), className, endl(), fileName});
+			if (pc) // Is an important class
+				fatal(m, ex);
+			else { // Can create a stub to represent the (external) class
+				warning(m + endl() + Messages.getString("JikesBT.____Will_create_a_stub_class_and_continue_29"));
+			}
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 	
@@ -420,13 +424,12 @@ public class BT_Factory {
 	 *
 	 */
 	public void noteAttributeLoadFailure(BT_Repository rep, BT_Item item, String attName, BT_Attribute attribute, BT_AttributeException e, LoadLocation loadLocation) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		warning(Messages.getString("JikesBT.Could_not_load_attribute_{0}_in_{1}__{2}_105", 
+		acquireFactoryLock();
+		try {
+			warning(Messages.getString("JikesBT.Could_not_load_attribute_{0}_in_{1}__{2}_105", 
 				new Object[] {attribute == null ? attName : attribute.getName(), item.useName(), e}));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 	
@@ -500,12 +503,11 @@ public class BT_Factory {
 			String fileName,
 			Throwable ex,
 			String equivalentRuntimeError) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		noteClassLoadFailure(name, fileName, ex, equivalentRuntimeError);
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			noteClassLoadFailure(name, fileName, ex, equivalentRuntimeError);
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 	
@@ -527,12 +529,11 @@ public class BT_Factory {
 			String fileName,
 			String problem,
 			String equivalentRuntimeError) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		warning(className + endl() + problem);
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			warning(className + endl() + problem);
+		} finally {
+			releaseFactoryLock();
 		}
 		return;
 	}
@@ -611,21 +612,20 @@ public class BT_Factory {
 	**/
 	//   Uses {@link BT_Factory#warning} instead of print.
 	public void noteUndeclaredField(BT_Field f, BT_Class targetClass, BT_Method fromMethod, BT_FieldRefIns fromIns, LoadLocation loadedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		String msg =
+		acquireFactoryLock();
+		try {
+			String msg =
 				Messages.getString("JikesBT.Instruction_{0}_1", fromIns)
 				+ endl() 
 				+ Messages.getString("JikesBT.____in_method_{0}_2", fromMethod)
 				+ endl()
 				+ Messages.getString("JikesBT.____refers_to_an_undeclared_field_in_a_project_class_68");
-		if (f.cls.inProject())
-			fatal(msg);
-		else
-			warning(msg + endl() + Messages.getString("JikesBT.____a___public___field_will_be_added_69"));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+			if (f.cls.inProject())
+				fatal(msg);
+			else
+				warning(msg + endl() + Messages.getString("JikesBT.____a___public___field_will_be_added_69"));
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 
@@ -649,23 +649,22 @@ public class BT_Factory {
 	**/
 	//   Uses {@link BT_Factory#warning} instead of print.
 	public void noteUndeclaredMethod(BT_Method m, BT_Class targetClass, BT_Method fromMethod, BT_MethodRefIns fromIns, LoadLocation loadedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		String msg =
+		acquireFactoryLock();
+		try {
+			String msg =
 				Messages.getString("JikesBT.Instruction_{0}_1", fromIns)
 				+ endl() 
 				+ Messages.getString("JikesBT.____in_method_{0}_2", fromMethod)
 				+ endl()
 				+ Messages.getString("JikesBT.____refers_to_an_undeclared_method_in_a_{0}_class_70", (m.cls.inProject() ? "project" : "system"));
-		if (m.cls.inProject())
-			// May not want to add missing methods to project classes
-			fatal(msg);
-		else
-			warning(
-				msg + endl() + Messages.getString("JikesBT.____a___public_native___method_will_be_added_74"));
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+			if (m.cls.inProject())
+				// May not want to add missing methods to project classes
+				fatal(msg);
+			else
+				warning(
+					msg + endl() + Messages.getString("JikesBT.____a___public_native___method_will_be_added_74"));
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 

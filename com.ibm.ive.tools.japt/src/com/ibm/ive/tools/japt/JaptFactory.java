@@ -198,40 +198,66 @@ public class JaptFactory extends BT_Factory {
 	public void noteInternalClassCreated(BT_Class clazz, BT_ClassPathEntry cpe) {
 		internalClassCount++;
 		if(verbose) {
-			messages.CREATED_INTERNAL_CLASS.log(logger, 
-				new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
-			);
+			acquireFactoryLock();
+			try {
+				messages.CREATED_INTERNAL_CLASS.log(logger, 
+					new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
+				);
+			} finally {
+				releaseFactoryLock();
+			}
 		}
+		
 	}
 	
 	public void noteInternalClassLoaded(BT_Class clazz, BT_ClassPathEntry cpe) {
 		internalClassCount++;
 		if(verbose) {
-			messages.LOADED_INTERNAL_CLASS.log(logger, 
-				new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
-			);
+			acquireFactoryLock();
+			try {
+				messages.LOADED_INTERNAL_CLASS.log(logger, 
+					new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
+				);
+			} finally {
+				releaseFactoryLock();
+			}
 		}
 	}
 	
 	public void noteClassDereferenced(BT_Class clazz) {
 		if(verbose && !clazz.isArray() && !clazz.isPrimitive()) {
-			messages.DEREFERENCED_CLASS.log(logger, new Object[] {clazz.fullKindName(), clazz});
+			acquireFactoryLock();
+			try {
+				messages.DEREFERENCED_CLASS.log(logger, new Object[] {clazz.fullKindName(), clazz});
+			} finally {
+				releaseFactoryLock();
+			}
 		}
 	}
 	
 	public void noteExternalClassLoaded(BT_Class clazz, BT_ClassPathEntry cpe) {
 		externalClassCount++;
 		if(verbose) {
-			messages.LOADED_EXTERNAL_CLASS.log(logger,
-				new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
-			);
+			acquireFactoryLock();
+			try {
+				messages.LOADED_EXTERNAL_CLASS.log(logger,
+					new Object[] {clazz.fullKindName(), clazz, cpe.getEntryCanonicalName()}
+				);
+			} finally {
+				releaseFactoryLock();
+			}
 		}
 	}
 	
 	public void noteClassNotLoaded(String className, BT_ClassPathEntry cpe) {
-		messages.COULD_NOT_LOAD_CLASS.log(logger, 
-			new String[] {className, cpe.getEntryCanonicalName()}
-		);
+		acquireFactoryLock();
+		try {
+			messages.COULD_NOT_LOAD_CLASS.log(logger, 
+				new String[] {className, cpe.getEntryCanonicalName()}
+			);
+		} finally {
+			releaseFactoryLock();
+		}
 		notLoadedClassCount++;
 	}
 	
@@ -268,38 +294,36 @@ public class JaptFactory extends BT_Factory {
 	}
 	
 	public void noteUndeclaredMethod(BT_Method m, BT_Class targetClass, BT_Method fromMethod, BT_MethodRefIns fromIns, LoadLocation loadedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		if(saveUnresolved && (unresolvedClasses == null || !unresolvedClasses.contains(m.getDeclaringClass()))) {
-			if(unresolvedMethods == null) {
-				unresolvedMethods = new BT_MethodVector();
+		acquireFactoryLock();
+		try {
+			if(saveUnresolved && (unresolvedClasses == null || !unresolvedClasses.contains(m.getDeclaringClass()))) {
+				if(unresolvedMethods == null) {
+					unresolvedMethods = new BT_MethodVector();
+				}
+				unresolvedMethods.addUnique(m);
 			}
-			unresolvedMethods.addUnique(m);
-		}
-		if(!ignoreClassNotFound.contains(m.getDeclaringClass().getName())) {
-			messages.UNRESOLVED_METHOD.log(logger, new Object[] {m.useName(), fromMethod.useName()});
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+			if(!ignoreClassNotFound.contains(m.getDeclaringClass().getName())) {
+				messages.UNRESOLVED_METHOD.log(logger, new Object[] {m.useName(), fromMethod.useName()});
+			}
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 
 	public void noteUndeclaredField(BT_Field f, BT_Class targetClass, BT_Method fromMethod, BT_FieldRefIns fromIns, LoadLocation loadedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		if(saveUnresolved && (unresolvedClasses == null || !unresolvedClasses.contains(f.getDeclaringClass()))) {
-			if(unresolvedFields == null) {
-				unresolvedFields = new BT_FieldVector();
+		acquireFactoryLock();
+		try {
+			if(saveUnresolved && (unresolvedClasses == null || !unresolvedClasses.contains(f.getDeclaringClass()))) {
+				if(unresolvedFields == null) {
+					unresolvedFields = new BT_FieldVector();
+				}
+				unresolvedFields.addUnique(f);
 			}
-			unresolvedFields.addUnique(f);
-		}
-		if(!ignoreClassNotFound.contains(f.getDeclaringClass().getName())) {
-			messages.UNRESOLVED_FIELD.log(logger, new Object[] {f.useName(), fromMethod.useName()});
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+			if(!ignoreClassNotFound.contains(f.getDeclaringClass().getName())) {
+				messages.UNRESOLVED_FIELD.log(logger, new Object[] {f.useName(), fromMethod.useName()});
+			}
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 		
@@ -329,42 +353,45 @@ public class JaptFactory extends BT_Factory {
 	}
 	
 	public BT_Class noteClassNotFound(String className, BT_Repository repository, BT_Class stub, LoadLocation referencedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		if(!ignoreClassNotFound.contains(className)) {
-			messages.COULD_NOT_FIND_CLASS.log(logger, className);
-			if(!ignoreClassesNotFound) {
-				notFoundClassCount++;
+		acquireFactoryLock();
+		try {
+			if(!ignoreClassNotFound.contains(className)) {
+				messages.COULD_NOT_FIND_CLASS.log(logger, className);
+				if(!ignoreClassesNotFound) {
+					notFoundClassCount++;
+				}
 			}
-		}
-		if(stub == null) {
-			//no need for locking here as we hold the table lock when this method is called
-			stub = repository.createStub(className);
-		}
-		if(saveUnresolved) {
-			if(unresolvedClasses == null) {
-				unresolvedClasses = new BT_ClassVector();
+			if(stub == null) {
+				//no need for locking here as we hold the table lock when this method is called
+				stub = repository.createStub(className);
 			}
-			unresolvedClasses.addUnique(stub);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+			if(saveUnresolved) {
+				if(unresolvedClasses == null) {
+					unresolvedClasses = new BT_ClassVector();
+				}
+				unresolvedClasses.addUnique(stub);
+			}
+		} finally {
+			releaseFactoryLock();
 		}
 		return stub;
 	}
 		
 	public void noteFileCloseIOException(String resource, IOException e) {
-		messages.EXCEPTION_CLOSING.log(logger, resource);
+		acquireFactoryLock();
+		try {
+			messages.EXCEPTION_CLOSING.log(logger, resource);
+		} finally {
+			releaseFactoryLock();
+		}
 	}
 	
 	public void noteAttributeLoadFailure(BT_Repository rep, BT_Item item, String name, BT_Attribute attribute, BT_AttributeException e, LoadLocation loadLocation) {
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.lock();
-		}
-		messages.COULD_NOT_LOAD_ATTRIBUTE.log(logger, new Object[] {attribute == null ? name : attribute.getName(), item.useName(), e.getInitialCause()});
-		if(BT_Factory.multiThreadedLoading) {
-			factoryLock.unlock();
+		acquireFactoryLock();
+		try {
+			messages.COULD_NOT_LOAD_ATTRIBUTE.log(logger, new Object[] {attribute == null ? name : attribute.getName(), item.useName(), e.getInitialCause()});
+		} finally {
+			releaseFactoryLock();
 		}
 	}
 	
@@ -386,11 +413,13 @@ public class JaptFactory extends BT_Factory {
 		if(className == null && clazz != null) {
 			className = clazz.getName();
 		}
-		//TODO remove;
-		//xxx;
-		System.err.println("error 1 ");
-		ex.printStackTrace();
-		messages.VERIFY_FAILURE.log(logger, new Object[] {className, fileName, ex, equivalentRuntimeError});
+		acquireFactoryLock();
+		try {
+			ex.printStackTrace();//TODO remove later
+			messages.VERIFY_FAILURE.log(logger, new Object[] {className, fileName, ex, equivalentRuntimeError});
+		} finally {
+			releaseFactoryLock();
+		}
 	}
 	
 	public void noteClassLoadError(
@@ -403,16 +432,24 @@ public class JaptFactory extends BT_Factory {
 		if(className == null && clazz != null) {
 			className = clazz.getName();
 		}
-		//TODO xxx;
-		System.err.println("error 2 ");
-		messages.VERIFY_FAILURE.log(logger, new Object[] {className, fileName, problem, equivalentRuntimeError});	
+		acquireFactoryLock();
+		try {
+			messages.VERIFY_FAILURE.log(logger, new Object[] {className, fileName, problem, equivalentRuntimeError});	
+		} finally {
+			releaseFactoryLock();
+		}
 	}
 	
 	public void noteClassReadIOException(
 			String className,
 			String fileName,
 			IOException ex) {
-		messages.READ_FAILURE.log(logger, new Object[] {className, fileName, ex});
+		acquireFactoryLock();
+		try {
+			messages.READ_FAILURE.log(logger, new Object[] {className, fileName, ex});
+		} finally {
+			releaseFactoryLock();
+		}
 	}
 	
 	/**

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.ibm.ive.tools.japt.MemberActor.ClassActor;
@@ -89,7 +88,7 @@ public class JaptRepository extends BT_Repository {
 	private HashMap accessorMethodGenerators = new HashMap();
 	RelatedMethodMap relatedMethodMap;
 	public ErrorReporter errorReporter;
-	private Lock japtLoadLock = new ReentrantLock();
+	private ReentrantLock japtLoadLock = new ReentrantLock();
 
 	
 	public JaptRepository(JaptFactory factory) {
@@ -113,6 +112,18 @@ public class JaptRepository extends BT_Repository {
 			ClassPathEntry entry = (ClassPathEntry) internalClassPaths.get(i);
 			entry.sortLoadedResources(comparator);
 		}
+	}
+	
+	public void releaseTableLock(BT_Class clazz) {
+		super.releaseTableLock(clazz);
+	}
+	
+	public JaptClass createStub(String name) {
+		return (JaptClass) super.createStub(name);
+	}
+	
+	public JaptClass getClass(String name) {
+		return (JaptClass) super.getClass(name);
 	}
 	
 	public JaptFactory getFactory() {
@@ -234,37 +245,36 @@ public class JaptRepository extends BT_Repository {
 	 * @param clazz
 	 * @return
 	 */
-	private void registerClass(String className, ClassPathEntry classPathEntry, BT_Class clazz) {
+	public void registerClass(String className, ClassPathEntry classPathEntry, BT_Class clazz) {
 		JaptFactory factory = getFactory();
-		if(BT_Factory.multiThreadedLoading) {
-			japtLoadLock.lock();
-		}
-		if(clazz.isStub()) {
-			factory.noteClassNotLoaded(className, classPathEntry);
-		} else if(internalClassPaths.contains(classPathEntry)) {
-			classPathEntry.addClass(clazz);
-			internalClasses.addElement(clazz);
-			factory.noteInternalClassLoaded(clazz, classPathEntry);
-		} else {
-			factory.noteExternalClassLoaded(clazz, classPathEntry);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			japtLoadLock.unlock();
+		acquireLock(japtLoadLock);
+		try {
+			if(clazz.isStub()) {
+				factory.noteClassNotLoaded(className, classPathEntry);
+			} else if(internalClassPaths.contains(classPathEntry)) {
+				classPathEntry.addClass(clazz);
+				internalClasses.addElement(clazz);
+				factory.noteInternalClassLoaded(clazz, classPathEntry);
+			} else {
+				factory.noteExternalClassLoaded(clazz, classPathEntry);
+			}
+		} finally {
+			releaseLock(japtLoadLock);
 		}
 	}
 
-	public BT_Class createInternalInterface(Identifier identifier, ClassPathEntry classPathEntry) throws InvalidIdentifierException {
+	public JaptClass createInternalInterface(Identifier identifier, ClassPathEntry classPathEntry) throws InvalidIdentifierException {
 		return createInternal(identifier, classPathEntry, true, new BT_ClassVersion());
 	}
 	
-	public BT_Class createInternalInterface(
+	public JaptClass createInternalInterface(
 			Identifier identifier, 
 			ClassPathEntry classPathEntry,
 			BT_ClassVersion version) throws InvalidIdentifierException {
 		return createInternal(identifier, classPathEntry, true, version);
 	}
 	
-	private BT_Class createInternal(
+	private JaptClass createInternal(
 			Identifier identifier, 
 			ClassPathEntry classPathEntry, 
 			boolean makeInterface,
@@ -279,7 +289,7 @@ public class JaptRepository extends BT_Repository {
 		if(!canCreate(name)) {
 			throw new IllegalArgumentException("class already exists, or is an array or a primitive");
 		}
-		BT_Class result = createStub(name);
+		JaptClass result = (JaptClass) createStub(name);
 		createInternalClass(
             classPathEntry,
             makeInterface,
@@ -313,11 +323,11 @@ public class JaptRepository extends BT_Repository {
         getFactory().noteInternalClassCreated(stub, classPathEntry);
     }
 	
-	public BT_Class createInternalClass(Identifier identifier, ClassPathEntry classPathEntry) throws InvalidIdentifierException {
+	public JaptClass createInternalClass(Identifier identifier, ClassPathEntry classPathEntry) throws InvalidIdentifierException {
 		return createInternal(identifier, classPathEntry, false, new BT_ClassVersion());
 	}
 	
-	public BT_Class createInternalClass(
+	public JaptClass createInternalClass(
 			Identifier identifier, 
 			ClassPathEntry classPathEntry,
 			BT_ClassVersion version) throws InvalidIdentifierException {

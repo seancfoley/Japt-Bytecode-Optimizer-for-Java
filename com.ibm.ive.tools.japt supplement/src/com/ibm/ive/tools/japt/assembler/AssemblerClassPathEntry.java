@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.ibm.ive.tools.japt.ClassPathEntry;
+import com.ibm.ive.tools.japt.JaptClass;
 import com.ibm.ive.tools.japt.PatternString;
 import com.ibm.jikesbt.BT_Class;
 import com.ibm.jikesbt.BT_Repository;
@@ -57,10 +58,8 @@ public class AssemblerClassPathEntry extends ClassPathEntry {
 		return null;
 	}
 	
-	/**
-	 * override the parent method
-	 */
+	@Override
 	protected BT_Class loadClass(String className, BT_Repository repository, BT_ClassPathLocation loc, BT_Class stub) {
-		return queue.loadClass(className, loc, stub);
+		return queue.loadClass(className, loc, (JaptClass) stub);
 	}
 }

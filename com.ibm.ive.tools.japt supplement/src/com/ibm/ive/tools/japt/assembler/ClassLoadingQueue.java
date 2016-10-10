@@ -12,13 +12,14 @@ import java.util.ArrayList;
 
 import com.ibm.ive.tools.japt.ClassPathEntry;
 import com.ibm.ive.tools.japt.InvalidIdentifierException;
+import com.ibm.ive.tools.japt.JaptClass;
 import com.ibm.ive.tools.japt.JaptRepository;
 import com.ibm.ive.tools.japt.Logger;
 import com.ibm.jikesbt.BT_Class;
 import com.ibm.jikesbt.BT_ClassFileException;
+import com.ibm.jikesbt.BT_ClassPathEntry.BT_ClassPathLocation;
 import com.ibm.jikesbt.BT_ClassVersion;
 import com.ibm.jikesbt.BT_DuplicateClassException;
-import com.ibm.jikesbt.BT_ClassPathEntry.BT_ClassPathLocation;
 
 /**
  * @author sfoley
@@ -38,9 +39,9 @@ public class ClassLoadingQueue {
 	class ToLoad {
 		String className;
 		BT_ClassPathLocation loc;
-		BT_Class stub;
+		JaptClass stub;
 		
-		ToLoad(String s, BT_ClassPathLocation l, BT_Class stub) {
+		ToLoad(String s, BT_ClassPathLocation l, JaptClass stub) {
 			this.className = s;
 			this.loc = l;
 			this.stub = stub;
@@ -68,7 +69,7 @@ public class ClassLoadingQueue {
 		this.classVersion = classVersion;
 	}
 	
-	public void add(String className, BT_ClassPathLocation loc, BT_Class stub) {
+	public void add(String className, BT_ClassPathLocation loc, JaptClass stub) {
 		ToLoad load = new ToLoad(className, loc, stub);
 		if(!toLoad.contains(load)) {
 			toLoad.add(load);
@@ -79,13 +80,19 @@ public class ClassLoadingQueue {
 		toLoad.clear();
 	}
 	
-	protected BT_Class loadClass(String className, BT_ClassPathLocation loc, BT_Class stub) {
+	/*
+	 * Called when holding the table lock
+	 */
+	protected JaptClass loadClass(String className, BT_ClassPathLocation loc, JaptClass stub) {
 		if(loading) {
-			//TODO sean this here and loadAssemblyClass below will need the same locking as in BT_Repository/BT_Class xxx;
 			if(stub == null) {
-				stub = repository.createStub(className); //TODO sean must grab table lock when calling this xxx;
+				stub = repository.createStub(className);
 			}
-			//TODO sean while creating the class structure, need to hold the class lock
+			
+			/* We can release the table lock (for this class load) now that the stub is in the class table.  
+			 * But we do not grab the class lock until we are about to load the class. 
+			 */
+			repository.releaseTableLock(stub);
 			
 			add(className, loc, stub); //add to the queue to be loaded later
 			return stub;
@@ -107,32 +114,30 @@ public class ClassLoadingQueue {
 	 * @param loc
 	 * @return
 	 */
-	private BT_Class loadAssemblyClass(String className, BT_ClassPathLocation loc, BT_Class stub) {
-		BT_Class clazz;
+	/* called while holding the class table lock */
+	private JaptClass loadAssemblyClass(String className, BT_ClassPathLocation loc, JaptClass stub) {
+		JaptClass clazz;
 		try {
 			clazz = loadAssemblyClass(loc, stub);
-		}
-		catch(BT_ClassFileException e) {
+		} catch(BT_ClassFileException e) {
 			messages.CLASS_ERROR.log(logger, new Object[] {loc.getName(), e});
-			clazz = repository.createStub(className); //TODO sean must grab table lock when calling this xxx;
-		}
-		catch(InvalidIdentifierException e) {
+			clazz = repository.createStub(className);
+		} catch(InvalidIdentifierException e) {
 			messages.CLASS_ERROR.log(logger, new Object[] {loc.getName(), e});
-			clazz = repository.createStub(className); //TODO sean must grab table lock when calling this xxx;
-		}
-		catch(BT_DuplicateClassException e) {
+			clazz = repository.createStub(className);
+		} catch(BT_DuplicateClassException e) {
 			messages.DUP_CLASS.log(logger, loc.getName());
-			clazz = e.getOld();
-		}
-		catch(IOException e) {
+			clazz = (JaptClass) e.getOld();
+		} catch(IOException e) {
 			messages.ERROR_SOURCE.log(logger, loc.getName());
 			clazz = repository.createStub(className);
-		}
-		catch(UnexpectedTokenException e) {
+		} catch(UnexpectedTokenException e) {
 			messages.ERROR_SOURCE_LINE.log(logger, new Object[] {Integer.toString(e.line), loc.getName()});
 			clazz = repository.createStub(className);
 		}
-		//repository.registerClass(className, (ClassPathEntry) loc.getClassPathEntry(), clazz);
+		
+		//this was commented out before, don't know why.  I believe it needs to be called to add class to internal class list.
+		repository.registerClass(className, (ClassPathEntry) loc.getClassPathEntry(), clazz);
 		return clazz;
 	}
 	
@@ -142,7 +147,7 @@ public class ClassLoadingQueue {
 	 * @param loc
 	 * @return
 	 */
-	private BT_Class loadAssemblyClass(BT_ClassPathLocation loc, BT_Class stub) 
+	private JaptClass loadAssemblyClass(BT_ClassPathLocation loc, JaptClass stub) 
 		throws IOException, 
 			UnexpectedTokenException, 
 			BT_DuplicateClassException, 
@@ -150,7 +155,7 @@ public class ClassLoadingQueue {
 			InvalidIdentifierException {
 		Scanner scanner = null;
 		InputStream is = loc.getInputStream();
-		BT_Class clazz;
+		JaptClass clazz;
         try {
 			byte buffer[] = new byte[is.available()];
 	        int bytes = 0, totalBytes = 0;

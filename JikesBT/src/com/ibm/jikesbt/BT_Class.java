@@ -150,6 +150,26 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	private ReentrantLock signatureTypeLock = new ReentrantLock();
 	private ReentrantLock kidsLock = new ReentrantLock();
 	
+	protected static void acquireLock(ReentrantLock lock) {
+		if(BT_Factory.multiThreadedLoading) {
+			lock.lock();
+		}
+	}
+	
+	protected static void releaseLock(ReentrantLock lock) {
+		if(BT_Factory.multiThreadedLoading) {
+			lock.unlock();
+		}
+	}
+	
+	protected void acquireClassLock() {
+		acquireLock(classLock);
+	}
+	
+	protected void releaseClassLock() {
+		releaseLock(classLock);
+	}
+	
 	public BT_Repository getRepository() {
 		return repository;
 	}
@@ -293,19 +313,18 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(isBasicTypeClass || isArray()) {
 			throw new IllegalStateException();
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
-		}
-		isClass = true;
-		isInterface = false;
-		disableFlags(INTERFACE);
-		BT_Class object = repository.findJavaLangObject();
-		if(object != this && superClass == null) {
-			setSuperClass(object);
-		}
-		// isStub = false; -- No -- can still also be a stub?
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
+		acquireClassLock();
+		try {
+			isClass = true;
+			isInterface = false;
+			disableFlags(INTERFACE);
+			BT_Class object = repository.findJavaLangObject();
+			if(object != this && superClass == null) {
+				setSuperClass(object);
+			}
+			// isStub = false; -- No -- can still also be a stub?
+		} finally {
+			releaseClassLock();
 		}
 	}
 
@@ -341,18 +360,16 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(isBasicTypeClass || isArray()) {
 			throw new IllegalStateException();
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
-		}
-		if (superClass != null) {
-			setSuperClass(null);
-		}
-		isClass = false;
-		isInterface = true;
-		enableFlags(INTERFACE);
-		
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
+		acquireClassLock();
+		try {
+			if (superClass != null) {
+				setSuperClass(null);
+			}
+			isClass = false;
+			isInterface = true;
+			enableFlags(INTERFACE);
+		} finally {
+			releaseClassLock();
 		}
 	}
 
@@ -591,35 +608,31 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	public BT_Class setSuperClass(BT_Class newSuper) {
 		if (CHECK_USER && !newSuper.name.equals(BT_Repository.JAVA_LANG_OBJECT))
 			expect(Messages.getString("JikesBT.The_superclass_of_an_array_should_be_java.lang.Object____not__6") + newSuper);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
-		}
-
-		if (superClass != null) {
-			parents_.removeElement(superClass);
-			if(BT_Factory.multiThreadedLoading) {
-				superClass.kidsLock.lock();
+		acquireClassLock();
+		try {
+			if (superClass != null) {
+				parents_.removeElement(superClass);
+				acquireLock(superClass.kidsLock);
+				try {
+					superClass.kids_.removeElement(this);
+				} finally {
+					releaseLock(superClass.kidsLock);
+				}
 			}
-			superClass.kids_.removeElement(this);
-			if(BT_Factory.multiThreadedLoading) {
-				superClass.kidsLock.unlock();
+	
+			if (newSuper != null) {
+				parents_.addUnique(newSuper);
+				acquireLock(newSuper.kidsLock);
+				try {
+					newSuper.kids_.addUnique(this);
+				} finally {
+					releaseLock(newSuper.kidsLock);
+				}
 			}
-		}
-
-		if (newSuper != null) {
-			parents_.addUnique(newSuper);
-			if(BT_Factory.multiThreadedLoading) {
-				newSuper.kidsLock.lock();
-			}
-			newSuper.kids_.addUnique(this);
-			if(BT_Factory.multiThreadedLoading) {
-				newSuper.kidsLock.unlock();
-			}
-		}
-
-		superClass = newSuper;
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
+	
+			superClass = newSuper;
+		} finally {
+			releaseClassLock();
 		}
 		return newSuper;
 	}
@@ -834,9 +847,8 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		
 		repository.addClass(this);
 		
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
-		}
+		acquireClassLock();
+		
 		repository.releaseTableLock(this);
 		
 		try {
@@ -852,24 +864,22 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 			this.parents_.addUnique(cloneable); // this -> parent
 			
 			
-			if(BT_Factory.multiThreadedLoading) {
-				cloneable.kidsLock.lock();
-			}
-			cloneable.kids_.addUnique(this); // parent -> this
-			if(BT_Factory.multiThreadedLoading) {
-				cloneable.kidsLock.unlock();
+			acquireLock(cloneable.kidsLock);
+			try {
+				cloneable.kids_.addUnique(this); // parent -> this
+			} finally {
+				releaseLock(cloneable.kidsLock);
 			}
 			
 			// All arrays implement java.io.Serializable except in J2ME
 			BT_Class serializable = repository.linkToStub(BT_Repository.JAVA_IO_SERIALIZABLE);
 			this.parents_.addUnique(serializable); // this -> parent
 			
-			if(BT_Factory.multiThreadedLoading) {
-				serializable.kidsLock.lock();
-			}
-			serializable.kids_.addUnique(this); // parent -> this
-			if(BT_Factory.multiThreadedLoading) {
-				serializable.kidsLock.unlock();
+			acquireLock(serializable.kidsLock);
+			try {
+				serializable.kids_.addUnique(this); // parent -> this
+			} finally {
+				releaseLock(serializable.kidsLock);
 			}
 			
 			// All arrays' immediate superclasses are java.lang.Object
@@ -893,9 +903,7 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 			methods.trimToSize();
 			parents_.trimToSize();
 		} finally {
-			if(BT_Factory.multiThreadedLoading) {
-				classLock.unlock();
-			}
+			releaseClassLock();
 		}
 	}
 	
@@ -1357,72 +1365,68 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	 Adds a creation site for the given JVM "newarray" instruction.
 	**/
 	BT_CreationSite addCreationSite(BT_NewArrayIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.lock();
+		acquireLock(creationSiteLock);
+		try {
+			BT_CreationSite site = findCreationSite(ins);
+			if(site == null) {
+				site = new BT_CreationSite(code, ins);
+				creationSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(creationSiteLock);
 		}
-		BT_CreationSite site = findCreationSite(ins);
-		if(site == null) {
-			site = new BT_CreationSite(code, ins);
-			creationSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.unlock();
-		}
-		return site;
 	}
 	
 	/**
 	 Adds a creation site for the given JVM "new" instruction.
 	**/
 	BT_CreationSite addCreationSite(BT_NewIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.lock();
+		acquireLock(creationSiteLock);
+		try {
+			BT_CreationSite site = findCreationSite(ins);
+			if(site == null) {
+				site = new BT_CreationSite(code, ins);
+				creationSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(creationSiteLock);
 		}
-		BT_CreationSite site = findCreationSite(ins);
-		if(site == null) {
-			site = new BT_CreationSite(code, ins);
-			creationSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.unlock();
-		}
-		return site;
 	}
 	
 	/**
 	 Adds a creation site for the given JVM "anewarray" instruction.
 	**/
 	BT_CreationSite addCreationSite(BT_ANewArrayIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.lock();
+		acquireLock(creationSiteLock);
+		try {
+			BT_CreationSite site = findCreationSite(ins);
+			if(site == null) {
+				site = new BT_CreationSite(code, ins);
+				creationSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(creationSiteLock);
 		}
-		BT_CreationSite site = findCreationSite(ins);
-		if(site == null) {
-			site = new BT_CreationSite(code, ins);
-			creationSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.unlock();
-		}
-		return site;
 	}
 	
 	/**
 	 Adds a creation site for the given JVM "multianewarray" instruction.
 	**/
 	BT_CreationSite addCreationSite(BT_MultiANewArrayIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.lock();
+		acquireLock(creationSiteLock);
+		try {
+			BT_CreationSite site = findCreationSite(ins);
+			if(site == null) {
+				site = new BT_MultiCreationSite(code, ins, this);
+				creationSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(creationSiteLock);
 		}
-		BT_CreationSite site = findCreationSite(ins);
-		if(site == null) {
-			site = new BT_MultiCreationSite(code, ins, this);
-			creationSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			creationSiteLock.unlock();
-		}
-		return site;
 	}
 
 	/**
@@ -1447,54 +1451,52 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	 new, anewarray, or multianewarray instruction.
 	**/
 	BT_ClassReferenceSite addReferenceSite(BT_ClassRefIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.lock();
+		acquireLock(referenceSiteLock);
+		try {
+			BT_ClassReferenceSite site = findReferenceSite(ins);
+			if(site == null) {
+				site = new BT_ClassReferenceSite(code, ins);
+				referenceSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(referenceSiteLock);
 		}
-		BT_ClassReferenceSite site = findReferenceSite(ins);
-		if(site == null) {
-			site = new BT_ClassReferenceSite(code, ins);
-			referenceSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.unlock();
-		}
-		return site;
+		
 	}
 	
 	/**
 	 Adds a class reference site for the given ldc, ldc_w instruction.
 	**/
 	BT_ClassReferenceSite addReferenceSite(BT_ConstantStringIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.lock();
+		acquireLock(referenceSiteLock);
+		try {
+			BT_ClassReferenceSite site = findReferenceSite(ins);
+			if(site == null) {
+				site = new BT_ClassReferenceSite(code, ins, repository.findJavaLangClass());
+				referenceSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(referenceSiteLock);
 		}
-		BT_ClassReferenceSite site = findReferenceSite(ins);
-		if(site == null) {
-			site = new BT_ClassReferenceSite(code, ins, repository.findJavaLangClass());
-			referenceSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.unlock();
-		}
-		return site;
 	}
 	
 	/**
 	 Adds a class reference site for the given ldc, ldc_w instruction.
 	**/
 	BT_ClassReferenceSite addReferenceSite(BT_ConstantClassIns ins, BT_CodeAttribute code) {
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.lock();
+		acquireLock(referenceSiteLock);
+		try {
+			BT_ClassReferenceSite site = findReferenceSite(ins);
+			if(site == null) {
+				site = new BT_ClassReferenceSite(code, ins, repository.findJavaLangClass());
+				referenceSites.addElement(site);
+			}
+			return site;
+		} finally {
+			releaseLock(referenceSiteLock);
 		}
-		BT_ClassReferenceSite site = findReferenceSite(ins);
-		if(site == null) {
-			site = new BT_ClassReferenceSite(code, ins, repository.findJavaLangClass());
-			referenceSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.unlock();
-		}
-		return site;
 	}
 	
 	/**
@@ -1502,18 +1504,17 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	 new, anewarray, or multianewarray instruction.
 	**/
 	BT_ClassReferenceSite addReferenceSite(BT_ClassReferenceSite site) {
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.lock();
+		acquireLock(referenceSiteLock);
+		try {
+			BT_ClassReferenceSite existingSite = findReferenceSite(site.instruction);
+			if(existingSite == null) {
+				existingSite = site;
+				referenceSites.addElement(site);
+			}
+			return existingSite;
+		} finally {
+			releaseLock(referenceSiteLock);
 		}
-		BT_ClassReferenceSite existingSite = findReferenceSite(site.instruction);
-		if(existingSite == null) {
-			existingSite = site;
-			referenceSites.addElement(site);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referenceSiteLock.unlock();
-		}
-		return existingSite;
 	}
 
 	/**
@@ -1532,22 +1533,21 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(!repository.factory.trackClassReferences) {
 			return;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			arrayTypeLock.lock();
-		}
-		boolean found = false;
-		if(asArrayTypes == null) {
-			asArrayTypes = new BT_ClassVector();
-		} else for (int n = asArrayTypes.size() - 1; n >= 0; n--)
-			if (asArrayTypes.elementAt(n).equals(clazz)) {
-				found = true;
-				break;
+		acquireLock(arrayTypeLock);
+		try {
+			boolean found = false;
+			if(asArrayTypes == null) {
+				asArrayTypes = new BT_ClassVector();
+			} else for (int n = asArrayTypes.size() - 1; n >= 0; n--)
+				if (asArrayTypes.elementAt(n).equals(clazz)) {
+					found = true;
+					break;
+				}
+			if(!found) {
+				asArrayTypes.addElement(clazz);
 			}
-		if(!found) {
-			asArrayTypes.addElement(clazz);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			arrayTypeLock.unlock();
+		} finally {
+			releaseLock(arrayTypeLock);
 		}
 	}
 	
@@ -1565,22 +1565,21 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(isPrimitive() || !repository.factory.trackClassReferences) {
 			return;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			referencingAttributeLock.lock();
-		}
-		boolean found = false;
-		if(referencingAttributes == null) {
-			referencingAttributes = new BT_AttributeVector();
-		} else for (int n = referencingAttributes.size() - 1; n >= 0; n--)
-			if (referencingAttributes.elementAt(n).equals(att)) {
-				found = true;
-				break;
+		acquireLock(referencingAttributeLock);
+		try {
+			boolean found = false;
+			if(referencingAttributes == null) {
+				referencingAttributes = new BT_AttributeVector();
+			} else for (int n = referencingAttributes.size() - 1; n >= 0; n--)
+				if (referencingAttributes.elementAt(n).equals(att)) {
+					found = true;
+					break;
+				}
+			if(!found) {
+				referencingAttributes.addElement(att);
 			}
-		if(!found) {
-			referencingAttributes.addElement(att);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referencingAttributeLock.unlock();
+		} finally {
+			releaseLock(referencingAttributeLock);
 		}
 	}
 	
@@ -1599,22 +1598,21 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 			return;
 		}
 		boolean found = false;
-		if(BT_Factory.multiThreadedLoading) {
-			fieldTypeLock.lock();
-		}
-		if(asFieldTypes == null) {
-			asFieldTypes = new BT_HashedFieldVector();
-		} else for (int n = asFieldTypes.size() - 1; n >= 0; n--) {
-			if (asFieldTypes.elementAt(n).equals(field)) {
-				found = true;
-				break;
+		acquireLock(fieldTypeLock);
+		try {
+			if(asFieldTypes == null) {
+				asFieldTypes = new BT_HashedFieldVector();
+			} else for (int n = asFieldTypes.size() - 1; n >= 0; n--) {
+				if (asFieldTypes.elementAt(n).equals(field)) {
+					found = true;
+					break;
+				}
 			}
-		}
-		if(!found) {
-			asFieldTypes.addElement(field);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			fieldTypeLock.unlock();
+			if(!found) {
+				asFieldTypes.addElement(field);
+			}
+		} finally {
+			releaseLock(fieldTypeLock);
 		}
 	}
 	
@@ -1622,18 +1620,17 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(isPrimitive()) {
 			return;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			fieldTypeLock.lock();
-		}
-		if(asFieldTypes != null) {
-			for (int n = asFieldTypes.size() - 1; n >= 0; n--) {
-				if (asFieldTypes.elementAt(n).equals(field)) {
-					asFieldTypes.removeElementAt(n);
+		acquireLock(fieldTypeLock);
+		try {
+			if(asFieldTypes != null) {
+				for (int n = asFieldTypes.size() - 1; n >= 0; n--) {
+					if (asFieldTypes.elementAt(n).equals(field)) {
+						asFieldTypes.removeElementAt(n);
+					}
 				}
 			}
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			fieldTypeLock.unlock();
+		} finally {
+			releaseLock(fieldTypeLock);
 		}
 	}
 	
@@ -1641,23 +1638,22 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 		if(isPrimitive()) {
 			return;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			signatureTypeLock.lock();
-		}
-		boolean found = false;
-		if(asSignatureTypes == null) {
-			asSignatureTypes = new BT_SignatureSiteVector();
-		} else for (int n = asSignatureTypes.size() - 1; n >= 0; n--) {
-			if (asSignatureTypes.elementAt(n).equals(method, index)) {
-				found = true;
-				break;
+		acquireLock(signatureTypeLock);
+		try {
+			boolean found = false;
+			if(asSignatureTypes == null) {
+				asSignatureTypes = new BT_SignatureSiteVector();
+			} else for (int n = asSignatureTypes.size() - 1; n >= 0; n--) {
+				if (asSignatureTypes.elementAt(n).equals(method, index)) {
+					found = true;
+					break;
+				}
 			}
-		}
-		if(!found) {
-			asSignatureTypes.addElement(new BT_SignatureSite(method, index, this));
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			signatureTypeLock.unlock();
+			if(!found) {
+				asSignatureTypes.addElement(new BT_SignatureSite(method, index, this));
+			}
+		} finally {
+			releaseLock(signatureTypeLock);
 		}
 	}
 	
@@ -1988,34 +1984,32 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	
 	//TODO should relink the method with its parents and children
 	public BT_Method addStubMethod(String methodName, BT_MethodSignature signature) {
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			short codeType = isInterface ? BT_Method.ABSTRACT : 0;
+			BT_Method result =
+				BT_Method.createMethod(
+					this,
+					(short) (BT_Method.PUBLIC | codeType),
+					signature,
+					methodName);
+			result.setStub(true);
+			return result;
+		} finally {
+			releaseClassLock();
 		}
-		short codeType = isInterface ? BT_Method.ABSTRACT : 0;
-		BT_Method result =
-			BT_Method.createMethod(
-				this,
-				(short) (BT_Method.PUBLIC | codeType),
-				signature,
-				methodName);
-		result.setStub(true);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return result;
 	}
 
 	public BT_Field addStubField(String fieldName, BT_Class type) {
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			BT_Field result =
+				BT_Field.createField(this, BT_Item.PUBLIC, type, fieldName);
+			result.setStub(true);
+			return result;
+		} finally {
+			releaseClassLock();
 		}
-		BT_Field result =
-			BT_Field.createField(this, BT_Item.PUBLIC, type, fieldName);
-		result.setStub(true);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return result;
 	}
 
 	/**
@@ -2029,29 +2023,28 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	public BT_Method findMethod(String mName, String extArgs) 
 			throws BT_NoSuchMethodException, BT_DescriptorException {
 		BT_MethodSignature sig = null;
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
-		}
-		BT_Method result = null;
-		for (int n = 0; n < methods.size(); n++) {
-			BT_Method m = methods.elementAt(n);
-			if (m.name.equals(mName)) {
-				if(sig == null) {
-					sig = BT_MethodSignature.create(
-							m.getSignature().returnType.name,
-							extArgs, repository);
-				}
-				if(m.getSignature().equals(sig)) {
-					result = m;
-					break;
+		acquireClassLock();
+		try {
+			BT_Method result = null;
+			for (int n = 0; n < methods.size(); n++) {
+				BT_Method m = methods.elementAt(n);
+				if (m.name.equals(mName)) {
+					if(sig == null) {
+						sig = BT_MethodSignature.create(
+								m.getSignature().returnType.name,
+								extArgs, repository);
+					}
+					if(m.getSignature().equals(sig)) {
+						result = m;
+						break;
+					}
 				}
 			}
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		if(result != null) {
-			return result;
+			if(result != null) {
+				return result;
+			}
+		} finally {
+			releaseClassLock();
 		}
 		throw new BT_NoSuchMethodException(
 			Messages.getString("JikesBT.{0}{1}_in_{2}_131", new Object[] {mName, extArgs, name}));		
@@ -2080,14 +2073,13 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	public BT_Method findMethodOrNull(
 		String mName,
 		BT_MethodSignature sig) {
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			BT_Method m = methods.findMethod(mName, sig);
+			return m;
+		} finally {
+			releaseClassLock();
 		}
-		BT_Method m = methods.findMethod(mName, sig);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return m;
 	}
 
 	/**
@@ -2123,14 +2115,13 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	public BT_Field findFieldOrNull(
 		String fieldName,
 		BT_Class fieldType) {
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			BT_Field f = fields.findField(fieldName, fieldType);
+			return f;
+		} finally {
+			releaseClassLock();
 		}
-		BT_Field f = fields.findField(fieldName, fieldType);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return f;
 	}
 
 	/**
@@ -2150,22 +2141,21 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 	public BT_Method findInheritedMethod(String mName, BT_MethodSignature sig, boolean allowStub) {
 		String sigString = sig.toString();
 		String key = methods.getKey(mName, sigString);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			BT_Method m = findInheritedMethod(mName, sigString, key, allowStub);
+			if(m == null && isInterface()) {
+				BT_Class javaLangObject = repository.findJavaLangObject();
+				m = javaLangObject.methods.findMethod(mName, sig);
+			}
+			if(m != null && !(m.methodType instanceof BT_MethodSignature)) {
+				//if the method is not dereferenced yet we can save a lot of time by setting the signature now
+				m.methodType = sig;
+			}
+			return m;
+		} finally {
+			releaseClassLock();
 		}
-		BT_Method m = findInheritedMethod(mName, sigString, key, allowStub);
-		if(m == null && isInterface()) {
-			BT_Class javaLangObject = repository.findJavaLangObject();
-			m = javaLangObject.methods.findMethod(mName, sig);
-		}
-		if(m != null && !(m.methodType instanceof BT_MethodSignature)) {
-			//if the method is not dereferenced yet we can save a lot of time by setting the signature now
-			m.methodType = sig;
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return m;
 	}
 	
 	private BT_Method findInheritedMethod(
@@ -2254,18 +2244,17 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 			BT_Class fieldType,
 			boolean allowStub) {
 		String key = fields.getKey(fName, fieldType.name);
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.lock();
+		acquireClassLock();
+		try {
+			BT_Field f = findInheritedField(fName, fieldType.name, key, allowStub);
+			if(f != null && !(f.fieldType instanceof BT_Class)) {
+				//the type might not be dereferenced yet, but we can save time since we know the type already
+				f.setFieldType(fieldType);
+			}
+			return f;
+		} finally {
+			releaseClassLock();
 		}
-		BT_Field f = findInheritedField(fName, fieldType.name, key, allowStub);
-		if(f != null && !(f.fieldType instanceof BT_Class)) {
-			//the type might not be dereferenced yet, but we can save time since we know the type already
-			f.setFieldType(fieldType);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			classLock.unlock();
-		}
-		return f;
 	}
 	
 	private BT_Field findInheritedField(
@@ -2350,54 +2339,52 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 				String scn = pool.getClassNameAt(superClassIndex, BT_ConstantPool.CLASS);
 				BT_Class superClass = repository.forName(scn);
 				
-				if(BT_Factory.multiThreadedLoading) {
-					superClass.classLock.lock();
-				}
-				
-				if (superClass.isStub()) {
-					superClass.becomeClass();
-				}
-				
-				// For backward-compatability
-				if (isInterface) { // Suppress the super-class from the class file
-					//in JIKESBT interfaces have a null super-class
-					setSuperClass(null);
-					if (!superClass.name.equals(BT_Repository.JAVA_LANG_OBJECT))
-						throw new BT_ClassFileException(
-							Messages.getString("JikesBT.Interface__140")
-								+ name
-								+ Messages.getString("JikesBT._does_not_have_superclass_java.lang.Object_in_the_class_file_141"));
-				} // Suppress the super-class from the class file
-				else { // Can have a real super-class
-					if (superClass == this || superClass.isDescendentOf(this)) {
-						setThrowsClassCircularityError();
-						invalidSuperClass = superClass;
-						repository.factory.noteClassLoadError(
-								loadedFromCPEntry,
-								this,
-								name,
-								file.toString(),
-								Messages.getString("JikesBT.Class_circularity__0_149", superClass.fullName()),
-								BT_Repository.JAVA_LANG_CLASS_CIRCULARITY_ERROR);
-					} else if(superClass.isInterface) {
-						setThrowsIncompatibleClassChangeError();
-						invalidSuperClass = superClass;
-						repository.factory.noteClassLoadError( 
-								loadedFromCPEntry,
-								this,
-								name,
-								file.toString(),
-								Messages.getString("JikesBT.Extending_interface__0_148", superClass.fullName()),
-								BT_Repository.JAVA_LANG_INCOMPATIBLE_CLASS_CHANGE_ERROR);
-					} else {
-						setSuperClass(superClass);
+				superClass.acquireClassLock();
+				try {
+						
+					
+					if (superClass.isStub()) {
+						superClass.becomeClass();
 					}
-				} // Can have a real super-class
-				
-				if(BT_Factory.multiThreadedLoading) {
-					superClass.classLock.unlock();
+					
+					// For backward-compatability
+					if (isInterface) { // Suppress the super-class from the class file
+						//in JIKESBT interfaces have a null super-class
+						setSuperClass(null);
+						if (!superClass.name.equals(BT_Repository.JAVA_LANG_OBJECT))
+							throw new BT_ClassFileException(
+								Messages.getString("JikesBT.Interface__140")
+									+ name
+									+ Messages.getString("JikesBT._does_not_have_superclass_java.lang.Object_in_the_class_file_141"));
+					} // Suppress the super-class from the class file
+					else { // Can have a real super-class
+						if (superClass == this || superClass.isDescendentOf(this)) {
+							setThrowsClassCircularityError();
+							invalidSuperClass = superClass;
+							repository.factory.noteClassLoadError(
+									loadedFromCPEntry,
+									this,
+									name,
+									file.toString(),
+									Messages.getString("JikesBT.Class_circularity__0_149", superClass.fullName()),
+									BT_Repository.JAVA_LANG_CLASS_CIRCULARITY_ERROR);
+						} else if(superClass.isInterface) {
+							setThrowsIncompatibleClassChangeError();
+							invalidSuperClass = superClass;
+							repository.factory.noteClassLoadError( 
+									loadedFromCPEntry,
+									this,
+									name,
+									file.toString(),
+									Messages.getString("JikesBT.Extending_interface__0_148", superClass.fullName()),
+									BT_Repository.JAVA_LANG_INCOMPATIBLE_CLASS_CHANGE_ERROR);
+						} else {
+							setSuperClass(superClass);
+						}
+					} // Can have a real super-class
+				} finally {
+					superClass.releaseClassLock();
 				}
-				
 			} else {
 				if (!name.equals(BT_Repository.JAVA_LANG_OBJECT)) {
 					throw new BT_ClassFileException(
@@ -2413,54 +2400,48 @@ public class BT_Class extends BT_Item implements FieldType, Comparable {
 				String itfName = pool.getClassNameAt(dis.readUnsignedShort(), BT_ConstantPool.CLASS);
 				BT_Class itf = repository.linkToSuperInterface(itfName, loadedFromEntry);
 				
-				if(BT_Factory.multiThreadedLoading) {
-					itf.classLock.lock();
-				}
-				
-				if (itf.isStub()) { // && !itf.isClass) // A stub not known to be a class
-					itf.becomeInterface();
-				}
-				if (!itf.isInterface) {
-						setThrowsIncompatibleClassChangeError();
-						repository.factory.noteClassLoadError( 
-							loadedFromCPEntry,
-							this,
-							name,
-							file.toString(),
-							Messages.getString("JikesBT.Implementing_class__0_145", itf.fullName()),
-							BT_Repository.JAVA_LANG_INCOMPATIBLE_CLASS_CHANGE_ERROR);
-				} else { // Is an interface
-					if (itf == this || itf.isDescendentOf(this)) {   
-						// Need to mark to avoid certain processing like preverification.
-						setThrowsClassCircularityError();
-						repository.factory.noteClassLoadError( 
+				itf.acquireClassLock();
+				try {
+					if (itf.isStub()) { // && !itf.isClass) // A stub not known to be a class
+						itf.becomeInterface();
+					}
+					if (!itf.isInterface) {
+							setThrowsIncompatibleClassChangeError();
+							repository.factory.noteClassLoadError( 
 								loadedFromCPEntry,
 								this,
 								name,
 								file.toString(),
-								Messages.getString("JikesBT.Class_circularity__0_149", itf.fullName()),
-								BT_Repository.JAVA_LANG_CLASS_CIRCULARITY_ERROR);
-						if (circularParents_ == null) {
-							circularParents_ = new BT_ClassVector();
+								Messages.getString("JikesBT.Implementing_class__0_145", itf.fullName()),
+								BT_Repository.JAVA_LANG_INCOMPATIBLE_CLASS_CHANGE_ERROR);
+					} else { // Is an interface
+						if (itf == this || itf.isDescendentOf(this)) {   
+							// Need to mark to avoid certain processing like preverification.
+							setThrowsClassCircularityError();
+							repository.factory.noteClassLoadError( 
+									loadedFromCPEntry,
+									this,
+									name,
+									file.toString(),
+									Messages.getString("JikesBT.Class_circularity__0_149", itf.fullName()),
+									BT_Repository.JAVA_LANG_CLASS_CIRCULARITY_ERROR);
+							if (circularParents_ == null) {
+								circularParents_ = new BT_ClassVector();
+							}
+							circularParents_.addElement(itf);
+						} else {
+							parents_.addElement(itf);
+							acquireLock(itf.kidsLock);
+							try {
+								itf.kids_.addElement(this);
+							} finally {
+								releaseLock(itf.kidsLock);
+							}
 						}
-						circularParents_.addElement(itf);
-					} else {
-						parents_.addElement(itf);
-						
-						if(BT_Factory.multiThreadedLoading) {
-							itf.kidsLock.lock();
-						}
-						itf.kids_.addElement(this);
-						if(BT_Factory.multiThreadedLoading) {
-							itf.kidsLock.unlock();
-						}
-					}
-				} // Is an interface
-				
-				if(BT_Factory.multiThreadedLoading) {
-					itf.classLock.unlock();
+					} // Is an interface
+				} finally {
+					itf.releaseClassLock();
 				}
-				
 			} // Per implemented or super-interface
 		} catch(BT_ConstantPoolException e) {
 			throw new BT_ClassFileException(e);

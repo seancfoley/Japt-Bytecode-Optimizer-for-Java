@@ -135,14 +135,12 @@ final class BT_MethodRelationships extends BT_Base {
 
 		for (int i = 0; i < kidM.parents.size(); ++i) {
 			BT_Method parent = kidM.parents.elementAt(i);
-			if(BT_Factory.multiThreadedLoading) {
-				parent.methodKidsLock.lock();
-			}
-			parent.kids.removeElement(kidM);
-			if(BT_Factory.multiThreadedLoading) {
-				parent.methodKidsLock.unlock();
-			}
-				
+			BT_Class.acquireLock(parent.methodKidsLock);
+			try {
+				parent.kids.removeElement(kidM);
+			} finally {
+				BT_Class.releaseLock(parent.methodKidsLock);
+			}	
 		}
 		kidM.parents.removeAllElements();
 	}
@@ -199,12 +197,11 @@ final class BT_MethodRelationships extends BT_Base {
 		if (pm != null) {
 			if (pm.canBeInherited()) {
 				// In particular, parent.isPrivate is legal but doesn't not cause inheritence
-				if(BT_Factory.multiThreadedLoading) {
-					pm.methodKidsLock.lock();
-				}
-				linkParentAndKid(pm, frM);
-				if(BT_Factory.multiThreadedLoading) {
-					pm.methodKidsLock.unlock();
+				BT_Class.acquireLock(pm.methodKidsLock);
+				try {
+					linkParentAndKid(pm, frM);
+				} finally {
+					BT_Class.releaseLock(pm.methodKidsLock);
 				}
 			}
 		} else // Not in parent -- try grandparent
@@ -611,7 +608,7 @@ final class BT_MethodRelationships extends BT_Base {
 	 satisfy simple checks and if they aren't already linked.
 	 Marks the new or old pair.
 	**/
-	private static void linkInlawPairIf(
+	private static void linkInlawPairIf(//TODO eliminate inlaws xxx
 		BT_Method sub,
 		BT_Method m2,
 		BT_Class causeC) {
@@ -624,19 +621,17 @@ final class BT_MethodRelationships extends BT_Base {
 			BT_MethodInlaw pair = sub.inlaws.findInlawRecord(m2, causeC);
 			if (pair == null) {
 				pair = new BT_MethodInlaw(sub, m2, causeC);
-				if(BT_Factory.multiThreadedLoading) {
-					sub.methodKidsLock.lock();
+				BT_Class.acquireLock(sub.methodKidsLock);
+				try {
+					sub.inlaws.addElement(pair);
+				} finally {
+					BT_Class.releaseLock(sub.methodKidsLock);
 				}
-				sub.inlaws.addElement(pair);
-				if(BT_Factory.multiThreadedLoading) {
-					sub.methodKidsLock.unlock();
-				}
-				if(BT_Factory.multiThreadedLoading) {
-					m2.methodKidsLock.lock();
-				}
-				m2.inlaws.addElement(pair);
-				if(BT_Factory.multiThreadedLoading) {
-					m2.methodKidsLock.unlock();
+				BT_Class.acquireLock(m2.methodKidsLock);
+				try {
+					m2.inlaws.addElement(pair);
+				} finally {
+					BT_Class.releaseLock(m2.methodKidsLock);
 				}
 			} else
 				pair.tempMark_ = BT_MethodInlaw.curMark_; // Remember was found, used by relinkInlawsOfAddedMethod only
@@ -936,7 +931,7 @@ final class BT_MethodRelationships extends BT_Base {
 	 Adds inlaws of the given method and fixes up its new neighbors.
 	 Assumes its parents and kids are now valid.
 	**/
-	static void relinkInlawsOfAddedMethod(BT_Method addedM) {
+	static void relinkInlawsOfAddedMethod(BT_Method addedM) {//TODO eliminate inlaws xxx
 		//         - Redo my new parents' (not ancestors) old inlaws (result should be only deleting some)
 		//           - Scan & mark as new
 		//           - Delete old ones

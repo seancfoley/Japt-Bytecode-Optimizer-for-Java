@@ -212,6 +212,7 @@ public class BT_StackMapAttribute extends BT_Attribute implements CodeInfo {
 			BT_StackShapeVisitor shapeVisitor = new BT_StackShapeVisitor(inCode, BT_StackPool.pool);
 			shapeVisitor.ignoreUpcasts(false);
 			shapeVisitor.useMergeCandidates(true);
+			shapeVisitor.useExtendedTypeChecking(true);
 			BT_StackShapes shapes = shapeVisitor.populate();
 			if(shapes == null) {
 				return;

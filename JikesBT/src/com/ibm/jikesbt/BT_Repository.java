@@ -110,6 +110,7 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 			loadLock = new Object();
 			dereferenceLock = new Object();
 			classesToBeDereferenced = Collections.synchronizedList(classesToBeDereferenced);
+			//numLoadingThreads = Runtime.getRuntime().availableProcessors() + 1;
 			numLoadingThreads = Runtime.getRuntime().availableProcessors() * 2;
 			if(executorService == null) {
 				synchronized(BT_Repository.class) {
@@ -127,7 +128,6 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 		} else {
 			numLoadingThreads = 1;
 		}
-		
 	}
 	
 	/**
@@ -457,24 +457,25 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	 * @return
 	 */
 	private BT_Class createPrimitive(String name, int stackMapType, BT_Class convertToStackType) {
-		if(BT_Factory.multiThreadedLoading) {
-			//in some cases we do not have the class table lock, when we get here from BT_Repository.getXXX()
-			//in other cases we do, like when we get here from BT_Repository.forName
-			//so we must get the lock here
-			classTableLock.lock();
-			BT_Class c = classes.findClass(name);
-			if(c != null) {
-				classTableLock.unlock();
-				return c;
-			}
-		}	
-		BT_Class c = createClass(name);
-		factory.noteClassLoaded(c, null);
-		c.initAsPrimitive(name, this, stackMapType, convertToStackType);
-		if(BT_Factory.multiThreadedLoading) {
-			classTableLock.unlock();
+		//in some cases we do not have the class table lock, when we get here from BT_Repository.getXXX()
+		//in other cases we do, like when we get here from BT_Repository.forName
+		//so we must get the lock here
+		//since it is a rentrant lock, that's fine
+		acquireClassTableLock();
+		try {
+			if(BT_Factory.multiThreadedLoading) {
+				BT_Class c = classes.findClass(name);
+				if(c != null) {
+					return c;
+				}
+			}	
+			BT_Class c = createClass(name);
+			factory.noteClassLoaded(c, null);
+			c.initAsPrimitive(name, this, stackMapType, convertToStackType);
+			return c;
+		} finally {
+			releaseClassTableLock();
 		}
-		return c;
 	}
 	
 	private BT_Class createPrimitive(String name, BT_Class convertToStackType) {
@@ -605,22 +606,6 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	protected List classesToBeDereferenced = new LinkedList();
 	
 	/**
-	 * Unlocks the table lock used to load this class.
-	 * This can be called more than once, and it will only decrement the lock count the first time.
-	 * 
-	 * This can only be called only after this class has been added to the class table.
-	 * 
-	 * If this class is not yet fully loaded, do not call this method before gaining ownership of the loading lock for this class,
-	 * so that other threads which obtain this class from the table will not access parts not yet loaded.
-	 */
-	protected void releaseTableLock(BT_Class clazz) {
-		if(BT_Factory.multiThreadedLoading && !clazz.tableLockReleased) {
-			clazz.tableLockReleased = true;
-			classTableLock.unlock();
-		}
-	}
-	
-	/**
 	 Loads a class, all its parents, and all the types mentioned in the field and
 	 method declarations.
 	 Adds the class to the {@link BT_Repository#.
@@ -687,9 +672,8 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 			}
 			
 
-			if(BT_Factory.multiThreadedLoading) {
-				gotC.classLock.lock();
-			}
+			gotC.acquireClassLock();
+			
 			releaseTableLock(gotC);
 
 			boolean didRead = false;
@@ -732,9 +716,7 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 				if(!didRead && !gotC.throwsAnyError()) {
 					gotC.setThrowsClassFormatError();
 				}
-				if(BT_Factory.multiThreadedLoading) {
-					gotC.classLock.unlock();
-				}
+				gotC.releaseClassLock();
 				classesToBeDereferenced.add(gotC);
 				if (isTopLevelLoad) {
 					doAsyncQueuedDereferences();
@@ -743,7 +725,8 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 			return gotC;
 		} finally {
 			if(gotC != null) {
-				releaseTableLock(gotC);//make sure we release the table lock before dereferencing
+				//TODO I think this is redundant, but is it?  Thre is the one case where we throw.  
+				releaseTableLockIfNotReleased(gotC);//make sure we release the table lock before dereferencing
 			}
 			is.close();
 			if (isTopLevelLoad) {// This is not a nested load
@@ -864,7 +847,6 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	private void doSyncQueuedDereferences() {
 		if(BT_Factory.multiThreadedLoading) {
 			waitForAsyncDereferences();
-			
 			if(dereferenceError != null) {
 				Error e = dereferenceError;
 				dereferenceError = null;
@@ -927,9 +909,9 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 				}
 			}
 		} catch (InterruptedException e) {
-			//TODO call factory I suppose
+			//TODO call factory
 		} catch (BrokenBarrierException e) {
-			//TODO call factory I suppose
+			//TODO call factory
 		}
 	}
 
@@ -1021,28 +1003,71 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	}
 	
 	BT_Class linkToStub(String cnm, LoadLocation referencedFrom) {
-		if(BT_Factory.multiThreadedLoading) {
-			classTableLock.lock();
-		}
-		BT_Class c = classes.findClass(cnm);
-		if (c == null) {
-			c = loadInternalClass(cnm, true); // Is an array or primitive
+		boolean loadingReleasedClassTableLock = false;
+		acquireClassTableLock();
+		try {
+			BT_Class c = classes.findClass(cnm);
 			if (c == null) {
-				c = createStub(cnm); //load it from the class path later
-				c.notLoaded = true;
-				c.referencedFrom = referencedFrom;
+				loadingReleasedClassTableLock = true;
+				try {
+					c = loadInternalClass(cnm, true); // Is an array or primitive
+					if (c == null) {
+						c = createStub(cnm); //load it from the class path later
+						c.notLoaded = true;
+						c.referencedFrom = referencedFrom;
+					}
+				} finally {
+					releaseTableLockIfNotReleased(c);
+				}
 			}
-			releaseTableLock(c);
-		} else {
-			if(BT_Factory.multiThreadedLoading) {
-				classTableLock.unlock();
+			return c;
+		} finally {
+			if(!loadingReleasedClassTableLock) {
+				releaseClassTableLock();
 			}
 		}
-		return c;
 	}
 
 	//ReentrantLock classTableLock = new DebugLock();
 	ReentrantLock classTableLock = new ReentrantLock();
+	
+	protected static void acquireLock(ReentrantLock lock) {
+		BT_Class.acquireLock(lock);
+	}
+	
+	protected static void releaseLock(ReentrantLock lock) {
+		BT_Class.releaseLock(lock);
+	}
+	
+	protected void acquireClassTableLock() {
+		acquireLock(classTableLock);
+	}
+	
+	protected void releaseClassTableLock() {
+		releaseLock(classTableLock);
+	}
+	
+	/**
+	 * Unlocks the table lock used to load the given class.
+	 * This can be called more than once, and it will only decrement the lock count the first time.
+	 * 
+	 * This can only be called only after this class has been added to the class table.
+	 * 
+	 * If this class is not yet fully loaded, do not call this method before gaining ownership of the loading lock for this class,
+	 * so that other threads which obtain this class from the table will not access parts not yet loaded.
+	 */
+	protected void releaseTableLockIfNotReleased(BT_Class clazz) {
+		if(!clazz.tableLockReleased) {
+			releaseTableLock(clazz);
+		}
+	}
+	
+	protected void releaseTableLock(BT_Class clazz) {
+		if(BT_Factory.multiThreadedLoading) {
+			clazz.tableLockReleased = true;
+			classTableLock.unlock();
+		}
+	}
 	
 //	class DebugLock extends ReentrantLock {
 //		String name;
@@ -1084,30 +1109,40 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	
 	BT_Class forName(String cnm, LoadLocation referencedFrom) {
 		//Note: this and loadClass are really the two loading entry points
-		if(BT_Factory.multiThreadedLoading) {
-			classTableLock.lock();
-		}
-		BT_Class c = classes.findClass(cnm);
-		if (c != null) {
-			if(c.isStub() && c.notLoaded) {
-				c.tableLockReleased = false;
-				LoadLocation referenced = referencedFrom == null ? c.referencedFrom : referencedFrom;
-				c.notLoaded = false;
-				loadFromClassPath(cnm, c, referenced);
-				releaseTableLock(c);
-			} else {
-				if(BT_Factory.multiThreadedLoading) {
-					classTableLock.unlock();
+		boolean loadingReleasedClassTableLock = false;
+		acquireClassTableLock();
+		try {
+			BT_Class c = classes.findClass(cnm);
+			if (c != null) {
+				if(c.isStub() && c.notLoaded) {
+					loadingReleasedClassTableLock = true;
+					try {
+						c.tableLockReleased = false;
+						LoadLocation referenced = referencedFrom == null ? c.referencedFrom : referencedFrom;
+						c.notLoaded = false;
+						loadFromClassPath(cnm, c, referenced);
+					} finally {
+						releaseTableLockIfNotReleased(c);
+					}
+				} else {
+					return c;
 				}
-				return c;
+			} else {
+				loadingReleasedClassTableLock = true;
+				try {
+					if ((c = loadInternalClass(cnm, false)) == null) { // Is an array or primitive
+						c = loadFromClassPath(cnm, null, referencedFrom);
+					}
+				} finally {
+					releaseTableLockIfNotReleased(c);
+				}
 			}
-		} else {
-			if ((c = loadInternalClass(cnm, false)) == null) { // Is an array or primitive
-				c = loadFromClassPath(cnm, null, referencedFrom);
+			return c;
+		} finally {
+			if(!loadingReleasedClassTableLock) {
+				releaseClassTableLock();
 			}
-			releaseTableLock(c);
 		}
-		return c;
 	}
 	
 	protected BT_Class loadInternalClass(String cnm, boolean link) {
@@ -1154,24 +1189,28 @@ public class BT_Repository extends BT_Base implements BT_FileConstants {
 	 * @return the class object (may be a stub if loading failed)
 	 */
 	public BT_Class loadClass(String name, BT_ClassPathLocation location) {
-		if(BT_Factory.multiThreadedLoading) {
-			classTableLock.lock();
-		}
-		
-		//Note: this and forName are really the two loading entry points
-		BT_Class clazz = classes.findClass(name);
-		if(clazz == null || (clazz.isStub() && clazz.notLoaded)) {
-			if(clazz != null) {
-				clazz.tableLockReleased = false;
+		boolean loadingReleasedClassTableLock = false;
+		acquireClassTableLock();
+		try {
+			//Note: this and forName are really the two loading entry points
+			BT_Class clazz = classes.findClass(name);
+			if(clazz == null || (clazz.isStub() && clazz.notLoaded)) {
+				loadingReleasedClassTableLock = true;
+				if(clazz != null) {
+					clazz.tableLockReleased = false;
+				}
+				try {
+					clazz = location.loadClass(name, this, clazz);
+				} finally {
+					releaseTableLockIfNotReleased(clazz);
+				}
 			}
-			clazz = location.loadClass(name, this, clazz);
-			releaseTableLock(clazz);
-		} else {
-			if(BT_Factory.multiThreadedLoading) {
-				classTableLock.unlock();
+			return clazz;
+		} finally {
+			if(!loadingReleasedClassTableLock) {
+				releaseClassTableLock();
 			}
 		}
-		return clazz;
 	}
 	
 	/**

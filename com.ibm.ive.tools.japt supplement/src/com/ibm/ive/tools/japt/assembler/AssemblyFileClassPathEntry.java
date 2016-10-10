@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.ibm.ive.tools.japt.FileClassPathEntry;
+import com.ibm.ive.tools.japt.JaptClass;
 import com.ibm.ive.tools.japt.JaptRepository;
 import com.ibm.ive.tools.japt.Logger;
 import com.ibm.ive.tools.japt.PatternString;
@@ -94,8 +95,9 @@ public class AssemblyFileClassPathEntry extends FileClassPathEntry {
 		return result;
 	}
 
-	protected BT_Class loadClass(String className, BT_Repository rep, BT_ClassPathLocation loc, BT_Class stub) {
-		return queue.loadClass(className, loc, stub);
+	@Override
+	protected JaptClass loadClass(String className, BT_Repository rep, BT_ClassPathLocation loc, BT_Class stub) {
+		return queue.loadClass(className, loc, (JaptClass) stub);
 	}
 	
 	public BT_ClassPathLocation[] findClassWithPattern(PatternString pattern) {
@@ -116,8 +118,5 @@ public class AssemblyFileClassPathEntry extends FileClassPathEntry {
 		}
 		catch(IOException e) {}
 		return null;
-	}
-	
-	
-	
+	}	
 }

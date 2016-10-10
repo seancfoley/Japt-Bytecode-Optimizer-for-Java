@@ -53,6 +53,7 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 	
 	
 	private boolean useMergeCandidates = true;
+	private boolean useExtendedTypeChecking = true; //when merging, merge to all the same types that the visitor checks, not just the typical merge candidates 
 	private boolean ignoreUpcasts = true;
 	
 	private BT_HashedClassVector mergeCandidates;
@@ -111,6 +112,10 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
    	public void useMergeCandidates(boolean useMergeCandidates) {
    		this.useMergeCandidates = useMergeCandidates;
    	}
+   	
+   	public void useExtendedTypeChecking(boolean useExtendedTypeChecking) {
+   		this.useExtendedTypeChecking = useExtendedTypeChecking;
+   	}
     
     protected void setUp() {
     	super.setUp();
@@ -155,6 +160,7 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
     	} finally {
     		returnStacks();
     	}
+    	stackShapes.useExtendedTypeChecking(useExtendedTypeChecking);
 		return stackShapes;
 	}
 
@@ -634,7 +640,6 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 			case opc_new :
 				newLocals = copyLocals(previousLocals, previousLocalsLength);
 				BT_NewIns newIns = (BT_NewIns) previousInstruction;
-				BT_Class targetClass = newIns.getTarget();
 				System.arraycopy(previousStack, 0, newStack, 0, newTop);
 				newStack[newTop] = provider.getUninitializedObject(newIns, iin, prev_iin);
 				break;
@@ -643,7 +648,7 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 			case opc_multianewarray :
 				newLocals = copyLocals(previousLocals, previousLocalsLength);
 				newIns = (BT_NewIns) previousInstruction;
-				targetClass = newIns.getTarget();
+				BT_Class targetClass = newIns.getTarget();
 				System.arraycopy(previousStack, 0, newStack, 0, newTop);
 				newStack[newTop] = provider.getObjectClassCell(targetClass, iin, prev_iin);
 				break;
@@ -752,7 +757,7 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 									newStack[i] = provider.getInitializedClassCell(uninit, code.getMethod().cls, previousCell, i == newTop, iin, prev_iin);
 								} else {
 									UninitializedObject other = (UninitializedObject) uninit;
-									newStack[i] = provider.getInitializedClassCell(uninit, other.creatingInstruction.target, previousCell, i == newTop, iin, prev_iin);
+									newStack[i] = provider.getInitializedClassCell(uninit, other.creatingInstruction.getClassTarget(), previousCell, i == newTop, iin, prev_iin);
 								}
 							}
 						}
@@ -1621,13 +1626,35 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 		return clazz;
 	}
 	
+	/**
+	 * A candidate for a merge of two types is any type that should be visible from the code.
+	 * 
+	 * In cases where types are resolved to intermediate types that are not accessible, 
+	 * what we need to do is to further resolve to the type that is accessible.  
+	 * This prevents us from creating stack maps with types that are not accessible and cannot be loaded.
+	 * 
+	 * One way to think about it is that a merge candidate is any type that is consumed in the source code.
+	 * However, when using extended stack checking, it is any type that is either consumed or produced.
+	 * 
+	 * Another way: any type that is consumed by an instruction, which is the type the source code expects to be there.
+	 * When using extended stack checking, it is any type that is referenced by an instruction, signature, or any other part of a method.
+	 * 
+	 * Stack maps should not contain inaccessible types.
+	 * 
+	 * If we are doing extended type checking, we are not just concerned with types that are consumed by methods, fields and so on.
+	 * We are also concerned with arrays, and we wish to account for types moving in or out of arrays.
+	 * This means any visible type from the code must be considered a merge candidate, we want to consider all types.
+	 * 
+	 * @throws BT_CodeException
+	 */
 	private void buildMergeCandidates() throws BT_CodeException {
 		if(mergeCandidates != null) {
 			return;
 		}
 		
-		/* merge candidates are types that are consumed from the stack by an instruction */
-		/* types that are added to the stack are not merge candidates */
+		/* merge candidates are types that are consumed from the stack by an instruction, unless we use extended type checking */
+		/* types that are added to the stack are not merge candidates, unless we use extended type checking */
+		/* when using extended type checking, we make note of all types in the method, allowing us to do additional checks on arrays */
 		mergeCandidates = new BT_HashedClassVector();
 		BT_CodeVisitor visitor = new BT_CodeVisitor() {
 			boolean foundCanThrow = false;
@@ -1650,7 +1677,13 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 					case opc_areturn:
 						if(!foundReturn) {
 							/* return type is returns objects */
-							mergeCandidates.addUnique(code.getMethod().getSignature().returnType);
+							BT_Class returnType = code.getMethod().getSignature().returnType;
+							if(useExtendedTypeChecking) {
+								while(returnType.isArray()) {
+									returnType = returnType.getElementClass();
+								}
+							}
+							mergeCandidates.addUnique(returnType);
 						}
 						foundReturn = true;
 						break;
@@ -1670,31 +1703,116 @@ public class BT_StackShapeVisitor extends BT_CodeVisitor implements BT_Opcodes {
 							BT_Class type = types.elementAt(i);
 							if(!type.isPrimitive()) {
 								/* parameters of an invoke */
+								if(useExtendedTypeChecking) {
+									while(type.isArray()) {
+										type = type.getElementClass();
+									}
+								}
 								mergeCandidates.addUnique(type);
+							}
+						}
+						if(useExtendedTypeChecking) {
+							BT_Class returnType = target.getSignature().returnType;
+							if(!returnType.isPrimitive()) {
+								while(returnType.isArray()) {
+									returnType = returnType.getElementClass();
+								}
+								mergeCandidates.addUnique(returnType);
 							}
 						}
 						break;
 					case opc_getfield:
 						/* target class of getfield or putfield */
 						mergeCandidates.addUnique(instruction.getResolvedClassTarget(code));
+						/* fall through */
+					case opc_getstatic:
+						if(useExtendedTypeChecking) {
+							BT_FieldRefIns fieldRefIns = (BT_FieldRefIns) instruction;
+							BT_Field fieldTarget = fieldRefIns.getFieldTarget();
+							BT_Class targetFieldType = fieldTarget.getFieldType();
+							if(!targetFieldType.isPrimitive()) {
+								while(targetFieldType.isArray()) {
+									targetFieldType = targetFieldType.getElementClass();
+								}
+								mergeCandidates.addUnique(targetFieldType);
+							}
+						}
 						break;
 					case opc_putfield:
-						mergeCandidates.addUnique(instruction.getResolvedClassTarget(code));
+						/* target class of getfield or putfield */
+						BT_Class tgt = instruction.getResolvedClassTarget(code);
+						mergeCandidates.addUnique(tgt);
 						/* fall through */
 					case opc_putstatic:
 						/* type of a putfield or putstatic */
-						mergeCandidates.addUnique(instruction.getFieldTarget().getFieldType());
+						BT_Class fieldType = instruction.getFieldTarget().getFieldType();
+						if(!fieldType.isPrimitive()) {
+							if(useExtendedTypeChecking) {
+								while(fieldType.isArray()) {
+									fieldType = fieldType.getElementClass();
+								}
+							}
+							mergeCandidates.addUnique(fieldType);
+						}
 						break;
-					case opc_checkcast:
+					case opc_new :
+					case opc_anewarray :
+					case opc_newarray : 
+					case opc_multianewarray :
+					case opc_checkcast :
 					case opc_instanceof:
-						/* the target class of an instanceof or checkcast NOT NECESSARY */
-						//mergeCandidates.addUnique(instruction.getClassTarget());
+						if(useExtendedTypeChecking) {
+							BT_ClassRefIns classRefIns = (BT_ClassRefIns) instruction;
+							BT_Class targetClass = classRefIns.getTarget();
+							while(targetClass.isArray()) {
+								targetClass = targetClass.getElementClass();
+							}
+							mergeCandidates.addUnique(targetClass);
+						}
+						break;
+					case opc_ldc :
+					case opc_ldc_w :
+						if(useExtendedTypeChecking) {
+							if(instruction instanceof BT_ConstantStringIns) {
+								mergeCandidates.addUnique(provider.javaLangString);
+							} else if(instruction instanceof BT_ConstantClassIns) {
+								mergeCandidates.addUnique(provider.javaLangClass);
+							}
+						}
+						break;
 					default:
 						break;
 				}
 				return true;
 			}
 		};
+		if(useExtendedTypeChecking) {
+			BT_Method method = code.getMethod();
+			BT_MethodSignature sig = method.getSignature();
+			boolean isStatic = method.isStatic();
+			if(!isStatic) {
+				mergeCandidates.addUnique(method.cls);
+			}
+			BT_ClassVector types = sig.types;
+			for(int i=0; i<types.size(); i++) {
+				BT_Class type = types.elementAt(i);
+				if(!type.isPrimitive()) {
+					while(type.isArray()) {
+						type = type.getElementClass();
+					}
+					mergeCandidates.addUnique(type);
+				}
+			}
+			BT_ExceptionTableEntryVector exceptionTable = method.getCode().getExceptionTableEntries();
+			for (int t=0; t < exceptionTable.size(); t++) {
+				BT_ExceptionTableEntry e = exceptionTable.elementAt(t);
+				BT_Class target = e.catchType;
+				if(target != null) {
+					mergeCandidates.addUnique(target);
+				}
+				
+			}
+		}
 		code.visitReachableCode(visitor);
 	}
 	

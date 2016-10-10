@@ -1080,12 +1080,11 @@ public class BT_Method extends BT_Member implements BT_Opcodes {
 
 	public void becomeStatic() {
 		BT_Class clazz = getDeclaringClass();
-		if(BT_Factory.multiThreadedLoading) {
-			clazz.classLock.lock();
-		}
-		super.becomeStatic();
-		if(BT_Factory.multiThreadedLoading) {
-			clazz.classLock.unlock();
+		clazz.acquireClassLock();
+		try {
+			super.becomeStatic();
+		} finally {
+			clazz.releaseClassLock();
 		}
 	}
 	
@@ -1096,20 +1095,19 @@ public class BT_Method extends BT_Member implements BT_Opcodes {
 		if(!cls.getRepository().factory.trackClassReferences) {
 			return;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			referencingAttributesLock.lock();
-		}
-		if(referencingAttributes == null) {
-			referencingAttributes = new BT_AttributeVector();
-			referencingAttributes.addElement(att);
-		} else {
-			BT_Attribute foundAtt = findReferencingAttribute(att);
-			if(foundAtt == null) {
+		BT_Class.acquireLock(referencingAttributesLock);
+		try {
+			if(referencingAttributes == null) {
+				referencingAttributes = new BT_AttributeVector();
 				referencingAttributes.addElement(att);
+			} else {
+				BT_Attribute foundAtt = findReferencingAttribute(att);
+				if(foundAtt == null) {
+					referencingAttributes.addElement(att);
+				}
 			}
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			referencingAttributesLock.unlock();
+		} finally {
+			BT_Class.releaseLock(referencingAttributesLock);
 		}
 	}
 		
@@ -1144,18 +1142,17 @@ public class BT_Method extends BT_Member implements BT_Opcodes {
 		if (!cls.repository.factory.buildMethodRelationships) {
 			return null;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			callSiteLock.lock();
+		BT_Class.acquireLock(callSiteLock);
+		try {
+			BT_MethodCallSite result = findCallSite(ins);
+			if(result == null) {
+				result = new BT_MethodCallSite(caller, ins);
+				callSites.addElement(result);
+			}
+			return result;
+		} finally {
+			BT_Class.releaseLock(callSiteLock);
 		}
-		BT_MethodCallSite result = findCallSite(ins);
-		if(result == null) {
-			result = new BT_MethodCallSite(caller, ins);
-			callSites.addElement(result);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			callSiteLock.unlock();
-		}
-		return result;
 	}
 	
 	BT_MethodCallSite findCallSite(BT_MethodRefIns ins) {

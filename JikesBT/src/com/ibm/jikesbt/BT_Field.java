@@ -58,7 +58,7 @@ public class BT_Field extends BT_Member {
 	**/
 	public BT_AccessorVector accessors = new BT_AccessorVector();
 
-	private Lock fieldAccessorLock = new ReentrantLock();
+	private ReentrantLock fieldAccessorLock = new ReentrantLock();
 	
 	/**
 	 Initializes the main fields of a BT_Field and updates the containing class to
@@ -278,12 +278,11 @@ public class BT_Field extends BT_Member {
 	
 	public void becomeStatic() {
 		BT_Class clazz = getDeclaringClass();
-		if(BT_Factory.multiThreadedLoading) {
-			clazz.classLock.lock();
-		}
-		super.becomeStatic();
-		if(BT_Factory.multiThreadedLoading) {
-			clazz.classLock.unlock();
+		clazz.acquireClassLock();
+		try {
+			super.becomeStatic();
+		} finally {
+			clazz.releaseClassLock();
 		}
 	}
 
@@ -302,18 +301,17 @@ public class BT_Field extends BT_Member {
 		if (!cls.repository.factory.buildMethodRelationships) {
 			return null;
 		}
-		if(BT_Factory.multiThreadedLoading) {
-			fieldAccessorLock.lock();
+		BT_Class.acquireLock(fieldAccessorLock);
+		try {
+			BT_Accessor acc = findAccessor(ins);
+			if(acc == null) {
+				acc = new BT_Accessor(caller, ins);
+				accessors.addElement(acc);
+			}
+			return acc;
+		} finally {
+			BT_Class.releaseLock(fieldAccessorLock);
 		}
-		BT_Accessor acc = findAccessor(ins);
-		if(acc == null) {
-			acc = new BT_Accessor(caller, ins);
-			accessors.addElement(acc);
-		}
-		if(BT_Factory.multiThreadedLoading) {
-			fieldAccessorLock.unlock();
-		}
-		return acc;
 	}
 
 	/**

@@ -47,6 +47,7 @@ public class BT_StackShapes implements BT_Opcodes {
 	final private BT_StackCellProvider provider;
 	
 	private boolean tolerateStubs = true;
+	private boolean useExtendedTypeChecking = true;
 	
 	BT_StackShapes(BT_CodeAttribute code, BT_StackPool pool, BT_StackCellProvider provider) {
 		this(code, pool, provider, false);
@@ -118,6 +119,10 @@ public class BT_StackShapes implements BT_Opcodes {
    	 */
    	public void tolerateStubs(boolean tolerateStubs) {
    		this.tolerateStubs = tolerateStubs;
+   	}
+   	
+   	void useExtendedTypeChecking(boolean val) {
+   		this.useExtendedTypeChecking = val;
    	}
 
 	public boolean equals(Object other) {
@@ -339,7 +344,11 @@ public class BT_StackShapes implements BT_Opcodes {
 		//areturn
     	BT_StackType stackItem = getStackItem(stack, stack.length - depth - 1, instruction, instructionIndex);
 		checkStackTypeIsObject(expected, stackItem, depth, instruction, instructionIndex);
-		checkObjectStackType(expected, stackItem, depth, instruction, instructionIndex);
+		if(!expected.isInterface()) {
+			//whenever an interface type is expected, we can accept any object, and that is because merging interfaces results in java.lang.Object,
+			//since there is no single type hierarchy to choose from otherwise when merging (ie superclass plus multiple interfaces)
+			checkObjectStackType(expected, stackItem, depth, instruction, instructionIndex);
+		}
 	}
     
     private void checkStackTypeIsRuntimeObject(BT_Class expected, BT_StackCell stack[], int depth, BT_Ins instruction, int instructionIndex) 
@@ -349,8 +358,10 @@ public class BT_StackShapes implements BT_Opcodes {
 		checkStackTypeIsObject(null, stackItem, depth, instruction, instructionIndex);
 		//is it possible for the checkcast to succeed or the instanceof expression to be true?  If not, note that (but keep in mind it's not a verify exception)
 		//this makes no sense except for simple cases.  
-		//If A implements X and Y, and Y has no relation to X, it is still valid to cast an item of type X to Y
+		//1. If A implements X and Y, and Y has no relation to X, it is still valid to cast an item of type X to Y
 		//because the item of type X might be A, so there is no reason to assume a relation between X and Y
+		//2. Even with just superclass inheritance, you might have an java.lang.Object argument and attempt to cast that arg to a subtype
+		//and in fact the case might succeed in some cases, but there is no indication that it can succeed using flow analysis
 //		if(!stackItem.isNull() && !stackItem.getClassType().getType().mightBeInstance(expected)) {
 //			BT_Repository rep = expected.getRepository();
 //			BT_ExpectedObjectTypeException e = new BT_ExpectedObjectTypeException(code, instruction, instructionIndex, expected, stackItem, depth);
@@ -678,7 +689,11 @@ public class BT_StackShapes implements BT_Opcodes {
 							break;
 						case opc_aastore :
 							stackItem = getStackItem(stack, stack.length - 1, ins, i);
-							getObjectStackType(clazz.getElementClass(), stackItem, 0, ins, i);
+							if(useExtendedTypeChecking) {
+								getObjectStackType(clazz.getElementClass(), stackItem, 0, ins, i);
+							} else  {
+								checkStackTypeIsObject(null, stackItem, 0, ins, i);
+							}
 							break;
 						case opc_iastore :
 						case opc_bastore :

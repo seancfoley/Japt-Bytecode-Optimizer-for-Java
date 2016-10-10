@@ -181,37 +181,29 @@ public final class BT_MethodSignature implements BT_Opcodes, MethodType {
 		String intSig,
 		BT_Class returnType,
 		BT_ClassVector args, BT_Repository repo) {
-		
-		if(BT_Factory.multiThreadedLoading) {
-			sigLock.lock();
-		}
-		
-		Hashtable signatures = repo.signatures;
-		BT_MethodSignature found = (BT_MethodSignature) signatures.get(intSig);
-		if (found != null) {
-			//class names can change, so we do a recheck to ensure that the one we found is accurate
-			String actualSig = found.toString();
-			if(actualSig.equals(intSig)) {
-				if(BT_Factory.multiThreadedLoading) {
-					sigLock.unlock();
-				}
-				return found;
-			} else {
-				signatures.remove(intSig);
-				if(signatures.get(actualSig) == null) {
-					signatures.put(actualSig, found);
+		BT_Class.acquireLock(sigLock);
+		try {
+			Hashtable signatures = repo.signatures;
+			BT_MethodSignature found = (BT_MethodSignature) signatures.get(intSig);
+			if (found != null) {
+				//class names can change, so we do a recheck to ensure that the one we found is accurate
+				String actualSig = found.toString();
+				if(actualSig.equals(intSig)) {
+					return found;
+				} else {
+					signatures.remove(intSig);
+					if(signatures.get(actualSig) == null) {
+						signatures.put(actualSig, found);
+					}
 				}
 			}
+			found = new BT_MethodSignature(returnType, args);
+			found.stringRepresentation = intSig;
+			signatures.put(intSig, found);
+			return found;
+		} finally {
+			BT_Class.releaseLock(sigLock);
 		}
-		found = new BT_MethodSignature(returnType, args);
-		found.stringRepresentation = intSig;
-		signatures.put(intSig, found);
-		
-		if(BT_Factory.multiThreadedLoading) {
-			sigLock.unlock();
-		}
-		
-		return found;
 	}
 	
 	
@@ -257,36 +249,29 @@ public final class BT_MethodSignature implements BT_Opcodes, MethodType {
 	private static BT_MethodSignature find(String intSig, BT_Repository repo, BT_MethodSignature result) 
 			throws BT_DescriptorException {
 		Hashtable signatures = repo.signatures;
-		
-		if(BT_Factory.multiThreadedLoading) {
-			sigLock.lock();
-		}
-		
-		BT_MethodSignature found = (BT_MethodSignature) signatures.get(intSig);
-		if (found != null) {
-			//class names can change, so we do a recheck to ensure that the one we found is accurate
-			String actualSig = found.toString();
-			if(actualSig.equals(intSig)) {
-				if(BT_Factory.multiThreadedLoading) {
-					sigLock.unlock();
-				}
-				return found;
-			} else {
-				signatures.remove(intSig);
-				if(signatures.get(actualSig) == null) {
-					signatures.put(actualSig, found);
+		BT_Class.acquireLock(sigLock);
+		try {
+			BT_MethodSignature found = (BT_MethodSignature) signatures.get(intSig);
+			if (found != null) {
+				//class names can change, so we do a recheck to ensure that the one we found is accurate
+				String actualSig = found.toString();
+				if(actualSig.equals(intSig)) {
+					return found;
+				} else {
+					signatures.remove(intSig);
+					if(signatures.get(actualSig) == null) {
+						signatures.put(actualSig, found);
+					}
 				}
 			}
+			if(result == null) {
+				result = new BT_MethodSignature(intSig, repo);
+			}
+			signatures.put(intSig, result);
+			return result;
+		} finally {
+			BT_Class.releaseLock(sigLock);
 		}
-		if(result == null) {
-			result = new BT_MethodSignature(intSig, repo);
-		}
-		signatures.put(intSig, result);
-		
-		if(BT_Factory.multiThreadedLoading) {
-			sigLock.unlock();
-		}
-		return result;
 	}
 	
 
