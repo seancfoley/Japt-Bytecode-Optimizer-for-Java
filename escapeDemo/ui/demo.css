@@ -1,0 +1,70 @@
+
+body {
+ color: #61266a;
+ background: white;
+ background-color: white;
+ background-image: none;
+ font-family: Arial,Verdana,Helvetica,sans-serif;
+ font-size: 10pt; 
+}
+
+div.slide0 {
+ display: block;
+ height: 600px;
+ position: absolute;
+ top: 1700px;
+ left: 0px;
+ width: 800px;
+ padding: 5px;
+}
+
+div.caption0 {
+ display: block;
+ height: 400px;
+ position: absolute;
+ top: 2375px;
+ left: 0px;
+ width: 670px;
+ padding: 5px;
+}
+
+div.text0 {
+ display: block;
+ height: 400px;
+ position: absolute;
+ top: 2475px;
+ left: 0px;
+ width: 800px;
+ padding: 5px;
+}
+
+#forwardControl0 {
+ position: absolute;
+ top: 2300px;
+ left: 200px;
+ width: 200px;
+ height: 100px;
+ padding: 5px;
+ font-size: 15pt; 
+}
+
+#backControl0 {
+ position: absolute;
+ top: 2300px;
+ left: 0px;
+ width: 200px;
+ height: 100px;
+ padding: 5px;
+ font-size: 15pt; 
+}
+
+#currentSlide0 {
+ height: 40px;
+ left: 500px;
+ position: absolute;
+ top: 2300px;
+ width: 100px;
+ font-size: 15pt; 
+}
+
+

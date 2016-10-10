@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Escape Analysis using ITA Reduction combined with Intraprocedural Analysis</title>
+<link rel="stylesheet" href="ui/demo.css" type="text/css" id="slideProj" />
+<script src="ui/slides.js" type="text/javascript"></script>
+</head>
+<body>
+<p><a href="../index.html">Back to Project Page Home</a></p>
+<h2>Escape Analysis Demonstration</h2>
+We apply ITA control flow escape analysis combined with intraprocedural escape analysis to the following code, using Class1.method1 as the entry point.
+
+<div id=code>
+<h2>Code</h2>
+
+<pre>
+class Class1 {
+    Class4 field1;
+    
+    
+    Class1() {}
+
+    void method1() {
+        try {
+            method2(new Class1());
+        } catch(Class2 exception) {
+            exception.method1();
+            Class4 local = method7(exception);
+            if(local != null) {
+                local.method1();
+            }
+            field1 = new Class4();
+            if(exception instanceof Class3) {
+                ((Class3) exception).method3(field1);
+                
+            }
+            throw exception;
+        }
+    }
+    
+    static void method2(Class1 arg) {
+        arg.method3();
+    }
+
+    void method3()  {
+        method4(null);
+    }
+
+    void method4(Class3 arg) {
+        method5(arg);
+    }
+
+    Class3 method5(Class3 arg) {
+        Class3 local = method6();
+        Class3.method2(this);
+        throw local;
+    }
+
+    Class3 method6() {
+        Class3 local = new Class3();
+        local.field4.method1();
+        return local;
+    }
+
+
+    Class4 method7(Class2 arg) {
+        return null;
+    }
+}
+
+
+class Class2 extends java.lang.RuntimeException {
+    boolean field2;
+    Class2 field3;
+
+    Class2() {}
+
+    Class4 method1() {
+        field2 = true;
+        return null;
+    }
+  
+}
+
+class Class3 extends Class2 {
+    Class4 field4;
+    static Class4 field5;
+    
+    Class3() {
+        field4 = new Class4();
+    }
+
+    /**
+     * overrides method7 in parent class
+     */
+    Class4 method1() {
+        return null;
+    }
+
+    static void method2(Class1 arg) {
+        field5 = null;
+    }
+
+    final void method3(Class4 arg) {
+        field5 = arg;
+    }
+}
+
+
+class Class4 {
+    char[] field5;
+
+    Class4() {}
+
+    void method1() {}
+}
+
+</pre>
+
+</div>
+
+
+
+<div id="currentSlide0"></div>
+<div id="forwardControl0"></div>
+<div id="backControl0"></div>
+
+
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/initial.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Here are the class representations.  Fields of primitive type are ignored.  Static fields will be represented just once, while the other fields will have a unique copy in each object instantiated.<p>
+<font size=+1><b>Click on the controls above to see the progress of the escape analysis.</b></font>
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it1.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Class1.method1 is the initial method, and we create a single generic object of type Class1 to act as the sole object argument for the non-static method.
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it2.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Generic object 3 is the generic object returned from the generic invocation of Class1.method7.  The invocation of Class1.method7 is generic because the object for which the invocation takes place is generic, Object 2.  Objects 2 and 4 are normal objects instantiated in method1.
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it3.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Using the generic Object 3, we have a second generic invocation, an invocation of Class4.method1. 
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it4.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it5.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it6.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it7.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it8.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Object 5 is thrown from Class1.method5 as an exception object.  Object 6 is a new object instantiated within the constructor of Class3. 
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it9.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it10.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it11.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it12.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/it13.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Object 4 is written to a static field.  At this time ITA control flow propagation has been completed, there are no new method invocactions, field accesses, or object movements that can take place.
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/itroots.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Here we can see the roots, the root sources of escape.  One root is the argument to the initial method Object 1, another is the object that was thrown from the initial method, Object 5.  The two generic method invocations Class1.method7 and Class4.method1 are roots.  The static field is the final root.
+</div>
+
+<div class="slide0" style="visibility: hidden">
+<img src=demo/itfinal.gif>
+</div>
+<div class="caption0" style="visibility: hidden">
+Here we can see how the various objects escape, or whether they do not escape at all.  This demonstration is a simple example, and so we can easily identify the escaped objects.  In general the search is not so straightforward, the algorithm searches from the roots to their contained objects, and from these objects to their contained fields and the additional objects contained in these fields, and so on recursively until all reachable objects have been identified.  Any objects that have not been reached have not escaped.
+</div>
+
+
+
+
+<div class=text0>
+
+<hr>
+<h2>Summary</h2>
+<p>
+
+The analysis is applied to method1 in Class1.  Because this method is not static, there is a generic instance of Class1 that is instantiated to be passed to the method.  From that point onwards, ITA analysis determines the flow of objects.  For purposes of escape analysis, the fields with primitive (non-object) types can be ignored, since they have no effect upon the flow of objects.  
+<p>
+Shown in this example is ITA exception handling, as the instance of Class3 is thrown from method5.  In method4, the object is not caught, and therefore the object is propagated but the object is not available to method5 in other ways.
+<p>
+Also shown is a virtual method resolution, in which an instruction's invocation of Class2.method1 is actually resolved to Class3.method1, the overriding method, when the invocation is applied to Object 5.
+<p>
+The example includes a generic object that is an argument to the initial method, Object 1.  A method is invoked on this object, method7, which therefore becomes a generic method invocation, which causes the creation of another generic object, as the returned object from the generic method invocation.
+<p>
+Intraprocedural analysis is included in this example.  For instance, the two separate instances of Class1 in method1 are not passed to the same methods and fields as determined by the intraprocedural analysis.
+<p>
+When the analysis completes, the roots of the search for escaping objects are:
+-Object 1, the generic object argument to the initial method, method1
+-the accessed static field, field5
+-Object 5, which was thrown from method1 and thus escaped directly
+-the generic method invocation method7
+<p>
+In the example, only one object does not escape the invocation of Class1.method1, and this object is Object 2.  <p>
+Knowing that Object 2 cannot escape method 1, it is possible to apply optimizations to the object when it is created.  Possible optimizations include eliminating locks on the object, or allocating the object on the stack.
+<p>
+Object 6 is never present in the initial method.  This object does escape, since it is reachable from another escaped object.  However, if the object had not been written to field4, then it would not escape.  More exactly, the object would not escape with a calling context originating with Class1.method1, but it would remain unknown whether the object might escape with other calling contexts.  To determine if an object created in a particular method will never escape, the algorithm must be applied with that particular method as the initial method and generic objects as the method arguments.  The generic objects allow us to account for all possible calling contexts.
+
+<p>
+Not included in this example are the actions of generic object splitting, and the handling of unknown method definitions (due to native methods or methods, methods not loaded, or methods whose definition is unknown for other reasons).  Also, there is not an example of a thread object acting as a root for the search phase, or a returned object that is a root.
+<p>
+</div>
+
+
+</body>
+</html>
