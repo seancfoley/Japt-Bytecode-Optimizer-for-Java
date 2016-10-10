@@ -15,18 +15,22 @@ public class AppRun {
 	
 	final String appClassPath; 
 	final String commandLine;
+	final String stdOutPath;
+	final String stdErrPath;
 	final int fromEndIndex;
 	final int startIndex;
 	final int endIndex;
 	private HashMap appInvocations = new HashMap();
 	
-	AppRun(String appClassPath, String commandLine,
+	AppRun(String appClassPath, String commandLine, String stdOutPath, String stdErrPath,
 			int fromEndIndex, int startIndex, int endIndex) {
 		this.appClassPath = appClassPath;
 		this.commandLine = commandLine;
 		this.fromEndIndex = fromEndIndex;
 		this.startIndex = startIndex;
 		this.endIndex = endIndex;
+		this.stdOutPath = stdOutPath;
+		this.stdErrPath = stdErrPath;
 	}
 	
 	

@@ -241,7 +241,8 @@ public class TestRun {
 		buffer.append(cmd);
 		buffer.append("\" on \"");
 		buffer.append(appRun.appClassPath);
-		buffer.append("\" with transformations \"");
+		buffer.append("\" with \"");
+		//buffer.append("\" with transformations \"");
 		for(int i=0; i<japtTransformationArgs.length; i++) {
 			if(i > 0) {
 				buffer.append(' ');

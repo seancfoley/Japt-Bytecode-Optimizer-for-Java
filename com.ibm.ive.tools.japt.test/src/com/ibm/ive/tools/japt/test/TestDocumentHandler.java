@@ -29,7 +29,6 @@ public class TestDocumentHandler extends DocumentHandler {
 	
 	public TestDocumentHandler() {}
 
-	
 	static String[] appendArgs(String current[], String arguments) {
 		Reader reader = new StringReader(arguments);
 		String args[];
@@ -70,7 +69,12 @@ public class TestDocumentHandler extends DocumentHandler {
 	 */
 	public void startElement(String name, AttributeList attributes) throws SAXException {
 		if (name.equals("testApp")) {
-			currentApp = new TestAppHandler(attributes.getValue("log"), attributes.getValue("jar"), attributes.getValue("dir"));
+			currentApp = new TestAppHandler(
+					attributes.getValue("log"),
+					attributes.getValue("jar"),
+					attributes.getValue("dir"),
+					attributes.getValue("stdout"),
+					attributes.getValue("stderr"));
 			String fromEndIndex = attributes.getValue("outputIndexFromEnd");
 			String startIndex = attributes.getValue("outputStartIndex");
 			String endIndex = attributes.getValue("outputEndIndex");

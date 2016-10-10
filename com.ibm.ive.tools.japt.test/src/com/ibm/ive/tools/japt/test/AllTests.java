@@ -1,14 +1,17 @@
 package com.ibm.ive.tools.japt.test;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import com.ibm.esc.xml.parser.sax.MicroXMLParser;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 /*
  * Created on Jun 15, 2004
@@ -41,13 +44,26 @@ public class AllTests {
 				xmlParser = new MicroXMLParser();
 				xmlParser.setDocumentHandler(testHandler);
 				xmlParser.parse(new InputSource(testStream));
+				
+				TestAppHandler testApps[] = testHandler.getApps();
+				for(TestAppHandler testApp : testApps) {
+					preparePaths(
+							Paths.get(testApp.stdoutPath).getParent(), 
+							Paths.get(testApp.stderrPath).getParent(), 
+							Paths.get(testApp.japtLogPath).getParent(), 
+							Paths.get(testApp.japtDir), 
+							Paths.get(testApp.japtedJar).getParent());
+				}
+				
 				FileInputStream transformStream = new FileInputStream(transformFileName);
-				TransformationDocumentHandler handler = new TransformationDocumentHandler(configHandler, testHandler);
+				TransformationDocumentHandler handler = new TransformationDocumentHandler(configHandler, testApps);
 				try {
 					xmlParser = new MicroXMLParser();
 					xmlParser.setDocumentHandler(handler);
 					xmlParser.parse(new InputSource(transformStream));
-					return handler.getTestRuns();
+					
+					TestRun runs[] = handler.getTestRuns();
+					return runs;
 				} finally {
 					transformStream.close();
 				}
@@ -59,6 +75,17 @@ public class AllTests {
 		}
 	}
 	
+	
+	static void preparePaths(Path ... paths) {
+		for(Path path : paths) {
+			File dir = path.toFile();
+			if(!dir.exists()) {
+				if(!dir.mkdirs()) {
+					System.err.println("Could not create " + dir);
+				}
+			}
+		}
+	}
 	
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for default package");

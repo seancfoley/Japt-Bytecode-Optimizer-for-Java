@@ -39,17 +39,19 @@ public class AppInvocation {
 		}
 	}
 	
-	void runApp() {
+	boolean runApp() {
+		boolean invoked = false;
 		if(!wasRun) {
 			synchronized(this) {
 				if(!wasRun) {
-					wasRun = true;
+					wasRun = invoked = true;
 					String commandLine = getCommandLine();
 					thread = new ProcessThread(commandLine);
 					thread.start();
 				}
 			}
 		}
+		return invoked;
 	}
 	
 	void waitTilDone() {

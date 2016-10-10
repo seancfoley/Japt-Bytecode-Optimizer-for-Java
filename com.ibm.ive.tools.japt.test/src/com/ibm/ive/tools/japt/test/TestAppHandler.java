@@ -27,6 +27,8 @@ public class TestAppHandler extends DocumentHandler {
 	String japtLogPath;
 	String japtedJar;
 	String japtDir;
+	String stdoutPath;
+	String stderrPath;
 	
 	CharacterHandler commandLineHandler = new CharacterHandler() {
 		public void handle(String characters) {
@@ -56,7 +58,7 @@ public class TestAppHandler extends DocumentHandler {
 		}
 	};
 
-	TestAppHandler(String japtLogPath, String japtedJar, String japtDir) {
+	TestAppHandler(String japtLogPath, String japtedJar, String japtDir, String stdoutPath, String stderrPath) {
 		if(japtLogPath == null) {
 			japtLogPath = "testJapt.log";
 		}
@@ -66,6 +68,8 @@ public class TestAppHandler extends DocumentHandler {
 		if(japtDir == null) {
 			japtDir = ".";
 		}
+		this.stdoutPath = stdoutPath;
+		this.stderrPath = stderrPath;
 		this.japtLogPath = japtLogPath;
 		this.japtedJar = japtedJar;
 		this.japtDir = japtDir;

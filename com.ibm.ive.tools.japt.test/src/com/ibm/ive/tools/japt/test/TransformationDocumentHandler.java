@@ -25,12 +25,12 @@ public class TransformationDocumentHandler extends DocumentHandler {
 	private final JRE jres[];
 	TransformationHandler transformationHandler = new TransformationHandler();
 
-	public TransformationDocumentHandler(ConfigDocumentHandler config, TestDocumentHandler testHandler) {
+	public TransformationDocumentHandler(ConfigDocumentHandler config, TestAppHandler testApps[]) {
 		this.jres = config.testJREs;
 		if(jres[0].equals(jres[1])) {
 			jres[1] = jres[0];
 		}
-		testApps = testHandler.getApps();
+		this.testApps = testApps;
 	}
 
 	static class Transformation {
@@ -65,7 +65,7 @@ public class TransformationDocumentHandler extends DocumentHandler {
 		AppRun appRuns[] = new AppRun[testApps.length];
 		for(int j=0; j<testApps.length; j++) {
 			TestAppHandler testApp = testApps[j];
-			appRuns[j] = new AppRun(testApp.appClassPath, testApp.commandLine,
+			appRuns[j] = new AppRun(testApp.appClassPath, testApp.commandLine, testApp.stdoutPath, testApp.stderrPath,
 					testApp.fromEndIndex, testApp.startIndex, testApp.endIndex);
 		}
 		

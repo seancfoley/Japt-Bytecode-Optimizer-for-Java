@@ -1,6 +1,9 @@
 package com.ibm.ive.tools.japt.test;
+import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
@@ -97,33 +100,38 @@ public class JaptTester extends TestCase {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	private void compareRuns(AppInvocation appRun, String japtedRun, String prefix) throws InterruptedException, IOException {
+	private void compareRuns(AppInvocation appInvocation, String japtedRun, String prefix) throws InterruptedException, IOException {
 		ProcessThread japtThread = new ProcessThread(japtedRun);
 		japtThread.start();
 		
-		appRun.runApp();
-		appRun.waitFor();
+		boolean invoked = appInvocation.runApp();
+		appInvocation.waitFor();
 		//wait for 15 minutes at most
 		japtThread.join(15 * 60 * 1000);
 		
 		//the output should be the same
-		String actualOutput = appRun.getOutput();
-		String actualErrorOutput = appRun.getErrorOutput();
+		String actualOutput = appInvocation.getOutput();
+		String actualErrorOutput = appInvocation.getErrorOutput();
+		AppRun appRun = appInvocation.app;
+		if(invoked) {
+			saveAppOutput(actualOutput, appRun.stdOutPath);
+			saveAppOutput(actualErrorOutput, appRun.stdErrPath);
+		}
 		
 		String japtOutput = japtThread.getOutput();
 		String japtErrorOutput = japtThread.getErrorOutput();
 		
-		int endIndex = appRun.app.endIndex;
+		int endIndex = appRun.endIndex;
 		if(endIndex >= 0) {
 			actualOutput = actualOutput.substring(0, Math.min(endIndex, actualOutput.length()));
 			japtOutput = japtOutput.substring(0, Math.min(endIndex, japtOutput.length()));
 		}
-		int startIndex = appRun.app.startIndex;
+		int startIndex = appRun.startIndex;
 		if(startIndex > 0) {
 			actualOutput = actualOutput.substring(Math.min(startIndex, actualOutput.length()));
 			japtOutput = japtOutput.substring(Math.min(startIndex, actualOutput.length()));
 		}
-		int fromEndIndex = appRun.app.fromEndIndex;
+		int fromEndIndex = appRun.fromEndIndex;
 		if(fromEndIndex >= 0) {
 			actualOutput = actualOutput.substring(Math.max(0, actualOutput.length() - fromEndIndex));
 			japtOutput = japtOutput.substring(Math.max(0, japtOutput.length() - fromEndIndex));
@@ -131,6 +139,20 @@ public class JaptTester extends TestCase {
 	
 		assertEquals(prefix + "app error output and japted app error output do not match: ", actualErrorOutput, japtErrorOutput);
 		assertEquals(prefix + "app output and japted app output do not match: ", actualOutput, japtOutput);
+	}
+
+	private void saveAppOutput(String output, String path)
+			throws FileNotFoundException {
+		if(path != null && path.length() > 0) {
+			PrintStream fileStream = new PrintStream(
+					new BufferedOutputStream(
+							new FileOutputStream(path)));
+			try {
+				fileStream.print(output);
+			} finally {
+				fileStream.close();
+			}
+		}
 	}
 
 }

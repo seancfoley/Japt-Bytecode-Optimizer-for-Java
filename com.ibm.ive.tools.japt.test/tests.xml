@@ -5,14 +5,13 @@
 
 <!-- the following tests are java 6 and hence have stack map tables and enhanced ldc instructions -->
 
-
-<testApp log="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidatesJava6.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidatesJava6.out.txt"
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidatesJava6.err.txt"
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidatesJava6.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests\java6">
-	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates C:\eclipse\workspaces\japtWorkspace\tests\java6</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\java6</classPath>
+<testApp log="../test_output/japtedMergeCandidatesJava6.log" 
+	stdout="../test_output/japtedMergeCandidatesJava6.out.txt"
+	stderr="../test_output/japtedMergeCandidatesJava6.err.txt"
+	jar="../test_output/japtedMergeCandidatesJava6.jar" 
+	dir="../test_output/japtTests\java6">
+	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates ../tests/java6</commandLine>
+	<classPath>../tests\java6</classPath>
 	<japtApplicationArgs>
 	-includeClass com.ibm.ive.tools.japt.testcase.mergeCandidates.* 
 	-includeMethod com.ibm.ive.tools.japt.testcase.mergeCandidates.App.testVerifier 
@@ -22,47 +21,47 @@
 	</japtApplicationArgs>
 </testApp>
 
-<testApp log="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcastJava6.log"
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcastJava6.out.txt"
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcastJava6.err.txt"
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcastJava6.jar"
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests\java6">
+<testApp log="../test_output/japtedTestUpcastJava6.log"
+	stdout="../test_output/japtedTestUpcastJava6.out.txt"
+	stderr="../test_output/japtedTestUpcastJava6.err.txt"
+	jar="../test_output/japtedTestUpcastJava6.jar"
+	dir="../test_output/japtTests\java6">
 	<commandLine>com.ibm.ive.tools.japt.testcase.TestUpcast</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\java6</classPath>
+	<classPath>../tests/java6</classPath>
 	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestUpcast.main(java.lang.String[])</japtApplicationArgs>
 </testApp>
 
-<testApp log="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSRJava6.log"
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSRJava6.out.txt"
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSRJava6.err.txt"
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSRJava6.jar"
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests\java6">
+<testApp log="../test_output/japtedTestJSRJava6.log"
+	stdout="../test_output/japtedTestJSRJava6.out.txt"
+	stderr="../test_output/japtedTestJSRJava6.err.txt"
+	jar="../test_output/japtedTestJSRJava6.jar"
+	dir="../test_output/japtTests\java6">
 	<commandLine>com.ibm.ive.tools.japt.testcase.TestJSR</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\java6</classPath>
+	<classPath>../tests/java6</classPath>
 	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestJSR.main(java.lang.String[])</japtApplicationArgs>
 </testApp>
 
 <testApp 
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedJaptJava6.log"
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedJaptJava6.out.txt"
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedJaptJava6.err.txt"
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedJaptJava6.jar"
+	log="../test_output/japtedJaptJava6.log"
+	stdout="../test_output/japtedJaptJava6.out.txt"
+	stderr="../test_output/japtedJaptJava6.err.txt"
+	jar="../test_output/japtedJaptJava6.jar"
 	outputIndexFromEnd="42"
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests\java6">
+	dir="../test_output/japtTests/java6">
 	<commandLine>
 		com.ibm.ive.tools.japt.commandLine.Main
-		-loadFile C:\eclipse\workspaces\japtWorkspace\tests\hanoi.jar
+		-loadFile ../tests\hanoi.jar
 		-includeMainMethod com/ibm/ivj/examples/hanoi/Hanoi
-		-cp c:\java\2.3\ive\lib\jclMax\classes.zip 
+		-cp C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre\lib\rt.jar
 		-obfuscate -reduce -xta -inline -inlineAllJSRs 
 		-compressionInline -expandPermissions -deferClassLoads 
 		-optimizeCatches -optimizeThrows -optimizeTypeChecks
 		-migrateMethodBodies -coldMethod *t* -allowAccessors -expandPermissions -load -verify 
-		-jarOutput -output "C:\\eclipse\\workspaces\\japtWorkspace\\test output\\hanoiOptimized.jar" 
+		-jarOutput -output "../test_output/hanoiOptimized.jar" 
 		-noStripDebugInfo -noStripSourceInfo -noStripAnnotations -noCompress
 		-includeResource *.properties
 	</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\japt.java6.jar</classPath>
+	<classPath>../tests/japt.java6.jar</classPath>
 	<japtApplicationArgs>
 		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main
 		-includeLibraryClass com.ibm.ive.tools.japt.*Extension 
@@ -80,13 +79,13 @@
 <!-- the following tests are not java 6 and hence have no stack maps -->
 
 <testApp 
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidates.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidates.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidates.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedMergeCandidates.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
-	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates C:\eclipse\workspaces\japtWorkspace\tests</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests</classPath>
+	log="../test_output/japtedMergeCandidates.log" 
+	stdout="../test_output/japtedMergeCandidates.out.txt" 
+	stderr="../test_output/japtedMergeCandidates.err.txt" 
+	jar="../test_output/japtedMergeCandidates.jar" 
+	dir="../test_output/japtTests">
+	<commandLine>com.ibm.ive.tools.japt.testcase.mergeCandidates.TestMergeCandidates ../tests</commandLine>
+	<classPath>../tests</classPath>
 	<japtApplicationArgs>
 	-includeClass com.ibm.ive.tools.japt.testcase.mergeCandidates.* 
 	-includeMethod com.ibm.ive.tools.japt.testcase.mergeCandidates.App.testVerifier 
@@ -97,40 +96,40 @@
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcast.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcast.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcast.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestUpcast.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedTestUpcast.log" 
+	stdout="../test_output/japtedTestUpcast.out.txt" 
+	stderr="../test_output/japtedTestUpcast.err.txt" 
+	jar="../test_output/japtedTestUpcast.jar" 
+	dir="../test_output/japtTests">
 	<commandLine>com.ibm.ive.tools.japt.testcase.TestUpcast</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests</classPath>
+	<classPath>../tests</classPath>
 	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestUpcast.main(java.lang.String[])</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSR.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSR.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSR.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedTestJSR.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedTestJSR.log" 
+	stdout="../test_output/japtedTestJSR.out.txt" 
+	stderr="../test_output/japtedTestJSR.err.txt" 
+	jar="../test_output/japtedTestJSR.jar" 
+	dir="../test_output/japtTests">
 	<commandLine>com.ibm.ive.tools.japt.testcase.TestJSR</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests</classPath>
+	<classPath>../tests</classPath>
 	<japtApplicationArgs>-includeMethod com.ibm.ive.tools.japt.testcase.TestJSR.main(java.lang.String[])</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedJapt.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedJapt.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedJapt.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedJapt.jar"
+	log="../test_output/japtedJapt.log" 
+	stdout="../test_output/japtedJapt.out.txt" 
+	stderr="../test_output/japtedJapt.err.txt" 
+	jar="../test_output/japtedJapt.jar"
 	outputIndexFromEnd="42" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>
 		com.ibm.ive.tools.japt.commandLine.Main
-		-icp C:\eclipse\workspaces\japtWorkspace\tests\Japt.jar 
-		-cp c:\java\2.3\ive\lib\jclMax\classes.zip 
+		-icp ../tests/Japt.jar 
+		-cp C:\java\ibm-java-sdk-60-win-x86_64\sdk\jre\lib\rt.jar
 		-obfuscate -reduce -xta -inline -inlineMethodJSRs ?*parseCommandLine -inlineAllJSRs 
-		-compressionInline -expandPermissions -jarOutput -output "C:\\eclipse\\workspaces\\japtWorkspace\\test output\\japtFinalized.jar" 
+		-compressionInline -expandPermissions -jarOutput -output "../test_output/japtFinalized.jar" 
 		-noStripDebugInfo 
 		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main 
 		-includeLibraryClass *.load.*Extension 
@@ -143,7 +142,7 @@
 		-includeLibraryClass com.ibm.ive.tools.japt.MsgHelp*
 		-includeResource *.properties
 	</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\Japt.jar</classPath>
+	<classPath>../tests/Japt.jar</classPath>
 	<japtApplicationArgs>
 		-includeMethod com.ibm.ive.tools.japt.commandLine.Main.main
 		-includeLibraryClass com.ibm.ive.tools.japt.*Extension 
@@ -154,129 +153,129 @@
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedFloatSanity.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedFloatSanity.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedFloatSanity.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedFloatsanity.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedFloatSanity.log" 
+	stdout="../test_output/japtedFloatSanity.out.txt" 
+	stderr="../test_output/japtedFloatSanity.err.txt" 
+	jar="../test_output/japtedFloatsanity.jar" 
+	dir="../test_output/japtTests">
 	<commandLine>j9vm.floatsanity.Runner</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\floatsanity.jar</classPath>
+	<classPath>../tests/floatsanity.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod j9vm.floatsanity.Runner</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedHanoi.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedHanoi.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedHanoi.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedHanoi.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedHanoi.log" 
+	stdout="../test_output/japtedHanoi.out.txt" 
+	stderr="../test_output/japtedHanoi.err.txt" 
+	jar="../test_output/japtedHanoi.jar" 
+	dir="../test_output/japtTests">
 	<commandLine>com/ibm/ivj/examples/hanoi/Hanoi 12</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\hanoi.jar</classPath>
+	<classPath>../tests/hanoi.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com/ibm/ivj/examples/hanoi/Hanoi</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedPhilosophers.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedPhilosophers.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedPhilosophers.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedPhilosophers.jar" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedPhilosophers.log" 
+	stdout="../test_output/japtedPhilosophers.out.txt" 
+	stderr="../test_output/japtedPhilosophers.err.txt" 
+	jar="../test_output/japtedPhilosophers.jar" 
+	dir="../test_output/japtTests">
 	<commandLine>VMBench.diningphilosophers.DiningPhilosophers</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\philosophers.jar</classPath>
+	<classPath>../tests/philosophers.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod VMBench.diningphilosophers.DiningPhilosophers -includeMethodEx VMBench.diningphilosophers.DiningPhilosophers.run</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedVich.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedVich.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedVich.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedVich.jar"
+	log="../test_output/japtedVich.log" 
+	stdout="../test_output/japtedVich.out.txt" 
+	stderr="../test_output/japtedVich.err.txt" 
+	jar="../test_output/japtedVich.jar"
 	outputIndexFromEnd="24" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>vich/runner/Menu 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 8</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\vich.jar</classPath>
+	<classPath>../tests/vich.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod vich.runner.Menu -includeMethod vich.bench.^.run</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedCaffeine.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedCaffeine.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedCaffeine.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedCaffeine.jar"
+	log="../test_output/japtedCaffeine.log" 
+	stdout="../test_output/japtedCaffeine.out.txt" 
+	stderr="../test_output/japtedCaffeine.err.txt" 
+	jar="../test_output/japtedCaffeine.jar"
 	outputStartIndex="0" outputEndIndex="13" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>CaffeineMarkEmbeddedApp</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\caffeine.jar</classPath>
+	<classPath>../tests/caffeine.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod CaffeineMarkEmbeddedApp</japtApplicationArgs>
 </testApp>
 
 <testApp 
-	log="c:\eclipse\workspaces\japtWorkspace\test output\japtedchessBM.log" 
-	stdout="c:\eclipse\workspaces\japtWorkspace\test output\japtedchessBM.out.txt" 
-	stderr="c:\eclipse\workspaces\japtWorkspace\test output\japtedchessBM.err.txt" 
-	jar="c:\eclipse\workspaces\japtWorkspace\test output\japtedchessBM.jar" 
+	log="../test_output/japtedchessBM.log" 
+	stdout="../test_output/japtedchessBM.out.txt" 
+	stderr="../test_output/japtedchessBM.err.txt" 
+	jar="../test_output/japtedchessBM.jar" 
 	outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\chessBM.jar</classPath>
+	<classPath>../tests/eembc/chessBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.sun.mep.bench.Chess.ChessBenchmark</japtApplicationArgs>
 </testApp>
 
 <testApp 
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedcryptoBM.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedcryptoBM.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedcryptoBM.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedcryptoBM.jar" outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedcryptoBM.log" 
+	stdout="../test_output/japtedcryptoBM.out.txt" 
+	stderr="../test_output/japtedcryptoBM.err.txt" 
+	jar="../test_output/japtedcryptoBM.jar" outputStartIndex="0" outputEndIndex="170" 
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\cryptoBM.jar</classPath>
+	<classPath>../tests/eembc/cryptoBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.parthus.CryptoBench.CryptoBench</japtApplicationArgs>
 </testApp>
 
 <testApp 
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedkxmlBM.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedkxmlBM.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedkxmlBM.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedkxmlBM.jar" outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	log="../test_output/japtedkxmlBM.log" 
+	stdout="../test_output/japtedkxmlBM.out.txt" 
+	stderr="../test_output/japtedkxmlBM.err.txt" 
+	jar="../test_output/japtedkxmlBM.jar" outputStartIndex="0" outputEndIndex="170" 
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\kxmlBM.jar</classPath>
+	<classPath>../tests/eembc/kxmlBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.xml -includeResource *.cmd -includeLibraryClass com.hp.kXML.kxmlBenchmark</japtApplicationArgs>
 </testApp>
 
 <testApp 
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedparallelBM.log" 
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedparallelBM.out.txt" 
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedparallelBM.err.txt" 
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedparallelBM.jar" 
+	log="../test_output/japtedparallelBM.log" 
+	stdout="../test_output/japtedparallelBM.out.txt" 
+	stderr="../test_output/japtedparallelBM.err.txt" 
+	jar="../test_output/japtedparallelBM.jar" 
 	outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\parallelBM.jar</classPath>
+	<classPath>../tests/eembc/parallelBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeLibraryClass com.motorola.bench.parallel.ParallelBench -includeWholeClass com.motorola.bench.parallel.data^ -includeMethod com.motorola.bench.parallel.ParallelBench$workerThread.run()</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="c:\eclipse\workspaces\japtWorkspace\test output\japtedregexpBM.log"
-	stdout="c:\eclipse\workspaces\japtWorkspace\test output\japtedregexpBM.out.txt"
-	stderr="c:\eclipse\workspaces\japtWorkspace\test output\japtedregexpBM.err.txt"
-	jar="c:\eclipse\workspaces\japtWorkspace\test output\japtedregexpBM.jar" 
+	log="../test_output/japtedregexpBM.log"
+	stdout="../test_output/japtedregexpBM.out.txt"
+	stderr="../test_output/japtedregexpBM.err.txt"
+	jar="../test_output/japtedregexpBM.jar" 
 	outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\regexpBM.jar</classPath>
+	<classPath>../tests/eembc/regexpBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.inp -includeLibraryClass com.sun.mep.bench.RegExp.RegExp</japtApplicationArgs>
 </testApp>
 
 <testApp
-	log="C:\eclipse\workspaces\japtWorkspace\test output\japtedpngdecodeBM.log"
-	stdout="C:\eclipse\workspaces\japtWorkspace\test output\japtedpngdecodeBM.out.txt"
-	stderr="C:\eclipse\workspaces\japtWorkspace\test output\japtedpngdecodeBM.err.txt"
-	jar="C:\eclipse\workspaces\japtWorkspace\test output\japtedpngdecodeBM.jar"
+	log="../test_output/japtedpngdecodeBM.log"
+	stdout="../test_output/japtedpngdecodeBM.out.txt"
+	stderr="../test_output/japtedpngdecodeBM.err.txt"
+	jar="../test_output/japtedpngdecodeBM.jar"
 	outputStartIndex="0" outputEndIndex="170" 
-	dir="C:\eclipse\workspaces\japtWorkspace\test output\japtTests">
+	dir="../test_output/japtTests">
 	<commandLine>com.sun.mep.bench.main -r 2</commandLine>
-	<classPath>C:\eclipse\workspaces\japtWorkspace\tests\eembc\pngdecodeBM.jar</classPath>
+	<classPath>../tests/eembc/pngdecodeBM.jar</classPath>
 	<japtApplicationArgs>-includeMainMethod com.sun.mep.bench.main -includeResource *.txt -includeResource *.png -includeLibraryClass com.sun.mep.bench.png.PNGBenchmark</japtApplicationArgs>
 </testApp>
 
