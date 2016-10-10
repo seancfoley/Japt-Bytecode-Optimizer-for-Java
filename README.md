@@ -3,7 +3,6 @@ Bytecode optimization tool to ease development and deployment of Java
 
 [**View Project Pages**](https://seancfoley.github.io/Japt-Bytecode-Optimizer-for-Java/)
 
-Description
 The tool provides the following technologies:
 
 * escape analysis on a per method-invocation basis 
