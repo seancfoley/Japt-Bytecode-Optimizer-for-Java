@@ -2,6 +2,10 @@
 bin/
 
 
+# Test files
+tests/
+test_output/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
