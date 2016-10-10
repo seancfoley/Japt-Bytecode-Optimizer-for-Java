@@ -16,16 +16,16 @@ xmlns="http://www.w3.org/TR/REC-html40">
   <o:Author>sfoley</o:Author>
   <o:LastAuthor>SEAN FOLEY</o:LastAuthor>
   <o:Revision>2</o:Revision>
-  <o:TotalTime>74</o:TotalTime>
-  <o:Created>2016-10-10T21:15:00Z</o:Created>
-  <o:LastSaved>2016-10-10T21:15:00Z</o:LastSaved>
+  <o:TotalTime>77</o:TotalTime>
+  <o:Created>2016-10-10T21:39:00Z</o:Created>
+  <o:LastSaved>2016-10-10T21:39:00Z</o:LastSaved>
   <o:Pages>1</o:Pages>
-  <o:Words>2557</o:Words>
-  <o:Characters>14578</o:Characters>
+  <o:Words>2562</o:Words>
+  <o:Characters>14606</o:Characters>
   <o:Company>Object Technology Int'l</o:Company>
   <o:Lines>121</o:Lines>
   <o:Paragraphs>34</o:Paragraphs>
-  <o:CharactersWithSpaces>17101</o:CharactersWithSpaces>
+  <o:CharactersWithSpaces>17134</o:CharactersWithSpaces>
   <o:Version>16.00</o:Version>
  </o:DocumentProperties>
  <o:OfficeDocumentSettings>
@@ -819,16 +819,15 @@ style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is a tool
-for optimizing java programs.<span style='mso-spacerun:yes'>  </span>Japt makes
-use of the JikesBT java class manipulation library and its own proprietary
-class manipulation functionality to optimize java class files.<span
-style='mso-spacerun:yes'>  </span>This lists some of the basic features of
-Japt.<span style='mso-spacerun:yes'>  </span>Advanced extensions (inlining,
-reduction, obfuscation, escape analysis, remapping, assembler/disassembler,
-instrumentation, etc) are not covered in this document.<span
-style='mso-spacerun:yes'>  </span>This document covers the basic concepts of
-Japt from a user’s perspective.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is a tool for
+optimizing java programs.<span style='mso-spacerun:yes'>  </span>Japt makes use
+of the JikesBT java class manipulation library and its own proprietary class manipulation
+functionality to optimize java class files.<span style='mso-spacerun:yes'> 
+</span>This lists some of the basic features of Japt.<span
+style='mso-spacerun:yes'>  </span>Advanced extensions (inlining, reduction, obfuscation,
+escape analysis, remapping, assembler/disassembler, instrumentation, etc) are not
+covered in this document.<span style='mso-spacerun:yes'>  </span>This document covers
+the basic concepts of Japt from a user’s perspective.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -851,8 +850,7 @@ href="#_2_Japt_Concepts">Japt Concepts</a><o:p></o:p></span></p>
 <a href="#_2.4_Application_Interface">Application Interface</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>3 <a
-href="#_3._Loading_Classes">Loading Classes and Resources with the Load
-Extension</a><o:p></o:p></span></p>
+href="#_3._Loading_Classes">Loading Classes and Resources with the Load Extension</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>3.1
 <a href="#_3.1_Loading">Loading</a><o:p></o:p></span></p>
@@ -879,8 +877,8 @@ Japt Usage<o:p></o:p></span></h1>
 style='font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
-style='font-family:"Arial",sans-serif'>Not all options are listed here, the
-more obscure options are omitted here for the purpose of clarity.<o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'>Not all options are listed here, the more
+obscure options are omitted here for the purpose of clarity.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
@@ -895,9 +893,8 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>japt optimizes java
-classes</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>japt optimizes java classes</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
@@ -910,8 +907,7 @@ color:black'>basic options:</span><span style='font-size:8.0pt;mso-bidi-font-siz
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-help<span
-style='mso-spacerun:yes'>            </span><span
-style='mso-spacerun:yes'>           </span>print out this message</span><span
+style='mso-spacerun:yes'>                       </span>print out this message</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
@@ -923,9 +919,8 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-sysProps<span
-style='mso-spacerun:yes'>                   </span>print out the system
-properties</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>                   </span>print out the system properties</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -936,22 +931,22 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-quiet<span
-style='mso-spacerun:yes'>                      </span>quiet mode</span><span
+style='mso-spacerun:yes'>    </span><span
+style='mso-spacerun:yes'>                  </span>quiet mode</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-macro xxx xxx<span
-style='mso-spacerun:yes'>              </span>define a macro with the given
-name and value</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+style='mso-spacerun:yes'>              </span>define a macro with the given name
+and value</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
 font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>   
-</span>-noResolveRuntimeRefs<span style='mso-spacerun:yes'>       </span>leave
-method/field references unresolved</span><span style='font-size:8.0pt;
-mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>-noResolveRuntimeRefs<span
+style='mso-spacerun:yes'>       </span>leave method/field references unresolved</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -977,43 +972,40 @@ color:black'>load options:</span><span style='font-size:8.0pt;mso-bidi-font-size
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-icp xxx<span
-style='mso-spacerun:yes'>                    </span>append named jar/dir to
-internal cls srch path</span><span style='font-size:8.0pt;mso-bidi-font-size:
-10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>                    </span>append named jar/dir to internal
+cls srch path</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-cp xxx<span
-style='mso-spacerun:yes'>                     </span>append named jar/dir to
-class search path</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+style='mso-spacerun:yes'>                     </span>append named jar/dir to class
+search path</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
 font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-loadFile xxx<span
-style='mso-spacerun:yes'>               </span>load named file as internal
-classes/resources</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>               </span>load named file as internal classes/resources</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-loadClass xxx<span
-style='mso-spacerun:yes'>              </span>load named class(es) (from class
-path)</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
-"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>              </span>load named class(es) (from class path)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-loadResource xxx<span
-style='mso-spacerun:yes'>           </span>load named resource(s) (from class
-path)</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
-"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>           </span>load named resource(s) (from class path)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>                               
-</span></span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>        </span><span
+style='mso-spacerun:yes'>                        </span></span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -1023,22 +1015,20 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeWholeClass
-xxx<span style='mso-spacerun:yes'>      </span>include all members with the
-named class(es)</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>-includeWholeClass xxx<span
+style='mso-spacerun:yes'>      </span>include all members with the named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeLibraryClass
-xxx<span style='mso-spacerun:yes'>    </span>include non-prvt members with
-named class(es)</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>-includeLibraryClass xxx<span
+style='mso-spacerun:yes'>    </span>include non-prvt members with named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeAccessibleClass
-xxx include pub/prot members with named class(es)</span><span style='font-size:
+color:black'><span style='mso-spacerun:yes'>    </span>-includeAccessibleClass xxx
+include pub/prot members with named class(es)</span><span style='font-size:
 8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
@@ -1055,30 +1045,28 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeMainMethod
-xxx<span style='mso-spacerun:yes'>      </span>include main method with named
-class(es)</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:black'><span style='mso-spacerun:yes'>    </span>-includeMainMethod xxx<span
+style='mso-spacerun:yes'>      </span>include main method with named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>    </span>-includeMethodEx xxx<span
+style='mso-spacerun:yes'>        </span>include named method(s) independent of owner</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>    </span>-includeExtLibraryClass xxx
+include non-private members with named class(es) and known overriding/implementing
+methods</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
 font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeMethodEx
-xxx<span style='mso-spacerun:yes'>        </span>include named method(s)
-independent of owner</span><span style='font-size:8.0pt;mso-bidi-font-size:
-10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
-
-<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
-style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeExtLibraryClass
-xxx include non-private members with named class(es) and known
-overriding/implementing methods</span><span style='font-size:8.0pt;mso-bidi-font-size:
-10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
-
-<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
-style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-includeExtAccClass
-xxx<span style='mso-spacerun:yes'>     </span>include public/protected members
-with named class(es) and known overriding/implementing methods</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-includeExtAccClass xxx<span
+style='mso-spacerun:yes'>     </span>include public/protected members with named
+class(es) and known overriding/implementing methods</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
@@ -1094,16 +1082,15 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-verify<span
-style='mso-spacerun:yes'>                     </span>verify internal classes
-and methods</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>                   </span><span
+style='mso-spacerun:yes'>  </span>verify internal classes and methods</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-optimize<span
-style='mso-spacerun:yes'>                   </span>perform bytecode
-optimization</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>                   </span>perform bytecode optimization</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
@@ -1124,9 +1111,9 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>The following built-in
-extensions are available:</span><span style='font-size:8.0pt;mso-bidi-font-size:
-10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>The following built-in extensions
+are available:</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -1150,17 +1137,16 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>Combining
-&quot;-extension xxx&quot; with &quot;-help&quot; or for example
-&quot;-inline&quot; with &quot;-help&quot; will print out the available</span><span
-style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>Combining &quot;-extension
+xxx&quot; with &quot;-help&quot; or for example &quot;-inline&quot; with &quot;-help&quot;
+will print out the available</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>   </span><span
-style='mso-spacerun:yes'> </span>options for the named extension following this
-message.</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>options for the named extension
+following this message.</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
@@ -1179,16 +1165,16 @@ font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-removeAttribute
-xxx<span style='mso-spacerun:yes'>        </span>remove the named attribute(s)</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-removeAttribute xxx<span
+style='mso-spacerun:yes'>        </span>remove the named attribute(s)</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-removeStackMaps<span
-style='mso-spacerun:yes'>            </span>remove stackmap table attributes
-from code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>            </span>remove stackmap table attributes from
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -1199,16 +1185,16 @@ code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-excludeResource
-xxx<span style='mso-spacerun:yes'>        </span>exclude the named resource(s)</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-excludeResource xxx<span
+style='mso-spacerun:yes'>        </span>exclude the named resource(s)</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>   
-</span>-includeZippedResources<span style='mso-spacerun:yes'>    
-</span>include resources contained within archives</span><span
-style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+color:black'><span style='mso-spacerun:yes'>    </span>-includeZippedResources<span
+style='mso-spacerun:yes'>   </span><span style='mso-spacerun:yes'>  </span>include
+resources contained within archives</span><span style='font-size:8.0pt;
+mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
@@ -1226,16 +1212,16 @@ style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-removeAttribute
-xxx<span style='mso-spacerun:yes'>        </span>remove the named attribute(s)</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-removeAttribute xxx<span
+style='mso-spacerun:yes'>        </span>remove the named attribute(s)</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
 color:black'><span style='mso-spacerun:yes'>    </span>-removeStackMaps<span
-style='mso-spacerun:yes'>            </span>remove stackmap table attributes
-from code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
-font-family:"Courier New"'><o:p></o:p></span></p>
+style='mso-spacerun:yes'>            </span>remove stackmap table attributes from
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
@@ -1246,15 +1232,14 @@ code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>    </span>-excludeResource
-xxx<span style='mso-spacerun:yes'>        </span>exclude the named resource(s)</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-excludeResource xxx<span
+style='mso-spacerun:yes'>        </span>exclude the named resource(s)</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'><span style='mso-spacerun:yes'>   
-</span>-includeZippedResources<span style='mso-spacerun:yes'>    
-</span>include resources contained within archives</span><span
+color:black'><span style='mso-spacerun:yes'>    </span>-includeZippedResources<span
+style='mso-spacerun:yes'>     </span>include resources contained within archives</span><span
 style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
@@ -1274,22 +1259,21 @@ Japt Concepts<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Users of Japt
-should be familiar with several concepts.<span style='mso-spacerun:yes'> 
-</span><o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Users of Japt should
+be familiar with several concepts.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Getting started,
-the user should be familiar with the notion of extensions and the intricacies
-of the japt command line.<o:p></o:p></span></p>
+the user should be familiar with the notion of extensions and the intricacies of
+the japt command line.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>In order to
-make modifications and optimizations to classes with Japt, the user should be
-familiar with the concept of internal versus external classes, as well as the
-concept of the application (or library) interface.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>In order to make
+modifications and optimizations to classes with Japt, the user should be familiar
+with the concept of internal versus external classes, as well as the concept of
+the application (or library) interface.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1301,13 +1285,13 @@ concept of the application (or library) interface.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt may read
-options from the command line or from options files.<span
-style='mso-spacerun:yes'>  </span>To read options from a file, use the option “</span><span
-style='font-family:"Courier New"'>@fileName</span><span style='font-family:
-"Arial",sans-serif'>”.<span style='mso-spacerun:yes'>  </span>The options
-contained in the file will be parsed immediately when japt encounters the
-directive.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt may read options
+from the command line or from options files.<span style='mso-spacerun:yes'> 
+</span>To read options from a file, use the option <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>@fileName</span><span
+style='font-family:"Arial",sans-serif'>”.<span style='mso-spacerun:yes'> 
+</span>The options contained in the file will be parsed immediately when japt encounters
+the directive.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1315,8 +1299,8 @@ directive.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Macros can be
-useful if you are creating many options.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Macros can be useful
+if you are creating many options.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1333,8 +1317,8 @@ any appearance of:<o:p></o:p></span></p>
 <p class=MsoNormal><span style='mso-spacerun:yes'> </span><span
 style='font-family:"Courier New"'>{{name}}</span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>on the command
-line or in options files to be replaced with:<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>on the command line
+or in options files to be replaced with:<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='mso-spacerun:yes'> </span><span
 style='font-family:"Courier New"'>value</span><span style='mso-spacerun:yes'> 
@@ -1342,31 +1326,30 @@ style='font-family:"Courier New"'>value</span><span style='mso-spacerun:yes'> 
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If Japt
-encounters an option containing the string “</span><span style='font-family:
-"Courier New"'>{{xxx}}</span><span style='font-family:"Arial",sans-serif'>” for
-which no macro for xxx was defined, Japt will search the System properties for
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If Japt encounters
+an option containing the string <span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>{{xxx}}</span><span style='font-family:"Arial",sans-serif'>”
+for which no macro for xxx was defined, Japt will search the System properties for
 the matching value.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The built-in
-macros are:<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The built-in macros
+are:<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.file.dir</span></i><span
-style='font-family:"Arial",sans-serif'>: the directory containing the current
-options file<o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'>: the directory containing the current options
+file<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.file</span></i><span
 style='font-family:"Arial",sans-serif'>: the current options file<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.character.encoding</span></i><span
 style='font-family:"Arial",sans-serif'>: The string returned by the java code</span>
-<span style='font-family:"Courier New"'>new
-OutputStreamWriter(System.out).getEncoding()</span></p>
+<span style='font-family:"Courier New"'>new OutputStreamWriter(System.out).getEncoding()</span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>/: platform
-independent path separator<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>/: platform independent
+path separator<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1386,13 +1369,13 @@ options file will be converted to the file name.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All work by
-Japt is done by extensions.<span style='mso-spacerun:yes'>  </span>Extensions
-are executed in the order that they are specified on the command line and in
-options files.<span style='mso-spacerun:yes'>  </span>To specify an extension,
-use “</span><span style='font-family:"Courier New"'>-extension extensionName</span><span
-style='font-family:"Arial",sans-serif'>”.<span style='mso-spacerun:yes'> 
-</span>Extensions are described further below.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All work by Japt
+is done by extensions.<span style='mso-spacerun:yes'>  </span>Extensions are executed
+in the order that they are specified on the command line and in options files.<span
+style='mso-spacerun:yes'>  </span>To specify an extension, use <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-extension
+extensionName</span><span style='font-family:"Arial",sans-serif'>”.<span
+style='mso-spacerun:yes'>  </span>Extensions are described further below.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1401,10 +1384,10 @@ style='font-family:"Arial",sans-serif'>”.<span style='mso-spacerun:yes'> 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt can create
-a log file detailing warnings, errors and information produced by Japt and its
-extensions.<span style='mso-spacerun:yes'>  </span>To specify a log file, use
-the option “</span><span style='font-family:"Courier New"'>-log logFileName</span><span
-style='font-family:"Arial",sans-serif'>”.<o:p></o:p></span></p>
+a log file detailing warnings, errors and information produced by Japt and its extensions.<span
+style='mso-spacerun:yes'>  </span>To specify a log file, use the option <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-log
+logFileName</span><span style='font-family:"Arial",sans-serif'>”.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New";
 color:blue'><o:p>&nbsp;</o:p></span></p>
@@ -1416,47 +1399,45 @@ Extensions<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is built
-with an extension framework.<span style='mso-spacerun:yes'>  </span>An
-extension is an implementation of the interface
-com.ibm.ive.tools.japt.commandLine.CommandLineExtension.<span
-style='mso-spacerun:yes'>  </span>An extension has full access to the JikesBT
-and Japt public APIs.<span style='mso-spacerun:yes'>  </span>Japt executes
-extensions one-by-one, with each extension altering the classes loaded and/or
-stored by Japt, leaving them in an altered state when the extension has
-completed execution.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is built with
+an extension framework.<span style='mso-spacerun:yes'>  </span>An extension is an
+implementation of the interface com.ibm.ive.tools.japt.commandLine.CommandLineExtension.<span
+style='mso-spacerun:yes'>  </span>An extension has full access to the JikesBT and
+Japt public APIs.<span style='mso-spacerun:yes'>  </span>Japt executes extensions
+one-by-one, with each extension altering the classes loaded and/or stored by Japt,
+leaving them in an altered state when the extension has completed execution.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Extensions are
-specified on the Japt command line, with the option “</span><span
-style='font-family:"Courier New"'>-extension extensionName</span><span
-style='font-family:"Arial",sans-serif'>”.<span style='mso-spacerun:yes'> 
-</span>Certain built-in extensions can be specified by their own unique command
-line options (for convenience), such as “</span>-<span style='font-family:"Courier New"'>jarOutput</span><span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Extensions are specified
+on the Japt command line, with the option <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-extension
+extensionName</span><span style='font-family:"Arial",sans-serif'>”.<span
+style='mso-spacerun:yes'>  </span>Certain built-in extensions can be specified by
+their own unique command line options (for convenience), such as <span
+style='mso-spacerun:yes'> </span>“</span>-<span style='font-family:"Courier New"'>jarOutput</span><span
 style='font-family:"Arial",sans-serif'>”. <o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The extensions
-are executed in the order that they appear on the command line.<span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The extensions are
+executed in the order that they appear on the command line.<span
 style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Each extension
-has its own extension-specific command line options.<span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Each extension has
+its own extension-specific command line options.<span
 style='mso-spacerun:yes'>  </span>These options must appear after the extension
 has been specified on the command line.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The same
-extension may be executed more than once.<span style='mso-spacerun:yes'> 
-</span>In such cases, extension-specific command line options apply only to the
-last extension as specified on the command line.<span
-style='mso-spacerun:yes'>  </span>If an option is applicable to more than one
-extension, the same rule applies.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The same extension
+may be executed more than once.<span style='mso-spacerun:yes'>  </span>In such cases,
+extension-specific command line options apply only to the last extension as specified
+on the command line.<span style='mso-spacerun:yes'>  </span>If an option is applicable
+to more than one extension, the same rule applies.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1467,30 +1448,29 @@ Internal and External Classes<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt defines
-two types of classes, internal and external.<span style='mso-spacerun:yes'> 
-</span>Internal classes are considered internal to the application or library
-at hand.<span style='mso-spacerun:yes'>  </span>These classes and resources are
-considered part of the working set and can be altered by Japt and any extension
-of Japt.<span style='mso-spacerun:yes'>  </span>External classes are considered
-supporting classes and cannot be altered.<span style='mso-spacerun:yes'> 
-</span>When writing classes and resources to a jar file or other form of
-output, only the internal classes and resources will be written.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt defines two
+types of classes, internal and external.<span style='mso-spacerun:yes'> 
+</span>Internal classes are considered internal to the application or library at
+hand.<span style='mso-spacerun:yes'>  </span>These classes and resources are considered
+part of the working set and can be altered by Japt and any extension of Japt.<span
+style='mso-spacerun:yes'>  </span>External classes are considered supporting classes
+and cannot be altered.<span style='mso-spacerun:yes'>  </span>When writing classes
+and resources to a jar file or other form of output, only the internal classes and
+resources will be written.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example, a
-typical invocation of Japt might make alterations to the classes of a
-stand-alone application but not the J2SE classes that the application
-requires.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example, a typical
+invocation of Japt might make alterations to the classes of a stand-alone application
+but not the J2SE classes that the application requires.<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Whether a class
-is an internal class depends upon which class path location it originates
-from.<span style='mso-spacerun:yes'>  </span>Each class path location is
-identified as either internal or external.<span style='mso-spacerun:yes'> 
-</span><o:p></o:p></span></p>
+is an internal class depends upon which class path location it originates from.<span
+style='mso-spacerun:yes'>  </span>Each class path location is identified as either
+internal or external.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1501,72 +1481,70 @@ Application Interface<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When invoking
-Japt, if the user intends to make modifications to the internal classes and
-resources, the user must be careful to explicitly indicate the entire interface
-of the application.<span style='mso-spacerun:yes'>  </span>The interface
-consists of all elements of the internal classes and resources that may be
-accessed from outside the application or library, either from the external
-classes or from elsewhere.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When invoking Japt,
+if the user intends to make modifications to the internal classes and resources,
+the user must be careful to explicitly indicate the entire interface of the application.<span
+style='mso-spacerun:yes'>  </span>The interface consists of all elements of the
+internal classes and resources that may be accessed from outside the application
+or library, either from the external classes or from elsewhere.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The identifying
-characteristics of such elements cannot change, so that the application can be
-accessed in exactly the same manner regardless of the internal modifications by
-Japt.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example,
-Japt might change or remove methods and fields in an application library, but
-the identifying characteristics of the API cannot change.<span
-style='mso-spacerun:yes'>  </span>API methods cannot be removed, their names
-cannot change, their arguments cannot change, their access permission modifiers
-cannot be made more restrictive, and so on.<br style='mso-special-character:
-line-break'>
-<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
-<![endif]><o:p></o:p></span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For a
-stand-alone application, the interface often consists of just the main method
-and its containing class which is invoked by the java virtual machine at
-startup.<span style='mso-spacerun:yes'>  </span>For libraries, the interface
-consists of the complete public API.<span style='mso-spacerun:yes'>  </span>For
-integrated apps like servlets, the interface consists of the specially
-predefined classes in the application that may be instantiated, or the methods
-in the application that may be invoked from an outside source.<span
+characteristics of such elements cannot change, so that the application can be accessed
+in exactly the same manner regardless of the internal modifications by Japt.<span
 style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a class is
-part of the interface, then this does not necessarily mean that its contents
-are also part of the interface, and vice-versa.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example, Japt
+might change or remove methods and fields in an application library, but the identifying
+characteristics of the API cannot change.<span style='mso-spacerun:yes'> 
+</span>API methods cannot be removed, their names cannot change, their arguments
+cannot change, their access permission modifiers cannot be made more restrictive,
+and so on.<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For a stand-alone
+application, the interface often consists of just the main method and its containing
+class which is invoked by the java virtual machine at startup.<span
+style='mso-spacerun:yes'>  </span>For libraries, the interface consists of the complete
+public API.<span style='mso-spacerun:yes'>  </span>For integrated apps like servlets,
+the interface consists of the specially predefined classes in the application that
+may be instantiated, or the methods in the application that may be invoked from
+an outside source.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For instance,
-an internal class that is subclassed by an external class may be part of the interface
-(the internal class is accessed externally through the action of inheritance),
-but if none of the internal class methods or fields are accessed from elsewhere
-then the contents of that class are not part of the interface.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a class is part
+of the interface, then this does not necessarily mean that its contents are also
+part of the interface, and vice-versa.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By the same
-token, an internal class C that subclasses an external class D might not
-necessarily be part of the application interface, but if that class C overrides
-methods in D, then those overriding methods may be part of the application
-interface, since they can be invoked externally.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For instance, an
+internal class that is subclassed by an external class may be part of the interface
+(the internal class is accessed externally through the action of inheritance), but
+if none of the internal class methods or fields are accessed from elsewhere then
+the contents of that class are not part of the interface.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The use of the
-reflection API in java may also create elements of the interface.<span
-style='mso-spacerun:yes'>  </span>Any class accessed by the Class.forName
-construct or the “.class” contruct may become part of the interface, for such
-classes can then be entered dynamically at run-time by the virtual machine.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By the same token,
+an internal class C that subclasses an external class D might not necessarily be
+part of the application interface, but if that class C overrides methods in D, then
+those overriding methods may be part of the application interface, since they can
+be invoked externally.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The use of the reflection
+API in java may also create elements of the interface.<span
+style='mso-spacerun:yes'>  </span>Any class accessed by the Class.forName construct
+or the <span style='mso-spacerun:yes'> </span>“.class” contruct may become part
+of the interface, for such classes can then be entered dynamically at run-time by
+the virtual machine.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1579,9 +1557,9 @@ Loading Classes and Resources<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Before any
-class manipulations or optimizations can begin, japt will load the classes and
-resources as specified, making its own use of the load extension.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Before any class
+manipulations or optimizations can begin, japt will load the classes and resources
+as specified, making its own use of the load extension.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1590,41 +1568,42 @@ style='font-family:"Arial",sans-serif'>3.1 The Load Extension<o:p></o:p></span><
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When loading,
-the user must distinguish between the internal and external classes.<span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When loading, the
+user must distinguish between the internal and external classes.<span
 style='mso-spacerun:yes'>  </span>All internal classes must be loaded.<span
-style='mso-spacerun:yes'>  </span>Japt need not load all external classes to
-function properly, but it is generally beneficial, so it is advisable to load
-all external classes even though they cannot be changed.<o:p></o:p></span></p>
+style='mso-spacerun:yes'>  </span>Japt need not load all external classes to function
+properly, but it is generally beneficial, so it is advisable to load all external
+classes even though they cannot be changed.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To specify a
-location on the classpath that will be used to load internal classes, the “</span><span
-style='font-family:"Courier New"'>-icp</span><span style='font-family:"Arial",sans-serif'>”
-class path option is used.<span style='mso-spacerun:yes'>  </span>Additionally,
-internal class path locations are specified with the “</span><span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To specify a location
+on the classpath that will be used to load internal classes, the <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-icp</span><span
+style='font-family:"Arial",sans-serif'>” class path option is used.<span
+style='mso-spacerun:yes'>  </span>Additionally, internal class path locations are
+specified with the <span style='mso-spacerun:yes'> </span>“</span><span
 style='font-family:"Courier New"'>-loadFile</span><span style='font-family:
-"Arial",sans-serif'>” option, the difference being that all classes found at
-that location will be loaded immediately.<span style='mso-spacerun:yes'> 
-</span>For external class path locations, the “</span><span style='font-family:
-"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>” class
-path option is used.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+"Arial",sans-serif'>” option, the difference being that all classes found at that
+location will be loaded immediately.<span style='mso-spacerun:yes'>  </span>For
+external class path locations, the <span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>”
+class path option is used.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
 mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
-10.0pt;font-family:"Arial",sans-serif;color:black'>To load classes, the user
-must generally identify the complete interface and specify the interface using
-options of the form “</span><span style='mso-bidi-font-size:10.0pt;font-family:
-"Courier New";color:black'>-includeXXX</span><span style='mso-bidi-font-size:
-10.0pt;font-family:"Arial",sans-serif;color:black'>”.<span
-style='mso-spacerun:yes'>  </span>Any class, method, field or resource that is
-included is considered part of the interface.<span style='mso-spacerun:yes'> 
-</span>This will cause the interface and all supporting classes to be loaded.<span
-style='mso-spacerun:yes'>  </span>In general, this is enough to load all
-required internal and external classes.<o:p></o:p></span></p>
+10.0pt;font-family:"Arial",sans-serif;color:black'>To load classes, the user must
+generally identify the complete interface and specify the interface using options
+of the form <span style='mso-spacerun:yes'> </span>“</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>-includeXXX</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>”.<span
+style='mso-spacerun:yes'>  </span>Any class, method, field or resource that is included
+is considered part of the interface.<span style='mso-spacerun:yes'>  </span>This
+will cause the interface and all supporting classes to be loaded.<span
+style='mso-spacerun:yes'>  </span>In general, this is enough to load all required
+internal and external classes.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
 mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
@@ -1632,50 +1611,54 @@ mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
 
 <p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
 mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
-10.0pt;font-family:"Arial",sans-serif;color:black'>Optionally, classes may be
-loaded using “</span><span style='mso-bidi-font-size:10.0pt;font-family:"Courier New";
-color:black'>-loadFile</span><span style='mso-bidi-font-size:10.0pt;font-family:
-"Arial",sans-serif;color:black'>”, however for any manipulations and
-optimizations it is still necessary that the interface be specified.<o:p></o:p></span></p>
+10.0pt;font-family:"Arial",sans-serif;color:black'>Optionally, classes may be loaded
+using <span style='mso-spacerun:yes'> </span>“</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>-loadFile</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>”,
+however for any manipulations and optimizations it is still necessary that the interface
+be specified.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
 mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
 10.0pt;font-family:"Arial",sans-serif;color:black'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
-color:black'>The “</span><span style='mso-bidi-font-size:10.0pt;font-family:
-"Courier New";color:black'>-loadClass</span><span style='mso-bidi-font-size:
-10.0pt;font-family:"Arial",sans-serif;color:black'>” and “</span><span
-style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>–loadResource</span><span
-style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>”
-options are also used to specify classes and resources to load, but whether
-they are identified as internal or external is dependent upon where they are
-found, as by the options </span><span style='font-family:"Arial",sans-serif'>“</span><span
-style='font-family:"Courier New"'>-icp</span><span style='font-family:"Arial",sans-serif'>”</span><span
-style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>, </span><span
-style='font-family:"Arial",sans-serif'>“</span><span style='font-family:"Courier New"'>-cp</span><span
+color:black'>The <span style='mso-spacerun:yes'> </span>“</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>-loadClass</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>” and
+<span style='mso-spacerun:yes'> </span>“</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>–loadResource</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>” options
+are also used to specify classes and resources to load, but whether they are identified
+as internal or external is dependent upon where they are found, as by the options
+</span><span style='font-family:"Arial",sans-serif'><span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-icp</span><span
 style='font-family:"Arial",sans-serif'>”</span><span style='mso-bidi-font-size:
-10.0pt;font-family:"Arial",sans-serif;color:black'>, and “</span><span
-style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>-loadFile</span><span
+10.0pt;font-family:"Arial",sans-serif;color:black'>, </span><span
+style='font-family:"Arial",sans-serif'><span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>”</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>, and
+<span style='mso-spacerun:yes'> </span>“</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>-loadFile</span><span
 style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>”.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The “</span><span
-style='font-family:"Courier New"'>-optimize</span><span style='font-family:
-"Arial",sans-serif'>” option is capable of making optimizations to bytecode,
-such as removing unreachable code and altering certain bytecode sequences.<o:p></o:p></span></p>
+<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-optimize</span><span
+style='font-family:"Arial",sans-serif'>” option is capable of making optimizations
+to bytecode, such as removing unreachable code and altering certain bytecode sequences.<o:p></o:p></span></p>
 
 <p class=MsoBodyText><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The “</span><span
-style='font-family:"Courier New"'>-verify</span><span style='font-family:"Arial",sans-serif'>”
-will perform some extensive verification on the internal classes.<span
-style='mso-spacerun:yes'>  </span>This will not guarantee that verification
-performed by a java virtual machine will pass, however.<span
-style='mso-spacerun:yes'>  </span>But it can help to confirm that the classes
-are well structured or provide helpful information regarding why the classes
-are not well-structured.<o:p></o:p></span></p>
+<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-verify</span><span
+style='font-family:"Arial",sans-serif'>” will perform some extensive verification
+on the internal classes.<span style='mso-spacerun:yes'>  </span>This will not guarantee
+that verification performed by a java virtual machine will pass, however.<span
+style='mso-spacerun:yes'>  </span>But it can help to confirm that the classes are
+well structured or provide helpful information regarding why the classes are not
+well-structured.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1705,48 +1688,41 @@ of characters that does not include either of the separators ‘/’ or ‘.’<o:p></o:
 style='font-family:"Arial",sans-serif'> to include all classes in java.lang and
 subpackages:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass
-java.lang.*<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.*<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
 style='font-family:"Arial",sans-serif'> to include all classes in java.lang:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass
-java.lang.^<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.^<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include the methods in
-java.lang.Object:<o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'> to include the methods in java.lang.Object:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod
-java.lang.Object.^<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod java.lang.Object.^<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
 style='font-family:"Arial",sans-serif'> to include all methods:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod
-*<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod *<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include all methods in the default
-package:<o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'> to include all methods in the default package:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod
-^.^<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod ^.^<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include all classes and their
-public, protected and package methods and fields in java.lang and subpackages:<o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'> to include all classes and their public,
+protected and package methods and fields in java.lang and subpackages:<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeLibraryClass
 java.lang.* <o:p></o:p></span></p>
@@ -1762,9 +1738,9 @@ Additional Extensions<o:p></o:p></span></h1>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Details about
-the load extension are in section 3.<span style='mso-spacerun:yes'> 
-</span>This sections lists some additional extensions.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Details about the
+load extension are in section 3.<span style='mso-spacerun:yes'>  </span>This sections
+lists some additional extensions.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1773,118 +1749,120 @@ The Jar Generation Extension<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The jar
-generation extension is specified by:<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The jar generation
+extension is specified by:<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Courier New"'>–jarOutput</span></p>
 
 <p class=MsoNormal><span style='mso-spacerun:yes'> </span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension
-is used to write all internal classes to jar files.<span
-style='mso-spacerun:yes'>   </span>The target directory or jar file is
-specified by: <o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension is
+used to write all internal classes to jar files.<span
+style='mso-spacerun:yes'>   </span>The target directory or jar file is specified
+by: <o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Courier New"'>-output fileName</span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a directory
-is specified, a set of jar files will be created corresponding to the classpath
-entries the individual classes were obtained from.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a directory is
+specified, a set of jar files will be created corresponding to the classpath entries
+the individual classes were obtained from.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There is an
-option to specify that the jar entries are not to be compressed, “</span><span
-style='font-family:"Courier New"'>-noCompress</span><span style='font-family:
-"Arial",sans-serif'>”.<span style='mso-spacerun:yes'>  </span>Any loaded
-resource can be excluded from the jar files by specifying the option “</span><span
-style='font-family:"Courier New"'>-excludeResource</span><span
-style='font-family:"Arial",sans-serif'>”, or optionally the user can use the
-option “</span><span style='font-family:"Courier New"'>-includeZipped</span><span
-style='font-family:"Arial",sans-serif'>” to ensure any resource contained
-within a jar or zip file on the classpath will be written to the output
-jar(s).<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There is an option
+to specify that the jar entries are not to be compressed, <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-noCompress</span><span
+style='font-family:"Arial",sans-serif'>”.<span style='mso-spacerun:yes'> 
+</span>Any loaded resource can be excluded from the jar files by specifying the
+option <span style='mso-spacerun:yes'> </span>“</span><span style='font-family:
+"Courier New"'>-excludeResource</span><span style='font-family:"Arial",sans-serif'>”,
+or optionally the user can use the option <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-includeZipped</span><span
+style='font-family:"Arial",sans-serif'>” to ensure any resource contained within
+a jar or zip file on the classpath will be written to the output jar(s).<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension
-also contains options that allow the user to remove various items from the
-written classes.<span style='mso-spacerun:yes'>  </span>The user may specify
-any specific attribute to be removed by using the “</span><span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension also
+contains options that allow the user to remove various items from the written classes.<span
+style='mso-spacerun:yes'>  </span>The user may specify any specific attribute to
+be removed by using the <span style='mso-spacerun:yes'> </span>“</span><span
 style='font-family:"Courier New"'>-removeAttributes</span><span
 style='font-family:"Arial",sans-serif'>” option.<span
-style='mso-spacerun:yes'>  </span>The user should consult the java virtual
-machine specification for a list of specification-defined attributes that may
-be excluded.<o:p></o:p></span></p>
+style='mso-spacerun:yes'>  </span>The user should consult the java virtual machine
+specification for a list of specification-defined attributes that may be excluded.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By default,
-certain groups of attributes are automatically removed (<i style='mso-bidi-font-style:
-normal'>Note: this behavior is expected to change so that removal is no longer
-the default behavior</i>).<span style='mso-spacerun:yes'>  </span>There are
-options to override this behaviour.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By default, certain
+groups of attributes are automatically removed (<i style='mso-bidi-font-style:
+normal'>Note: this behavior is expected to change so that removal is no longer the
+default behavior</i>).<span style='mso-spacerun:yes'>  </span>There are options
+to override this behaviour.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the
-removal of attributes used by debuggers use “</span><span style='font-family:
-"Courier New"'>-noStripDebugInfo</span><span style='font-family:"Arial",sans-serif'>”.
-This will prevent the removal of the attributes </span><span style='font-family:
-"Courier New"'>SourceFile</span>,<span style='font-family:"Courier New"'>
-SourceDebugExtension</span>,<span style='font-family:"Courier New"'>
-LineNumberTable</span>,<span style='font-family:"Courier New"'>
-LocalVariableTable</span> <span style='font-family:"Arial",sans-serif'>and</span>
-<span style='font-family:"Courier New"'>LocalVariableTypeTable</span><span
-style='font-family:"Arial",sans-serif'>.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
+of attributes used by debuggers use <span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>-noStripDebugInfo</span><span
+style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes
+</span><span style='font-family:"Courier New"'>SourceFile</span>,<span
+style='font-family:"Courier New"'> SourceDebugExtension</span>,<span
+style='font-family:"Courier New"'> LineNumberTable</span>,<span
+style='font-family:"Courier New"'> LocalVariableTable</span> <span
+style='font-family:"Arial",sans-serif'>and</span> <span style='font-family:
+"Courier New"'>LocalVariableTypeTable</span><span style='font-family:"Arial",sans-serif'>.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the
-removal of attributes used to denote information about the original source
-file, use “</span><span style='font-family:"Courier New"'>-noStripSourceInfo</span><span
-style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the
-attributes </span><span style='font-family:"Courier New"'>InnerClasses</span>,<span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
+of attributes used to denote information about the original source file, use <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-noStripSourceInfo</span><span
+style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes
+</span><span style='font-family:"Courier New"'>InnerClasses</span>,<span
 style='font-family:"Courier New"'> Synthetic</span>,<span style='font-family:
-"Courier New"'> Deprecated</span>,<span style='font-family:"Courier New"'>
-EnclosingMethod </span><span style='font-family:"Arial",sans-serif'>and</span> <span
+"Courier New"'> Deprecated</span>,<span style='font-family:"Courier New"'> EnclosingMethod
+</span><span style='font-family:"Arial",sans-serif'>and</span> <span
 style='font-family:"Courier New"'>Signature</span>.<span
 style='mso-spacerun:yes'>  </span><span style='font-family:"Arial",sans-serif'>These
-attributes have no influence in runtime behaviour other than influencing
-information derived from the reflection API.<o:p></o:p></span></p>
+attributes have no influence in runtime behaviour other than influencing information
+derived from the reflection API.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the
-removal of attributes used to store annotation information, use “</span><span
-style='font-family:"Courier New"'>-noStripAnnotations</span><span
-style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the
-attributes</span> <span style='font-family:"Courier New"'>RuntimeVisibleAnnotations</span>,<span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
+of attributes used to store annotation information, use <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-noStripAnnotations</span><span
+style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes</span>
+<span style='font-family:"Courier New"'>RuntimeVisibleAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeInvisibleAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeVisibleParameterAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeInvisibleParameterAnnotations </span><span
 style='font-family:"Arial",sans-serif'>and</span> <span style='font-family:
 "Courier New"'>AnnotationDefault</span>.<span style='mso-spacerun:yes'> 
-</span><span style='font-family:"Arial",sans-serif'>These attributes have no
-influence in runtime behaviour other than influencing information derived from
-the reflection API that is annotation related.<o:p></o:p></span></p>
+</span><span style='font-family:"Arial",sans-serif'>These attributes have no influence
+in runtime behaviour other than influencing information derived from the reflection
+API that is annotation related.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There are
-options to control the removal of the stack map table attributes. The options
-“-addStackMaps” and</span> <span style='font-family:"Arial",sans-serif'>“</span><span
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There are options
+to control the removal of the stack map table attributes. The options <span
+style='mso-spacerun:yes'> </span>“-addStackMaps” and</span> <span
+style='font-family:"Arial",sans-serif'><span style='mso-spacerun:yes'> </span>“</span><span
 style='font-family:"Courier New"'>-removeStackMaps</span><span
-style='font-family:"Arial",sans-serif'>” will add and remove these attributes
-from the class files.<span style='mso-spacerun:yes'>  </span>The option “</span><span
-style='font-family:"Courier New"'>-addStackMaps</span><span style='font-family:
-"Arial",sans-serif'>” takes precedence over the options “</span><span
-style='font-family:"Courier New"'>-removeStackMaps</span><span
-style='font-family:"Arial",sans-serif'>” and “</span><span style='font-family:
-"Courier New"'>-removeAttributes StackMapTable</span><span style='font-family:
-"Arial",sans-serif'>”.</span><span style='font-family:"Courier New"'><o:p></o:p></span></p>
+style='font-family:"Arial",sans-serif'>” will add and remove these attributes from
+the class files.<span style='mso-spacerun:yes'>  </span>The option <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-addStackMaps</span><span
+style='font-family:"Arial",sans-serif'>” takes precedence over the options <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-removeStackMaps</span><span
+style='font-family:"Arial",sans-serif'>” and <span
+style='mso-spacerun:yes'> </span>“</span><span style='font-family:"Courier New"'>-removeAttributes
+StackMapTable</span><span style='font-family:"Arial",sans-serif'>”.</span><span
+style='font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1895,19 +1873,19 @@ The Class File Generation Extension<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The class file
-generation extension, specified by the “</span><span style='font-family:"Courier New"'>–dirOutput</span><span
-style='font-family:"Arial",sans-serif'>” option, is used to write all internal
-classes to the file system.<span style='mso-spacerun:yes'>   </span>The target
-directory or jar file is specified by the “</span><span style='font-family:
-"Courier New"'>-dir</span><span style='font-family:"Arial",sans-serif'>”
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The class file generation
+extension, specified by the <span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>–dirOutput</span><span style='font-family:
+"Arial",sans-serif'>” option, is used to write all internal classes to the file
+system.<span style='mso-spacerun:yes'>   </span>The target directory or jar file
+is specified by the <span style='mso-spacerun:yes'> </span>“</span><span
+style='font-family:"Courier New"'>-dir</span><span style='font-family:"Arial",sans-serif'>”
 option.</span><span style='mso-spacerun:yes'>  </span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All other
-options behave in the exact same way as they do with the jar generation
-extension.<o:p></o:p></span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All other options
+behave in the exact same way as they do with the jar generation extension.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
