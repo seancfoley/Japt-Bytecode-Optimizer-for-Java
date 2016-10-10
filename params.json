@@ -1,0 +1,6 @@
+{
+  "name": "Japt-bytecode-optimizer-for-java",
+  "tagline": "Bytecode optimization tool to ease development and deployment of Java",
+  "body": "# Japt Bytecode Optimizer for Java\r\nBytecode optimization tool to ease development and deployment of Java\r\n\r\nDescription\r\nThe tools provide the following technologies:\r\n\r\n* escape analysis on a per method-invocation basis \r\n* static control flow analysis that determines entry points into an application or library\r\n* removal of unwanted attributes from Java™ class files\r\n* addition or rewrite of stackmaps for Java class files\r\n* verification of Java class files\r\n* auto-generation of classes to load all other classes within the same archive \r\n* specific remapping of method invocations\r\n* specific rewrites of bytecodes\r\n* obfuscation of class, field and method names\r\n* assembler and disassembler of bytecodes\r\n* static control flow analysis for removal of unused methods, classes, fields\r\n* static control flow analysis that splits an application into archives according to thread accessibility\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
