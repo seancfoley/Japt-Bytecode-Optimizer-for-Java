@@ -241,33 +241,7 @@ Here we can see how the various objects escape, or whether they do not escape at
 <div class=text0>
 
 <hr>
-<h2>Summary</h2>
-<p>
 
-The analysis is applied to method1 in Class1.  Because this method is not static, there is a generic instance of Class1 that is instantiated to be passed to the method.  From that point onwards, ITA analysis determines the flow of objects.  For purposes of escape analysis, the fields with primitive (non-object) types can be ignored, since they have no effect upon the flow of objects.  
-<p>
-Shown in this example is ITA exception handling, as the instance of Class3 is thrown from method5.  In method4, the object is not caught, and therefore the object is propagated but the object is not available to method5 in other ways.
-<p>
-Also shown is a virtual method resolution, in which an instruction's invocation of Class2.method1 is actually resolved to Class3.method1, the overriding method, when the invocation is applied to Object 5.
-<p>
-The example includes a generic object that is an argument to the initial method, Object 1.  A method is invoked on this object, method7, which therefore becomes a generic method invocation, which causes the creation of another generic object, as the returned object from the generic method invocation.
-<p>
-Intraprocedural analysis is included in this example.  For instance, the two separate instances of Class1 in method1 are not passed to the same methods and fields as determined by the intraprocedural analysis.
-<p>
-When the analysis completes, the roots of the search for escaping objects are:
--Object 1, the generic object argument to the initial method, method1
--the accessed static field, field5
--Object 5, which was thrown from method1 and thus escaped directly
--the generic method invocation method7
-<p>
-In the example, only one object does not escape the invocation of Class1.method1, and this object is Object 2.  <p>
-Knowing that Object 2 cannot escape method 1, it is possible to apply optimizations to the object when it is created.  Possible optimizations include eliminating locks on the object, or allocating the object on the stack.
-<p>
-Object 6 is never present in the initial method.  This object does escape, since it is reachable from another escaped object.  However, if the object had not been written to field4, then it would not escape.  More exactly, the object would not escape with a calling context originating with Class1.method1, but it would remain unknown whether the object might escape with other calling contexts.  To determine if an object created in a particular method will never escape, the algorithm must be applied with that particular method as the initial method and generic objects as the method arguments.  The generic objects allow us to account for all possible calling contexts.
-
-<p>
-Not included in this example are the actions of generic object splitting, and the handling of unknown method definitions (due to native methods or methods, methods not loaded, or methods whose definition is unknown for other reasons).  Also, there is not an example of a thread object acting as a root for the search phase, or a returned object that is a root.
-<p>
 </div>
 
 
