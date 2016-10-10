@@ -33,19 +33,18 @@
       </header>
       <section>
         <h1>
-<a id="japt-bytecode-optimizer-for-java" class="anchor" href="#japt-bytecode-optimizer-for-java" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Japt Bytecode Optimizer for Java</h1>
+<a id="japt-bytecode-optimizer-for-java" class="anchor" href="#japt-bytecode-optimizer-for-java" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Japt (<font color=red>Ja</font>va O<font color=red>pt</font>imizer) Bytecode Optimizer for Java</h1>
 
 <p>Bytecode optimization tool to ease development and deployment of Java</p>
 
-<p>Description
-The tools provide the following technologies:</p>
+<p>The tool provides the following functionality and technologies:</p>
 
 <ul>
 <li>escape analysis on a per method-invocation basis </li>
 <li>static control flow analysis that determines entry points into an application or library</li>
-<li>removal of unwanted attributes from Java™ class files</li>
-<li>addition or rewrite of stackmaps for Java class files</li>
-<li>verification of Java class files</li>
+<li>removal of unwanted attributes from Java™ class files or adding specialized attributes to class files</li>
+<li>creation or rewrite of stackmaps for Java class files</li>
+<li>verification of Java class files, providing more feedback than the runtime verifier</li>
 <li>auto-generation of classes to load all other classes within the same archive </li>
 <li>specific remapping of method invocations</li>
 <li>specific rewrites of bytecodes</li>
@@ -53,6 +52,12 @@ The tools provide the following technologies:</p>
 <li>assembler and disassembler of bytecodes</li>
 <li>static control flow analysis for removal of unused methods, classes, fields</li>
 <li>static control flow analysis that splits an application into archives according to thread accessibility</li>
+<li>startup performance improvements using the insertion of checkcasts to allow the runtime verifier to avoid extra class loads</li>
+<li>startup performance improvements by separating methods unused at startup into separate classes</li>
+<li>measuring usage of profiles: listing the fields/methods missing from a profile that are required by application</li>
+<li>measuring library usage by an app: listing the points of entry into a library from an application, or into a servlet or other integrated app</li>
+<li>instrumentation of bytecode</li>
+<li>inlining of methods, and/or merging inner classes into their respective outer classes, for class file size reduction</li>
 </ul>
       </section>
       <footer>
