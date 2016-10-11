@@ -1,979 +1,1898 @@
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=Generator content="Microsoft Word 15 (filtered)">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 15">
+<meta name=Originator content="Microsoft Word 15">
+<link rel=File-List href="documentation_files/filelist.xml">
 <title>Japt is a tool for optimizing java programs</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>sfoley</o:Author>
+  <o:LastAuthor>SEAN FOLEY</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>81</o:TotalTime>
+  <o:Created>2016-10-11T16:11:00Z</o:Created>
+  <o:LastSaved>2016-10-11T16:11:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>2562</o:Words>
+  <o:Characters>14606</o:Characters>
+  <o:Company>Object Technology Int'l</o:Company>
+  <o:Lines>121</o:Lines>
+  <o:Paragraphs>34</o:Paragraphs>
+  <o:CharactersWithSpaces>17134</o:CharactersWithSpaces>
+  <o:Version>16.00</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<link rel=dataStoreItem href="documentation_files/item0001.xml"
+target="documentation_files/props002.xml">
+<link rel=themeData href="documentation_files/themedata.thmx">
+<link rel=colorSchemeMapping href="documentation_files/colorschememapping.xml">
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:DoNotPromoteQF/>
+  <w:LidThemeOther>EN-US</w:LidThemeOther>
+  <w:LidThemeAsian>X-NONE</w:LidThemeAsian>
+  <w:LidThemeComplexScript>X-NONE</w:LidThemeComplexScript>
+  <w:Compatibility>
+   <w:SelectEntireFieldWithStartOrEnd/>
+   <w:UseWord2002TableStyleRules/>
+   <w:UseWord2010TableStyleRules/>
+   <w:DontUseIndentAsNumberingTabStop/>
+   <w:FELineBreak11/>
+   <w:WW11IndentRules/>
+   <w:DontAutofitConstrainedTables/>
+   <w:AutofitLikeWW11/>
+   <w:UnderlineTabInNumList/>
+   <w:HangulWidthLikeWW11/>
+   <w:UseNormalStyleForList/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+  </w:Compatibility>
+  <m:mathPr>
+   <m:mathFont m:val="Cambria Math"/>
+   <m:brkBin m:val="before"/>
+   <m:brkBinSub m:val="&#45;-"/>
+   <m:smallFrac m:val="off"/>
+   <m:dispDef/>
+   <m:lMargin m:val="0"/>
+   <m:rMargin m:val="0"/>
+   <m:defJc m:val="centerGroup"/>
+   <m:wrapIndent m:val="1440"/>
+   <m:intLim m:val="subSup"/>
+   <m:naryLim m:val="undOvr"/>
+  </m:mathPr></w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" DefUnhideWhenUsed="false"
+  DefSemiHidden="false" DefQFormat="false" DefPriority="99"
+  LatentStyleCount="373">
+  <w:LsdException Locked="false" Priority="0" QFormat="true" Name="Normal"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 1"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 2"/>
+  <w:LsdException Locked="false" Priority="9" QFormat="true" Name="heading 3"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 4"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 5"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 6"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 7"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 8"/>
+  <w:LsdException Locked="false" Priority="9" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="heading 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index 9"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 1"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 2"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 3"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 4"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 5"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 6"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 7"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 8"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" Name="toc 9"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="header"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footer"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="index heading"/>
+  <w:LsdException Locked="false" Priority="35" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="caption"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of figures"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="envelope return"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="footnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="line number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="page number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote reference"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="endnote text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="table of authorities"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="macro"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="toa heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Bullet 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Number 5"/>
+  <w:LsdException Locked="false" Priority="10" QFormat="true" Name="Title"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Closing"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Signature"/>
+  <w:LsdException Locked="false" Priority="0" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Default Paragraph Font"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="List Continue 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Message Header"/>
+  <w:LsdException Locked="false" Priority="11" QFormat="true" Name="Subtitle"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Salutation"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Date"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text First Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Note Heading"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Body Text Indent 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Block Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Hyperlink"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="FollowedHyperlink"/>
+  <w:LsdException Locked="false" Priority="22" QFormat="true" Name="Strong"/>
+  <w:LsdException Locked="false" Priority="20" QFormat="true" Name="Emphasis"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Document Map"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Plain Text"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="E-mail Signature"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Top of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Bottom of Form"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal (Web)"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Acronym"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Address"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Cite"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Code"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Definition"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Keyboard"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Preformatted"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Sample"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Typewriter"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="HTML Variable"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Normal Table"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="annotation subject"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="No List"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Outline List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Simple 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Classic 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Colorful 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Columns 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Grid 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 4"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 5"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 7"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table List 8"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table 3D effects 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Contemporary"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Elegant"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Professional"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Subtle 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 2"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Web 3"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Balloon Text"/>
+  <w:LsdException Locked="false" Priority="39" Name="Table Grid"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Table Theme"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Placeholder Text"/>
+  <w:LsdException Locked="false" Priority="1" QFormat="true" Name="No Spacing"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 1"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 1"/>
+  <w:LsdException Locked="false" SemiHidden="true" Name="Revision"/>
+  <w:LsdException Locked="false" Priority="34" QFormat="true"
+   Name="List Paragraph"/>
+  <w:LsdException Locked="false" Priority="29" QFormat="true" Name="Quote"/>
+  <w:LsdException Locked="false" Priority="30" QFormat="true"
+   Name="Intense Quote"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 1"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 1"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 1"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 1"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 1"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 2"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 2"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 2"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 2"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 2"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 2"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 3"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 3"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 3"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 3"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 3"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 3"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 4"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 4"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 4"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 4"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 4"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 4"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 5"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 5"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 5"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 5"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 5"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 5"/>
+  <w:LsdException Locked="false" Priority="60" Name="Light Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="61" Name="Light List Accent 6"/>
+  <w:LsdException Locked="false" Priority="62" Name="Light Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="63" Name="Medium Shading 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="64" Name="Medium Shading 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="65" Name="Medium List 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="66" Name="Medium List 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="67" Name="Medium Grid 1 Accent 6"/>
+  <w:LsdException Locked="false" Priority="68" Name="Medium Grid 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="69" Name="Medium Grid 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="70" Name="Dark List Accent 6"/>
+  <w:LsdException Locked="false" Priority="71" Name="Colorful Shading Accent 6"/>
+  <w:LsdException Locked="false" Priority="72" Name="Colorful List Accent 6"/>
+  <w:LsdException Locked="false" Priority="73" Name="Colorful Grid Accent 6"/>
+  <w:LsdException Locked="false" Priority="19" QFormat="true"
+   Name="Subtle Emphasis"/>
+  <w:LsdException Locked="false" Priority="21" QFormat="true"
+   Name="Intense Emphasis"/>
+  <w:LsdException Locked="false" Priority="31" QFormat="true"
+   Name="Subtle Reference"/>
+  <w:LsdException Locked="false" Priority="32" QFormat="true"
+   Name="Intense Reference"/>
+  <w:LsdException Locked="false" Priority="33" QFormat="true" Name="Book Title"/>
+  <w:LsdException Locked="false" Priority="37" SemiHidden="true"
+   UnhideWhenUsed="true" Name="Bibliography"/>
+  <w:LsdException Locked="false" Priority="39" SemiHidden="true"
+   UnhideWhenUsed="true" QFormat="true" Name="TOC Heading"/>
+  <w:LsdException Locked="false" Priority="41" Name="Plain Table 1"/>
+  <w:LsdException Locked="false" Priority="42" Name="Plain Table 2"/>
+  <w:LsdException Locked="false" Priority="43" Name="Plain Table 3"/>
+  <w:LsdException Locked="false" Priority="44" Name="Plain Table 4"/>
+  <w:LsdException Locked="false" Priority="45" Name="Plain Table 5"/>
+  <w:LsdException Locked="false" Priority="40" Name="Grid Table Light"/>
+  <w:LsdException Locked="false" Priority="46" Name="Grid Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="Grid Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="Grid Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="Grid Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="Grid Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="Grid Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="Grid Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="Grid Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="Grid Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="Grid Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="46" Name="List Table 1 Light"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark"/>
+  <w:LsdException Locked="false" Priority="51" Name="List Table 6 Colorful"/>
+  <w:LsdException Locked="false" Priority="52" Name="List Table 7 Colorful"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 1"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 1"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 1"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 1"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 1"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 1"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 2"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 2"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 2"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 2"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 2"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 2"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 3"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 3"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 3"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 3"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 3"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 3"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 4"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 4"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 4"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 4"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 4"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 4"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 5"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 5"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 5"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 5"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 5"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 5"/>
+  <w:LsdException Locked="false" Priority="46"
+   Name="List Table 1 Light Accent 6"/>
+  <w:LsdException Locked="false" Priority="47" Name="List Table 2 Accent 6"/>
+  <w:LsdException Locked="false" Priority="48" Name="List Table 3 Accent 6"/>
+  <w:LsdException Locked="false" Priority="49" Name="List Table 4 Accent 6"/>
+  <w:LsdException Locked="false" Priority="50" Name="List Table 5 Dark Accent 6"/>
+  <w:LsdException Locked="false" Priority="51"
+   Name="List Table 6 Colorful Accent 6"/>
+  <w:LsdException Locked="false" Priority="52"
+   Name="List Table 7 Colorful Accent 6"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Mention"/>
+  <w:LsdException Locked="false" SemiHidden="true" UnhideWhenUsed="true"
+   Name="Smart Hyperlink"/>
+ </w:LatentStyles>
+</xml><![endif]-->
 <style>
 <!--
  /* Font Definitions */
  @font-face
 	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:-536870145 1107305727 0 0 415 0;}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-parent:"";
+	margin:0in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
 	font-size:12.0pt;
-	font-family:"Times New Roman",serif;}
-h1
-	{margin:0in;
-	margin-bottom:.0001pt;
-	page-break-after:avoid;
-	font-size:14.0pt;
 	font-family:"Times New Roman",serif;
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:14.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman",serif;
+	mso-font-kerning:0pt;
 	font-weight:normal;}
 h2
-	{margin:0in;
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin:0in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
 	page-break-after:avoid;
+	mso-outline-level:2;
 	font-size:12.0pt;
 	font-family:"Times New Roman",serif;}
 h3
-	{margin:0in;
+	{mso-style-unhide:no;
+	mso-style-qformat:yes;
+	mso-style-next:Normal;
+	margin:0in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
 	page-break-after:avoid;
+	mso-outline-level:3;
 	font-size:16.0pt;
+	mso-bidi-font-size:12.0pt;
 	font-family:"Times New Roman",serif;
 	font-weight:normal;}
 p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
-	{margin:0in;
+	{mso-style-noshow:yes;
+	mso-style-unhide:no;
+	margin:0in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
 	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
 	font-family:"Times New Roman",serif;
+	mso-fareast-font-family:"Times New Roman";
 	color:black;}
 p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
-	{margin:0in;
+	{mso-style-noshow:yes;
+	mso-style-unhide:no;
+	margin:0in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
 	font-size:10.0pt;
-	font-family:"Courier New";}
+	mso-bidi-font-size:12.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
 p.MsoBlockText, li.MsoBlockText, div.MsoBlockText
-	{margin-top:0in;
+	{mso-style-noshow:yes;
+	mso-style-unhide:no;
+	margin-top:0in;
 	margin-right:-.5in;
 	margin-bottom:0in;
 	margin-left:-.5in;
 	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	mso-layout-grid-align:none;
 	text-autospace:none;
 	font-size:8.0pt;
+	mso-bidi-font-size:10.0pt;
 	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
 	color:black;}
 a:link, span.MsoHyperlink
-	{color:blue;
-	text-decoration:underline;}
+	{mso-style-noshow:yes;
+	mso-style-unhide:no;
+	mso-style-parent:"";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
 a:visited, span.MsoHyperlinkFollowed
-	{color:purple;
-	text-decoration:underline;}
+	{mso-style-noshow:yes;
+	mso-style-unhide:no;
+	mso-style-parent:"";
+	color:purple;
+	text-decoration:underline;
+	text-underline:single;}
 @page WordSection1
 	{size:8.5in 11.0in;
-	margin:1.0in 1.25in 1.0in 1.25in;}
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
 div.WordSection1
 	{page:WordSection1;}
 -->
 </style>
-
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-priority:99;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman",serif;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1026"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
 </head>
 
-<body lang=EN-US link=blue vlink=purple>
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
 
 <div class=WordSection1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Back to <a
-href="index.html">Project Pages Home</a></span></p>
+href="index.html">Project Pages Home</a><o:p></o:p></span></p>
 
-<p class=MsoNormal><b><span style='font-size:20.0pt;font-family:"Arial",sans-serif'>&nbsp;</span></b></p>
+<p class=MsoNormal><b><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></b></p>
 
-<p class=MsoNormal><b><span style='font-size:20.0pt;font-family:"Arial",sans-serif'>JAPT</span></b><span
-style='font-size:16.0pt;font-family:"Arial",sans-serif'> (</span><b><i><span
-style='font-size:20.0pt;font-family:"Arial",sans-serif'>Ja</span></i></b><span
-style='font-size:16.0pt;font-family:"Arial",sans-serif'>va o</span><b><i><span
-style='font-size:20.0pt;font-family:"Arial",sans-serif'>pt</span></i></b><span
-style='font-size:16.0pt;font-family:"Arial",sans-serif'>imizer)</span></p>
+<p class=MsoNormal><b><span style='font-size:20.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Arial",sans-serif'>JAPT</span></b><span style='font-size:16.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'> (</span><b
+style='mso-bidi-font-weight:normal'><i><span style='font-size:20.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>Ja</span></i></b><span
+style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>va
+o</span><b style='mso-bidi-font-weight:normal'><i><span style='font-size:20.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>pt</span></i></b><span
+style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>imizer)<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is a tool for
-optimizing java programs.  Japt makes use of the JikesBT java class manipulation
-library and its own proprietary class manipulation functionality to optimize java
-class files.  This lists some of the basic features of Japt.  Advanced extensions
-(inlining, reduction, obfuscation, escape analysis, remapping, assembler/disassembler,
-instrumentation, etc) are not covered in this document.  This document covers the
-basic concepts of Japt from a user’s perspective.</span></p>
+optimizing java programs.<span style='mso-spacerun:yes'>Â  </span>Japt makes use
+of the JikesBT java class manipulation library and its own proprietary class manipulation
+functionality to optimize java class files.<span style='mso-spacerun:yes'>Â 
+</span>This lists some of the basic features of Japt.<span
+style='mso-spacerun:yes'>Â  </span>Advanced extensions (inlining, reduction, obfuscation,
+escape analysis, remapping, assembler/disassembler, instrumentation, etc) are not
+covered in this document.<span style='mso-spacerun:yes'>Â  </span>This document covers
+the basic concepts of Japt from a userâ€™s perspective.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>1 <a
-href="#_1._Japt_Usage">Japt Usage</a></span></p>
+href="#_1._Japt_Usage">Japt Usage</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>2 <a
-href="#_2_Japt_Concepts">Japt Concepts</a></span></p>
+href="#_2_Japt_Concepts">Japt Concepts</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>2.1
-<a href="#_2.1_Command_Line">Command Line</a></span></p>
+<a href="#_2.1_Command_Line">Command Line</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>2.2
-<a href="#_2.2_Extensions">Extensions</a></span></p>
+<a href="#_2.2_Extensions">Extensions</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>2.3
-<a href="#_2.3_Internal_and">Internal and External Classes</a></span></p>
+<a href="#_2.3_Internal_and">Internal and External Classes</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>2.4
-<a href="#_2.4_Application_Interface">Application Interface</a></span></p>
+<a href="#_2.4_Application_Interface">Application Interface</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>3 <a
-href="#_3._Loading_Classes">Loading Classes and Resources with the Load Extension</a></span></p>
+href="#_3._Loading_Classes">Loading Classes and Resources with the Load Extension</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>3.1
-<a href="#_3.1_Loading">Loading</a></span></p>
+<a href="#_3.1_Loading">Loading</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>3.2
-<a href="#_3.4_Wildcards">Wildcards</a></span></p>
+<a href="#_3.4_Wildcards">Wildcards</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>4 <a
-href="#_4._Additional_Extensions">Additional Extensions</a></span></p>
+href="#_4._Additional_Extensions">Additional Extensions</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>4.1
-<a href="#_4.4_The_Jar">The Jar Generation Extension</a></span></p>
+<a href="#_4.4_The_Jar">The Jar Generation Extension</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>4.8
-<a href="#_4.6_The_Class">The Class File Generation Extension</a></span></p>
-
-<h1><a name="_1._Japt_Usage"></a><span style='font-size:16.0pt;font-family:
-"Arial",sans-serif'>&nbsp;</span></h1>
-
-<h1><span style='font-size:16.0pt;font-family:"Arial",sans-serif'>1. Japt Usage</span></h1>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-family:"Arial",sans-serif'>Not
-all options are listed here, the more obscure options are omitted here for the purpose
-of clarity.</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>usage: japt [options...]</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    japt optimizes java classes</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>basic options:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -help                       print out
-this message</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -version                    print out
-program version</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -sysProps                   print out
-the system properties</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -log xxx                    write to
-the named log file</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -quiet                      quiet mode</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -macro xxx xxx              define a
-macro with the given name and value</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -noResolveRuntimeRefs       leave method/field
-references unresolved</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -incrementalLoad            turn off
-auto load</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    @xxx                        read named
-file for additional options</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>load options:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -icp xxx                    append named
-jar/dir to internal cls srch path</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -cp xxx                     append named
-jar/dir to class search path</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -loadFile xxx               load named
-file as internal classes/resources</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -loadClass xxx              load named
-class(es) (from class path)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -loadResource xxx           load named
-resource(s) (from class path)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>                                </span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeClass xxx           include named
-class(es)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeWholeClass xxx      include all
-members with the named class(es)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeLibraryClass xxx    include non-prvt
-members with named class(es)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeAccessibleClass xxx include pub/prot
-members with named class(es)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeField xxx           include named
-field(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeMethod xxx          include named
-method(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeMainMethod xxx      include main
-method with named class(es)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeMethodEx xxx        include named
-method(s) independent of owner</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeExtLibraryClass xxx include non-private
-members with named class(es) and known overriding/implementing methods</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeExtAccClass xxx     include public/protected
-members with named class(es) and known overriding/implementing methods</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>                          </span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -startupClass xxx           specify named
-manifest main class</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -verify                     verify internal
-classes and methods</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -optimize                   perform bytecode
-optimization</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>program extensions:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -extension xxx              use named
-program extension</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    The following built-in extensions are
-available:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -load</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -dirOutput                  </span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -jarOutput                  </span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    Combining &quot;-extension xxx&quot;
-with &quot;-help&quot; or for example &quot;-inline&quot; with &quot;-help&quot;
-will print out the available</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    options for the named extension following
-this message.</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>jar generation options:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -output xxx                 write to
-named output jar file or directory</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -removeAttribute xxx        remove the
-named attribute(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -removeStackMaps            remove stackmap
-table attributes from code</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -addStackMaps               add stackmap
-table attributes to code</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -excludeResource xxx        exclude the
-named resource(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeZippedResources     include resources
-contained within archives</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>class generation options:</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -dir xxx                    write to
-named directory</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -removeAttribute xxx        remove the
-named attribute(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -removeStackMaps            remove stackmap
-table attributes from code</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -addStackMaps               add stackmap
-table attributes to code</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -excludeResource xxx        exclude the
-named resource(s)</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New";color:black'>    -includeZippedResources     include resources
-contained within archives</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:8.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
-font-family:"Courier New"'>&nbsp;</span></p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>&nbsp;</p>
+<a href="#_4.6_The_Class">The Class File Generation Extension</a><o:p></o:p></span></p>
+
+<h1><a name="_1._Japt_Usage"></a><span style='font-size:16.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></h1>
+
+<h1><span style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>1.
+Japt Usage<o:p></o:p></span></h1>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-family:"Arial",sans-serif'>Not all options are listed here, the more
+obscure options are omitted here for the purpose of clarity.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>usage: japt [options...]</span><span style='font-size:8.0pt;
+mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>japt optimizes java classes</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>basic options:</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-help<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span><span
+style='mso-spacerun:yes'>Â Â Â Â Â Â </span>print out this message</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-version<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>print out program version</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-sysProps<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>print out the system properties</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-log xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>write to the named log file</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-quiet<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>quiet mode</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â  </span><span
+style='mso-spacerun:yes'>Â Â </span>-macro xxx xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>define a macro with the given name
+and value</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-noResolveRuntimeRefs<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â  </span>leave method/field references unresolved</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-incrementalLoad<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â  </span>turn off auto load</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>@xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>read named file for additional
+options</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>load options:</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-icp xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>append named jar/dir to internal
+cls srch path</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-cp xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>append named jar/dir to class
+search path</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-loadFile xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>load named file as internal classes/resources</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-loadClass xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>load named class(es) (from class path)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-loadResource xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â  </span>load named resource(s) (from class path)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+</span></span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeClass xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â  </span>include named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeWholeClass xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â  </span>include all members with the named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeLibraryClass xxx<span
+style='mso-spacerun:yes'>Â Â Â  </span>include non-prvt members with named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeAccessibleClass xxx
+include pub/prot members with named class(es)</span><span style='font-size:
+8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeField xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â  </span>include named field(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeMethod xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â  </span>include named method(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeMainMethod xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â  </span>include main method with named class(es)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeMethodEx xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â  </span>include named method(s) independent of owner</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeExtLibraryClass xxx
+include non-private members with named class(es) and known overriding/implementing
+methods</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeExtAccClass xxx<span
+style='mso-spacerun:yes'>Â Â Â Â  </span>include public/protected members with named
+class(es) and known overriding/implementing methods</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-startupClass xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â  </span>specify named manifest main class</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-verify<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>verify internal classes and
+methods</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-optimize<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>perform bytecode optimization</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>program extensions:</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-extension xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>use named program extension</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>The following built-in extensions
+are available:</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-load</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-dirOutput<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span></span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-jarOutput<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span></span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>Combining &quot;-extension
+xxx&quot; with &quot;-help&quot; or for example &quot;-inline&quot; with &quot;-help&quot;
+will print out the available</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>options for the named extension
+following this message.</span><span style='font-size:8.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>jar generation options:</span><span style='font-size:8.0pt;
+mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-output xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>write to named output jar file
+or directory</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-removeAttribute xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â  </span>remove the named attribute(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-removeStackMaps<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â  </span>remove stackmap table attributes from
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-addStackMaps<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>add stackmap table attributes to
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-excludeResource xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â  </span>exclude the named resource(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeZippedResources<span
+style='mso-spacerun:yes'>Â Â Â Â  </span>include resources contained within archives</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'>class generation options:</span><span style='font-size:8.0pt;
+mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-dir xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>write to named directory</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-removeAttribute xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â  </span>remove the named attribute(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-removeStackMaps<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â  </span>remove stackmap table attributes from
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-addStackMaps<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â Â Â Â Â Â Â Â  </span>add stackmap table attributes to
+code</span><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-excludeResource xxx<span
+style='mso-spacerun:yes'>Â Â Â Â Â Â Â  </span>exclude the named resource(s)</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New";
+color:black'><span style='mso-spacerun:yes'>Â Â Â  </span>-includeZippedResources<span
+style='mso-spacerun:yes'>Â Â Â Â  </span>include resources contained within archives</span><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'><span
+style='font-size:10.0pt;font-family:"Courier New"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_Command_Line"></a><a name="_1.1_Command_Line"></a><a
 name="_2.1_Command_Line"></a><a name="_2_Japt_Concepts"></a><span
-style='font-size:16.0pt;font-family:"Arial",sans-serif'>2. Japt Concepts</span></h1>
+style='font-size:16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>2.
+Japt Concepts<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Users of Japt should
-be familiar with several concepts.  </span></p>
+be familiar with several concepts.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Getting started,
 the user should be familiar with the notion of extensions and the intricacies of
-the japt command line.</span></p>
+the japt command line.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>In order to make
 modifications and optimizations to classes with Japt, the user should be familiar
 with the concept of internal versus external classes, as well as the concept of
-the application (or library) interface.</span></p>
+the application (or library) interface.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<h1><span style='font-family:"Arial",sans-serif'>2.1 Command Line</span></h1>
+<h1><span style='font-family:"Arial",sans-serif'>2.1 Command Line<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<h2><span style='font-family:"Arial",sans-serif'>Options files</span></h2>
+<h2><span style='font-family:"Arial",sans-serif'>Options files<o:p></o:p></span></h2>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt may read options
-from the command line or from options files.  To read options from a file, use the
-option  “</span><span style='font-family:"Courier New"'>@fileName</span><span
-style='font-family:"Arial",sans-serif'>”.  The options contained in the file will
-be parsed immediately when japt encounters the directive.</span></p>
+from the command line or from options files.<span style='mso-spacerun:yes'>Â 
+</span>To read options from a file, use the option <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>@fileName</span><span
+style='font-family:"Arial",sans-serif'>â€.<span style='mso-spacerun:yes'>Â 
+</span>The options contained in the file will be parsed immediately when japt encounters
+the directive.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<h2><span style='font-family:"Arial",sans-serif'>Macros</span></h2>
+<h2><span style='font-family:"Arial",sans-serif'>Macros<o:p></o:p></span></h2>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Macros can be useful
-if you are creating many options.</span></p>
+if you are creating many options.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Use:</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Use:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Courier New"'>-macro name value</span> 
-</p>
+<p class=MsoNormal><span style='font-family:"Courier New"'>-macro name value</span><span
+style='mso-spacerun:yes'>Â  </span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This will cause
-any appearance of:</span></p>
+any appearance of:<o:p></o:p></span></p>
 
-<p class=MsoNormal> <span style='font-family:"Courier New"'>{{name}}</span></p>
+<p class=MsoNormal><span style='mso-spacerun:yes'>Â </span><span
+style='font-family:"Courier New"'>{{name}}</span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>on the command line
-or in options files to be replaced with:</span></p>
+or in options files to be replaced with:<o:p></o:p></span></p>
 
-<p class=MsoNormal> <span style='font-family:"Courier New"'>value</span>  </p>
+<p class=MsoNormal><span style='mso-spacerun:yes'>Â </span><span
+style='font-family:"Courier New"'>value</span><span style='mso-spacerun:yes'>Â 
+</span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If Japt encounters
-an option containing the string  “</span><span style='font-family:"Courier New"'>{{xxx}}</span><span
-style='font-family:"Arial",sans-serif'>” for which no macro for xxx was defined,
-Japt will search the System properties for the matching value.  </span></p>
+an option containing the string <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>{{xxx}}</span><span style='font-family:"Arial",sans-serif'>â€
+for which no macro for xxx was defined, Japt will search the System properties for
+the matching value.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The built-in macros
-are:</span></p>
+are:<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.file.dir</span></i><span
 style='font-family:"Arial",sans-serif'>: the directory containing the current options
-file</span></p>
+file<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.file</span></i><span
-style='font-family:"Arial",sans-serif'>: the current options file</span></p>
+style='font-family:"Arial",sans-serif'>: the current options file<o:p></o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>current.character.encoding</span></i><span
 style='font-family:"Arial",sans-serif'>: The string returned by the java code</span>
 <span style='font-family:"Courier New"'>new OutputStreamWriter(System.out).getEncoding()</span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>/: platform independent
-path separator</span></p>
+path separator<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For instance, </span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For instance, <o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Courier New"'>{{current.file}}</span>
 </p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>appearing in an
-options file will be converted to the file name.</span></p>
+options file will be converted to the file name.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<h2><span style='font-family:"Arial",sans-serif'>Specifying extensions</span></h2>
+<h2><span style='font-family:"Arial",sans-serif'>Specifying extensions<o:p></o:p></span></h2>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All work by Japt
-is done by extensions.  Extensions are executed in the order that they are specified
-on the command line and in options files.  To specify an extension, use  “</span><span
-style='font-family:"Courier New"'>-extension extensionName</span><span
-style='font-family:"Arial",sans-serif'>”.  Extensions are described further below.</span></p>
+is done by extensions.<span style='mso-spacerun:yes'>Â  </span>Extensions are executed
+in the order that they are specified on the command line and in options files.<span
+style='mso-spacerun:yes'>Â  </span>To specify an extension, use <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-extension
+extensionName</span><span style='font-family:"Arial",sans-serif'>â€.<span
+style='mso-spacerun:yes'>Â  </span>Extensions are described further below.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<h2><span style='font-family:"Arial",sans-serif'>Log files</span></h2>
+<h2><span style='font-family:"Arial",sans-serif'>Log files<o:p></o:p></span></h2>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt can create
-a log file detailing warnings, errors and information produced by Japt and its extensions. 
-To specify a log file, use the option  “</span><span style='font-family:"Courier New"'>-log
-logFileName</span><span style='font-family:"Arial",sans-serif'>”.</span></p>
+a log file detailing warnings, errors and information produced by Japt and its extensions.<span
+style='mso-spacerun:yes'>Â  </span>To specify a log file, use the option <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-log
+logFileName</span><span style='font-family:"Arial",sans-serif'>â€.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New";
-color:blue'>&nbsp;</span></p>
+color:blue'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_2.2_Extensions"></a><span style='font-family:"Arial",sans-serif'>2.2
-Extensions</span></h1>
+Extensions<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt is built with
-an extension framework.  An extension is an implementation of the interface com.ibm.ive.tools.japt.commandLine.CommandLineExtension. 
-An extension has full access to the JikesBT and Japt public APIs.  Japt executes
-extensions one-by-one, with each extension altering the classes loaded and/or stored
-by Japt, leaving them in an altered state when the extension has completed execution.</span></p>
+an extension framework.<span style='mso-spacerun:yes'>Â  </span>An extension is an
+implementation of the interface com.ibm.ive.tools.japt.commandLine.CommandLineExtension.<span
+style='mso-spacerun:yes'>Â  </span>An extension has full access to the JikesBT and
+Japt public APIs.<span style='mso-spacerun:yes'>Â  </span>Japt executes extensions
+one-by-one, with each extension altering the classes loaded and/or stored by Japt,
+leaving them in an altered state when the extension has completed execution.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Extensions are specified
-on the Japt command line, with the option  “</span><span style='font-family:
-"Courier New"'>-extension extensionName</span><span style='font-family:"Arial",sans-serif'>”. 
-Certain built-in extensions can be specified by their own unique command line options
-(for convenience), such as  “</span>-<span style='font-family:"Courier New"'>jarOutput</span><span
-style='font-family:"Arial",sans-serif'>”. </span></p>
+on the Japt command line, with the option <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-extension
+extensionName</span><span style='font-family:"Arial",sans-serif'>â€.<span
+style='mso-spacerun:yes'>Â  </span>Certain built-in extensions can be specified by
+their own unique command line options (for convenience), such as <span
+style='mso-spacerun:yes'>Â </span>â€œ</span>-<span style='font-family:"Courier New"'>jarOutput</span><span
+style='font-family:"Arial",sans-serif'>â€. <o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The extensions are
-executed in the order that they appear on the command line.  </span></p>
+executed in the order that they appear on the command line.<span
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Each extension has
-its own extension-specific command line options.  These options must appear after
-the extension has been specified on the command line.</span></p>
+its own extension-specific command line options.<span
+style='mso-spacerun:yes'>Â  </span>These options must appear after the extension
+has been specified on the command line.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The same extension
-may be executed more than once.  In such cases, extension-specific command line
-options apply only to the last extension as specified on the command line.  If an
-option is applicable to more than one extension, the same rule applies.</span></p>
+may be executed more than once.<span style='mso-spacerun:yes'>Â  </span>In such cases,
+extension-specific command line options apply only to the last extension as specified
+on the command line.<span style='mso-spacerun:yes'>Â  </span>If an option is applicable
+to more than one extension, the same rule applies.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_2.3_Internal_and"></a><span style='font-family:"Arial",sans-serif'>2.3
-Internal and External Classes</span></h1>
+Internal and External Classes<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Japt defines two
-types of classes, internal and external.  Internal classes are considered internal
-to the application or library at hand.  These classes and resources are considered
-part of the working set and can be altered by Japt and any extension of Japt.  External
-classes are considered supporting classes and cannot be altered.  When writing classes
+types of classes, internal and external.<span style='mso-spacerun:yes'>Â 
+</span>Internal classes are considered internal to the application or library at
+hand.<span style='mso-spacerun:yes'>Â  </span>These classes and resources are considered
+part of the working set and can be altered by Japt and any extension of Japt.<span
+style='mso-spacerun:yes'>Â  </span>External classes are considered supporting classes
+and cannot be altered.<span style='mso-spacerun:yes'>Â  </span>When writing classes
 and resources to a jar file or other form of output, only the internal classes and
-resources will be written.</span></p>
+resources will be written.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example, a typical
 invocation of Japt might make alterations to the classes of a stand-alone application
-but not the J2SE classes that the application requires.  </span></p>
+but not the J2SE classes that the application requires.<span
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Whether a class
-is an internal class depends upon which class path location it originates from. 
-Each class path location is identified as either internal or external.  </span></p>
+is an internal class depends upon which class path location it originates from.<span
+style='mso-spacerun:yes'>Â  </span>Each class path location is identified as either
+internal or external.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_2.4_Application_Interface"></a><span style='font-family:"Arial",sans-serif'>2.4
-Application Interface</span></h1>
+Application Interface<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When invoking Japt,
 if the user intends to make modifications to the internal classes and resources,
-the user must be careful to explicitly indicate the entire interface of the application. 
-The interface consists of all elements of the internal classes and resources that
-may be accessed from outside the application or library, either from the external
-classes or from elsewhere.</span></p>
+the user must be careful to explicitly indicate the entire interface of the application.<span
+style='mso-spacerun:yes'>Â  </span>The interface consists of all elements of the
+internal classes and resources that may be accessed from outside the application
+or library, either from the external classes or from elsewhere.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The identifying
 characteristics of such elements cannot change, so that the application can be accessed
-in exactly the same manner regardless of the internal modifications by Japt.  </span></p>
+in exactly the same manner regardless of the internal modifications by Japt.<span
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For example, Japt
 might change or remove methods and fields in an application library, but the identifying
-characteristics of the API cannot change.  API methods cannot be removed, their
-names cannot change, their arguments cannot change, their access permission modifiers
-cannot be made more restrictive, and so on.<br>
-<br>
-</span></p>
+characteristics of the API cannot change.<span style='mso-spacerun:yes'>Â 
+</span>API methods cannot be removed, their names cannot change, their arguments
+cannot change, their access permission modifiers cannot be made more restrictive,
+and so on.<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For a stand-alone
 application, the interface often consists of just the main method and its containing
-class which is invoked by the java virtual machine at startup.  For libraries, the
-interface consists of the complete public API.  For integrated apps like servlets,
+class which is invoked by the java virtual machine at startup.<span
+style='mso-spacerun:yes'>Â  </span>For libraries, the interface consists of the complete
+public API.<span style='mso-spacerun:yes'>Â  </span>For integrated apps like servlets,
 the interface consists of the specially predefined classes in the application that
 may be instantiated, or the methods in the application that may be invoked from
-an outside source.  </span></p>
+an outside source.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a class is part
 of the interface, then this does not necessarily mean that its contents are also
-part of the interface, and vice-versa.</span></p>
+part of the interface, and vice-versa.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>For instance, an
 internal class that is subclassed by an external class may be part of the interface
 (the internal class is accessed externally through the action of inheritance), but
 if none of the internal class methods or fields are accessed from elsewhere then
-the contents of that class are not part of the interface.</span></p>
+the contents of that class are not part of the interface.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By the same token,
 an internal class C that subclasses an external class D might not necessarily be
 part of the application interface, but if that class C overrides methods in D, then
 those overriding methods may be part of the application interface, since they can
-be invoked externally.</span></p>
+be invoked externally.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The use of the reflection
-API in java may also create elements of the interface.  Any class accessed by the
-Class.forName construct or the  “.class” contruct may become part of the interface,
-for such classes can then be entered dynamically at run-time by the virtual machine.</span></p>
+API in java may also create elements of the interface.<span
+style='mso-spacerun:yes'>Â  </span>Any class accessed by the Class.forName construct
+or the <span style='mso-spacerun:yes'>Â </span>â€œ.classâ€ contruct may become part
+of the interface, for such classes can then be entered dynamically at run-time by
+the virtual machine.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_3._Loading_Classes"></a><span style='font-family:"Arial",sans-serif'>3.
-Loading Classes and Resources</span></h1>
+Loading Classes and Resources<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Before any class
 manipulations or optimizations can begin, japt will load the classes and resources
-as specified, making its own use of the load extension.</span></p>
+as specified, making its own use of the load extension.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_3.1_The_Load"></a><a name="_3.1_Loading"></a><span
-style='font-family:"Arial",sans-serif'>3.1 The Load Extension</span></h1>
+style='font-family:"Arial",sans-serif'>3.1 The Load Extension<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When loading, the
-user must distinguish between the internal and external classes.  All internal classes
-must be loaded.  Japt need not load all external classes to function properly, but
-it is generally beneficial, so it is advisable to load all external classes even
-though they cannot be changed.</span></p>
+user must distinguish between the internal and external classes.<span
+style='mso-spacerun:yes'>Â  </span>All internal classes must be loaded.<span
+style='mso-spacerun:yes'>Â  </span>Japt need not load all external classes to function
+properly, but it is generally beneficial, so it is advisable to load all external
+classes even though they cannot be changed.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To specify a location
-on the classpath that will be used to load internal classes, the  “</span><span
-style='font-family:"Courier New"'>-icp</span><span style='font-family:"Arial",sans-serif'>”
-class path option is used.  Additionally, internal class path locations are specified
-with the  “</span><span style='font-family:"Courier New"'>-loadFile</span><span
-style='font-family:"Arial",sans-serif'>” option, the difference being that all classes
-found at that location will be loaded immediately.  For external class path locations,
-the  “</span><span style='font-family:"Courier New"'>-cp</span><span
-style='font-family:"Arial",sans-serif'>” class path option is used.  </span></p>
+on the classpath that will be used to load internal classes, the <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-icp</span><span
+style='font-family:"Arial",sans-serif'>â€ class path option is used.<span
+style='mso-spacerun:yes'>Â  </span>Additionally, internal class path locations are
+specified with the <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>-loadFile</span><span style='font-family:
+"Arial",sans-serif'>â€ option, the difference being that all classes found at that
+location will be loaded immediately.<span style='mso-spacerun:yes'>Â  </span>For
+external class path locations, the <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>â€
+class path option is used.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='line-height:12.0pt;text-autospace:none'><span
-style='font-family:"Arial",sans-serif;color:black'>To load classes, the user must
+<p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
+mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
+10.0pt;font-family:"Arial",sans-serif;color:black'>To load classes, the user must
 generally identify the complete interface and specify the interface using options
-of the form  “</span><span style='font-family:"Courier New";color:black'>-includeXXX</span><span
-style='font-family:"Arial",sans-serif;color:black'>”.  Any class, method, field
-or resource that is included is considered part of the interface.  This will cause
-the interface and all supporting classes to be loaded.  In general, this is enough
-to load all required internal and external classes.</span></p>
+of the form <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>-includeXXX</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>â€.<span
+style='mso-spacerun:yes'>Â  </span>Any class, method, field or resource that is included
+is considered part of the interface.<span style='mso-spacerun:yes'>Â  </span>This
+will cause the interface and all supporting classes to be loaded.<span
+style='mso-spacerun:yes'>Â  </span>In general, this is enough to load all required
+internal and external classes.<o:p></o:p></span></p>
 
-<p class=MsoNormal style='line-height:12.0pt;text-autospace:none'><span
-style='font-family:"Arial",sans-serif;color:black'>&nbsp;</span></p>
+<p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
+mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
+10.0pt;font-family:"Arial",sans-serif;color:black'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal style='line-height:12.0pt;text-autospace:none'><span
-style='font-family:"Arial",sans-serif;color:black'>Optionally, classes may be loaded
-using  “</span><span style='font-family:"Courier New";color:black'>-loadFile</span><span
-style='font-family:"Arial",sans-serif;color:black'>”, however for any manipulations
-and optimizations it is still necessary that the interface be specified.</span></p>
+<p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
+mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
+10.0pt;font-family:"Arial",sans-serif;color:black'>Optionally, classes may be loaded
+using <span style='mso-spacerun:yes'>Â </span>â€œ</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>-loadFile</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>â€,
+however for any manipulations and optimizations it is still necessary that the interface
+be specified.<o:p></o:p></span></p>
 
-<p class=MsoNormal style='line-height:12.0pt;text-autospace:none'><span
-style='font-family:"Arial",sans-serif;color:black'>&nbsp;</span></p>
+<p class=MsoNormal style='line-height:12.0pt;tab-stops:0in .5in 1.0in 1.5in 2.0in 2.5in 3.0in;
+mso-layout-grid-align:none;text-autospace:none'><span style='mso-bidi-font-size:
+10.0pt;font-family:"Arial",sans-serif;color:black'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif;color:black'>The
- “</span><span style='font-family:"Courier New";color:black'>-loadClass</span><span
-style='font-family:"Arial",sans-serif;color:black'>” and  “</span><span
-style='font-family:"Courier New";color:black'>–loadResource</span><span
-style='font-family:"Arial",sans-serif;color:black'>” options are also used to specify
-classes and resources to load, but whether they are identified as internal or external
-is dependent upon where they are found, as by the options </span><span
-style='font-family:"Arial",sans-serif'> “</span><span style='font-family:"Courier New"'>-icp</span><span
-style='font-family:"Arial",sans-serif'>”</span><span style='font-family:"Arial",sans-serif;
-color:black'>, </span><span style='font-family:"Arial",sans-serif'> “</span><span
-style='font-family:"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>”</span><span
-style='font-family:"Arial",sans-serif;color:black'>, and  “</span><span
-style='font-family:"Courier New";color:black'>-loadFile</span><span
-style='font-family:"Arial",sans-serif;color:black'>”.</span></p>
+<p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
+color:black'>The <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Courier New";color:black'>-loadClass</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>â€ and
+<span style='mso-spacerun:yes'>Â </span>â€œ</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>â€“loadResource</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>â€ options
+are also used to specify classes and resources to load, but whether they are identified
+as internal or external is dependent upon where they are found, as by the options
+</span><span style='font-family:"Arial",sans-serif'><span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-icp</span><span
+style='font-family:"Arial",sans-serif'>â€</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Arial",sans-serif;color:black'>, </span><span
+style='font-family:"Arial",sans-serif'><span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>-cp</span><span style='font-family:"Arial",sans-serif'>â€</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>, and
+<span style='mso-spacerun:yes'>Â </span>â€œ</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New";color:black'>-loadFile</span><span
+style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;color:black'>â€.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The  “</span><span
-style='font-family:"Courier New"'>-optimize</span><span style='font-family:
-"Arial",sans-serif'>” option is capable of making optimizations to bytecode, such
-as removing unreachable code and altering certain bytecode sequences.</span></p>
+<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-optimize</span><span
+style='font-family:"Arial",sans-serif'>â€ option is capable of making optimizations
+to bytecode, such as removing unreachable code and altering certain bytecode sequences.<o:p></o:p></span></p>
 
-<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
-<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The  “</span><span
-style='font-family:"Courier New"'>-verify</span><span style='font-family:"Arial",sans-serif'>”
-will perform some extensive verification on the internal classes.  This will not
-guarantee that verification performed by a java virtual machine will pass, however. 
-But it can help to confirm that the classes are well structured or provide helpful
-information regarding why the classes are not well-structured.</span></p>
+<p class=MsoBodyText><span style='font-family:"Arial",sans-serif'>The <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-verify</span><span
+style='font-family:"Arial",sans-serif'>â€ will perform some extensive verification
+on the internal classes.<span style='mso-spacerun:yes'>Â  </span>This will not guarantee
+that verification performed by a java virtual machine will pass, however.<span
+style='mso-spacerun:yes'>Â  </span>But it can help to confirm that the classes are
+well structured or provide helpful information regarding why the classes are not
+well-structured.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><a name="_3.2_Rules_Files"></a><a name="_3.3_Multiple_Load"></a>&nbsp;</p>
+<p class=MsoNormal><a name="_3.2_Rules_Files"></a><a name="_3.3_Multiple_Load"></a><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_3.4_Wildcards"></a><a name="_3.3_Wildcards"></a><span
-style='font-family:"Arial",sans-serif'>3.2 Wildcards</span></h1>
+style='font-family:"Arial",sans-serif'>3.2 Wildcards<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-size:14.0pt;font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Any option used
-to specify a class, field, method or resource will accept wildcards.  The available
-wildcards are:</span></p>
+to specify a class, field, method or resource will accept wildcards.<span
+style='mso-spacerun:yes'>Â  </span>The available wildcards are:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>*: any sequence
-of characters</span></p>
+of characters<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>^: any sequence
-of characters that does not include either of the separators ‘/’ or ‘.’</span></p>
+of characters that does not include either of the separators â€˜/â€™ or â€˜.â€™<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
 style='font-family:"Arial",sans-serif'> to include all classes in java.lang and
-subpackages:</span></p>
+subpackages:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.*</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.*<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
-
-<p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include all classes in java.lang:</span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.^</span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include the methods in java.lang.Object:</span></p>
+style='font-family:"Arial",sans-serif'> to include all classes in java.lang:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod java.lang.Object.^</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeClass java.lang.^<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
-
-<p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include all methods:</span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod *</span></p>
-
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
-style='font-family:"Arial",sans-serif'> to include all methods in the default package:</span></p>
+style='font-family:"Arial",sans-serif'> to include the methods in java.lang.Object:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod ^.^</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod java.lang.Object.^<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
+style='font-family:"Arial",sans-serif'> to include all methods:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod *<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
+style='font-family:"Arial",sans-serif'> to include all methods in the default package:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeMethod ^.^<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><i><span style='font-family:"Arial",sans-serif'>e.g.</span></i><span
 style='font-family:"Arial",sans-serif'> to include all classes and their public,
-protected and package methods and fields in java.lang and subpackages:</span></p>
+protected and package methods and fields in java.lang and subpackages:<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>-includeLibraryClass
-java.lang.* </span></p>
+java.lang.* <o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><a name="_3.4_noFollow"></a><a name="_4.6_The_Migrate"></a>&nbsp;</p>
+<p class=MsoNormal><a name="_3.4_noFollow"></a><a name="_4.6_The_Migrate"></a><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_4._Additional_Extensions"></a><span style='font-family:"Arial",sans-serif'>4.
-Additional Extensions</span></h1>
+Additional Extensions<o:p></o:p></span></h1>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Details about the
-load extension are in section 3.  This sections lists some additional extensions.</span></p>
+load extension are in section 3.<span style='mso-spacerun:yes'>Â  </span>This sections
+lists some additional extensions.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_4.4_The_Jar"></a><span style='font-family:"Arial",sans-serif'>4.1
-The Jar Generation Extension</span></h1>
+The Jar Generation Extension<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The jar generation
-extension is specified by:</span></p>
+extension is specified by:<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Courier New"'>–jarOutput</span></p>
+<p class=MsoNormal><span style='font-family:"Courier New"'>â€“jarOutput</span></p>
 
-<p class=MsoNormal> </p>
+<p class=MsoNormal><span style='mso-spacerun:yes'>Â </span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension is
-used to write all internal classes to jar files.   The target directory or jar file
-is specified by: </span></p>
+used to write all internal classes to jar files.<span
+style='mso-spacerun:yes'>Â Â  </span>The target directory or jar file is specified
+by: <o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Courier New"'>-output fileName</span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If a directory is
 specified, a set of jar files will be created corresponding to the classpath entries
-the individual classes were obtained from.</span></p>
+the individual classes were obtained from.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There is an option
-to specify that the jar entries are not to be compressed,  “</span><span
-style='font-family:"Courier New"'>-noCompress</span><span style='font-family:
-"Arial",sans-serif'>”.  Any loaded resource can be excluded from the jar files by
-specifying the option  “</span><span style='font-family:"Courier New"'>-excludeResource</span><span
-style='font-family:"Arial",sans-serif'>”, or optionally the user can use the option
- “</span><span style='font-family:"Courier New"'>-includeZipped</span><span
-style='font-family:"Arial",sans-serif'>” to ensure any resource contained within
-a jar or zip file on the classpath will be written to the output jar(s).  </span></p>
+to specify that the jar entries are not to be compressed, <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-noCompress</span><span
+style='font-family:"Arial",sans-serif'>â€.<span style='mso-spacerun:yes'>Â 
+</span>Any loaded resource can be excluded from the jar files by specifying the
+option <span style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:
+"Courier New"'>-excludeResource</span><span style='font-family:"Arial",sans-serif'>â€,
+or optionally the user can use the option <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-includeZipped</span><span
+style='font-family:"Arial",sans-serif'>â€ to ensure any resource contained within
+a jar or zip file on the classpath will be written to the output jar(s).<span
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This extension also
-contains options that allow the user to remove various items from the written classes. 
-The user may specify any specific attribute to be removed by using the  “</span><span
+contains options that allow the user to remove various items from the written classes.<span
+style='mso-spacerun:yes'>Â  </span>The user may specify any specific attribute to
+be removed by using the <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
 style='font-family:"Courier New"'>-removeAttributes</span><span
-style='font-family:"Arial",sans-serif'>” option.  The user should consult the java
-virtual machine specification for a list of specification-defined attributes that
-may be excluded.</span></p>
+style='font-family:"Arial",sans-serif'>â€ option.<span
+style='mso-spacerun:yes'>Â  </span>The user should consult the java virtual machine
+specification for a list of specification-defined attributes that may be excluded.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>By default, certain
-groups of attributes are automatically removed (<i>Note: this behavior is expected
-to change so that removal is no longer the default behavior</i>).  There are options
-to override this behaviour.  </span></p>
+groups of attributes are automatically removed (<i style='mso-bidi-font-style:
+normal'>Note: this behavior is expected to change so that removal is no longer the
+default behavior</i>).<span style='mso-spacerun:yes'>Â  </span>There are options
+to override this behaviour.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
-of attributes used by debuggers use  “</span><span style='font-family:"Courier New"'>-noStripDebugInfo</span><span
-style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes
+of attributes used by debuggers use <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>-noStripDebugInfo</span><span
+style='font-family:"Arial",sans-serif'>â€. This will prevent the removal of the attributes
 </span><span style='font-family:"Courier New"'>SourceFile</span>,<span
 style='font-family:"Courier New"'> SourceDebugExtension</span>,<span
 style='font-family:"Courier New"'> LineNumberTable</span>,<span
 style='font-family:"Courier New"'> LocalVariableTable</span> <span
 style='font-family:"Arial",sans-serif'>and</span> <span style='font-family:
-"Courier New"'>LocalVariableTypeTable</span><span style='font-family:"Arial",sans-serif'>.</span></p>
+"Courier New"'>LocalVariableTypeTable</span><span style='font-family:"Arial",sans-serif'>.<o:p></o:p></span></p>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
-of attributes used to denote information about the original source file, use  “</span><span
-style='font-family:"Courier New"'>-noStripSourceInfo</span><span
-style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes
+of attributes used to denote information about the original source file, use <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-noStripSourceInfo</span><span
+style='font-family:"Arial",sans-serif'>â€. This will prevent the removal of the attributes
 </span><span style='font-family:"Courier New"'>InnerClasses</span>,<span
 style='font-family:"Courier New"'> Synthetic</span>,<span style='font-family:
 "Courier New"'> Deprecated</span>,<span style='font-family:"Courier New"'> EnclosingMethod
 </span><span style='font-family:"Arial",sans-serif'>and</span> <span
-style='font-family:"Courier New"'>Signature</span>.  <span style='font-family:
-"Arial",sans-serif'>These attributes have no influence in runtime behaviour other
-than influencing information derived from the reflection API.</span></p>
+style='font-family:"Courier New"'>Signature</span>.<span
+style='mso-spacerun:yes'>Â  </span><span style='font-family:"Arial",sans-serif'>These
+attributes have no influence in runtime behaviour other than influencing information
+derived from the reflection API.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To prevent the removal
-of attributes used to store annotation information, use  “</span><span
-style='font-family:"Courier New"'>-noStripAnnotations</span><span
-style='font-family:"Arial",sans-serif'>”. This will prevent the removal of the attributes</span>
+of attributes used to store annotation information, use <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-noStripAnnotations</span><span
+style='font-family:"Arial",sans-serif'>â€. This will prevent the removal of the attributes</span>
 <span style='font-family:"Courier New"'>RuntimeVisibleAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeInvisibleAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeVisibleParameterAnnotations</span>,<span
 style='font-family:"Courier New"'> RuntimeInvisibleParameterAnnotations </span><span
 style='font-family:"Arial",sans-serif'>and</span> <span style='font-family:
-"Courier New"'>AnnotationDefault</span>.  <span style='font-family:"Arial",sans-serif'>These
-attributes have no influence in runtime behaviour other than influencing information
-derived from the reflection API that is annotation related.</span></p>
+"Courier New"'>AnnotationDefault</span>.<span style='mso-spacerun:yes'>Â 
+</span><span style='font-family:"Arial",sans-serif'>These attributes have no influence
+in runtime behaviour other than influencing information derived from the reflection
+API that is annotation related.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>There are options
-to control the removal of the stack map table attributes. The options  “-addStackMaps”
-and</span> <span style='font-family:"Arial",sans-serif'> “</span><span
+to control the removal of the stack map table attributes. The options <span
+style='mso-spacerun:yes'>Â </span>â€œ-addStackMapsâ€ and</span> <span
+style='font-family:"Arial",sans-serif'><span style='mso-spacerun:yes'>Â </span>â€œ</span><span
 style='font-family:"Courier New"'>-removeStackMaps</span><span
-style='font-family:"Arial",sans-serif'>” will add and remove these attributes from
-the class files.  The option  “</span><span style='font-family:"Courier New"'>-addStackMaps</span><span
-style='font-family:"Arial",sans-serif'>” takes precedence over the options  “</span><span
-style='font-family:"Courier New"'>-removeStackMaps</span><span
-style='font-family:"Arial",sans-serif'>” and  “</span><span style='font-family:
-"Courier New"'>-removeAttributes StackMapTable</span><span style='font-family:
-"Arial",sans-serif'>”.</span></p>
+style='font-family:"Arial",sans-serif'>â€ will add and remove these attributes from
+the class files.<span style='mso-spacerun:yes'>Â  </span>The option <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-addStackMaps</span><span
+style='font-family:"Arial",sans-serif'>â€ takes precedence over the options <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-removeStackMaps</span><span
+style='font-family:"Arial",sans-serif'>â€ and <span
+style='mso-spacerun:yes'>Â </span>â€œ</span><span style='font-family:"Courier New"'>-removeAttributes
+StackMapTable</span><span style='font-family:"Arial",sans-serif'>â€.</span><span
+style='font-family:"Courier New"'><o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_4.6_The_Class"></a><span style='font-family:"Arial",sans-serif'>4.2
-The Class File Generation Extension</span></h1>
+The Class File Generation Extension<o:p></o:p></span></h1>
 
-<p class=MsoNormal><span style='font-family:"Arial",sans-serif'>&nbsp;</span></p>
+<p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The class file generation
-extension, specified by the  “</span><span style='font-family:"Courier New"'>–dirOutput</span><span
-style='font-family:"Arial",sans-serif'>” option, is used to write all internal classes
-to the file system.   The target directory or jar file is specified by the  “</span><span
-style='font-family:"Courier New"'>-dir</span><span style='font-family:"Arial",sans-serif'>”
-option.</span>  </p>
+extension, specified by the <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>â€“dirOutput</span><span style='font-family:
+"Arial",sans-serif'>â€ option, is used to write all internal classes to the file
+system.<span style='mso-spacerun:yes'>Â Â  </span>The target directory or jar file
+is specified by the <span style='mso-spacerun:yes'>Â </span>â€œ</span><span
+style='font-family:"Courier New"'>-dir</span><span style='font-family:"Arial",sans-serif'>â€
+option.</span><span style='mso-spacerun:yes'>Â  </span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>All other options
-behave in the exact same way as they do with the jar generation extension.</span></p>
+behave in the exact same way as they do with the jar generation extension.<o:p></o:p></span></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal>&nbsp;</p>
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><a name="_5._Extensions_available"></a>&nbsp;</p>
+<p class=MsoNormal><a name="_5._Extensions_available"></a><o:p>&nbsp;</o:p></p>
 
-<p class=MsoNormal><a name="_4.5_The_Instrument"></a>&nbsp;</p>
+<p class=MsoNormal><a name="_4.5_The_Instrument"></a><o:p>&nbsp;</o:p></p>
 
 </div>
 
