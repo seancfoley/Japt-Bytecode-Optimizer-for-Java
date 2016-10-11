@@ -5,7 +5,7 @@ xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
 xmlns="http://www.w3.org/TR/REC-html40">
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <meta name=ProgId content=Word.Document>
 <meta name=Generator content="Microsoft Word 15">
 <meta name=Originator content="Microsoft Word 15">
@@ -16,9 +16,9 @@ xmlns="http://www.w3.org/TR/REC-html40">
   <o:Author>sfoley</o:Author>
   <o:LastAuthor>SEAN FOLEY</o:LastAuthor>
   <o:Revision>2</o:Revision>
-  <o:TotalTime>105</o:TotalTime>
-  <o:Created>2016-10-10T21:16:00Z</o:Created>
-  <o:LastSaved>2016-10-10T21:16:00Z</o:LastSaved>
+  <o:TotalTime>112</o:TotalTime>
+  <o:Created>2016-10-11T16:23:00Z</o:Created>
+  <o:LastSaved>2016-10-11T16:23:00Z</o:LastSaved>
   <o:Pages>1</o:Pages>
   <o:Words>1959</o:Words>
   <o:Characters>11171</o:Characters>
@@ -731,9 +731,6 @@ a:visited, span.MsoHyperlinkFollowed
 	color:purple;
 	text-decoration:underline;
 	text-underline:single;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	mso-default-props:yes;}
 @page WordSection1
 	{size:8.5in 11.0in;
 	margin:1.0in 1.25in 1.0in 1.25in;
@@ -808,7 +805,7 @@ href="#_1._Using_the">Using the Message and Logger classes</a><o:p></o:p></span>
 href="#_3._The_Japt">The Japt Repository</a><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><span
-style='mso-tab-count:1'>            </span>3.1 <a href="#_3.1_Do_not">Do not
+style='mso-tab-count:1'>Â Â Â Â Â Â Â Â Â Â Â  </span>3.1 <a href="#_3.1_Do_not">Do not
 Alter External Classes</a><o:p></o:p></span></p>
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-family:"Arial",sans-serif'>3.2
@@ -845,7 +842,7 @@ href="#_5_Running_your">Running your Extension</a><o:p></o:p></span></p>
 <p class=MsoNormal style='line-height:12.0pt;mso-layout-grid-align:none;
 text-autospace:none'><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
 color:black'>This document covers the basic concepts of Japt from a
-programmer’s perspective, rather than a user’s perpective.<o:p></o:p></span></p>
+programmerâ€™s perspective, rather than a userâ€™s perpective.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='line-height:12.0pt;mso-layout-grid-align:none;
 text-autospace:none'><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
@@ -884,9 +881,9 @@ color:black'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
 color:black'>Japt is built with an extension architecture.<span
-style='mso-spacerun:yes'>  </span>It is much like a plugin architecture except
+style='mso-spacerun:yes'>Â  </span>It is much like a plugin architecture except
 that extensions are defined on the command line.<span
-style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
 color:black'><o:p>&nbsp;</o:p></span></p>
@@ -894,11 +891,11 @@ color:black'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:"Arial",sans-serif;
 color:black'>The idea is that you should simply worry about writing your
 bytecode or class manipulation code and you need to do nothing to integrate
-your code into Japt.<span style='mso-spacerun:yes'>  </span>You can use the
+your code into Japt.<span style='mso-spacerun:yes'>Â  </span>You can use the
 existing LoadException to load your classes, you can then run your own custom,
 then you can use the ClassGenerationExtension or JarGenerationExtension to save
 the altered classes, all of this controlled by the command line.<span
-style='mso-spacerun:yes'>  </span>The existing Japt architecture does not need
+style='mso-spacerun:yes'>Â  </span>The existing Japt architecture does not need
 to know about the existence of your extension, and you can easily pick and
 choose which existing extensions you need to use with your own.<o:p></o:p></span></p>
 
@@ -926,7 +923,7 @@ user must implement the interface com.ibm.ive.tools.japt.commandLine.CommandLine
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The interface
 CommandLineExtension has the method getOptions, which provides an array of
-command line options.<span style='mso-spacerun:yes'>  </span>The extension must
+command line options.<span style='mso-spacerun:yes'>Â  </span>The extension must
 provide these objects which the command line parser will update as it parses
 the command line.<o:p></o:p></span></p>
 
@@ -941,7 +938,7 @@ CommandLineException;<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>which is called
 whenever the given option appears on the command line, along with any arguments
-present and the parser which found the option.<span style='mso-spacerun:yes'> 
+present and the parser which found the option.<span style='mso-spacerun:yes'>Â 
 </span>There is a single parser for the command line as well as a new parser
 for every options file or rules file.<o:p></o:p></span></p>
 
@@ -955,7 +952,7 @@ execute(JaptRepository repository, Logger logger) throws ExtensionException;<o:p
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>This is the
 method that will be called by Japt to run your extension.<span
-style='mso-spacerun:yes'>  </span>The JaptRepository object and the japt Logger
+style='mso-spacerun:yes'>Â  </span>The JaptRepository object and the japt Logger
 object will be passed to your extension so that it can alter the classes in the
 repository and pass any user information to the logger.<o:p></o:p></span></p>
 
@@ -1002,9 +999,9 @@ something regarding the progress of Japt as it runs<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The logger
 object decides where each stream will write its information.<span
-style='mso-spacerun:yes'>  </span>One type of logger, the StandardLogger, will
+style='mso-spacerun:yes'>Â  </span>One type of logger, the StandardLogger, will
 write the error stream to the standard error stream and the other three streams
-to the standard output stream.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+to the standard output stream.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1013,10 +1010,10 @@ line japt will generate a CommandLineLogger for use by the extensions.<o:p></o:p
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>On the command
 line, the user may specify a log file for japt for use by this logger.<span
-style='mso-spacerun:yes'>  </span>This logger writes the error stream to the
-standard error stream.<span style='mso-spacerun:yes'>  </span>It writes the
+style='mso-spacerun:yes'>Â  </span>This logger writes the error stream to the
+standard error stream.<span style='mso-spacerun:yes'>Â  </span>It writes the
 warning and progress streams to the standard output stream.<span
-style='mso-spacerun:yes'>  </span>Additionally, it will also write the error,
+style='mso-spacerun:yes'>Â  </span>Additionally, it will also write the error,
 warning and information streams to the log file, if such a file was specified.<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
@@ -1028,19 +1025,19 @@ Message Objects<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Information to
 be passed to the user is generally stored in an object of type
-com.ibm.ive.tools.japt.Message.<span style='mso-spacerun:yes'>  </span>The
+com.ibm.ive.tools.japt.Message.<span style='mso-spacerun:yes'>Â  </span>The
 subclass com.ibm.ive.tools.japt.LogMessage has additional methods named log
 which cause the message to be written to the given logger.<span
-style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The message
 object itself will decide which logger stream(s) will receive the message.<span
-style='mso-spacerun:yes'>  </span>Japt defines a subclass for each Logger
+style='mso-spacerun:yes'>Â  </span>Japt defines a subclass for each Logger
 stream, the ErrorMessage, InfoMessage, StatusMessage, ProgressMessage and
 WarningMessage classes, to direct their contents to their corresponding logger
-streams.<span style='mso-spacerun:yes'>  </span>These are all subclasses of
+streams.<span style='mso-spacerun:yes'>Â  </span>These are all subclasses of
 JaptMessage, which adds a prefix to each message as it is written to identify
 the type of message and the component from which it originated.<o:p></o:p></span></p>
 
@@ -1058,11 +1055,11 @@ with Arguments<o:p></o:p></span></h2>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When a
 JaptMessage object is logged, it may be passed arguments that are inserted into
-the message.<span style='mso-spacerun:yes'>  </span>JaptMessage objects that
+the message.<span style='mso-spacerun:yes'>Â  </span>JaptMessage objects that
 take arguments must be constructed with the JaptMessage constructor that takes
-a FormattedString as an argument.<span style='mso-spacerun:yes'>  </span>The
+a FormattedString as an argument.<span style='mso-spacerun:yes'>Â  </span>The
 FormattedString object will break a message up into components.<span
-style='mso-spacerun:yes'>  </span>Between each component is where each argument
+style='mso-spacerun:yes'>Â  </span>Between each component is where each argument
 will be inserted. <o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
@@ -1070,19 +1067,20 @@ will be inserted. <o:p></o:p></span></p>
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <h1><a name="_3._The_Japt"></a><span style='font-size:16.0pt;mso-bidi-font-size:
-12.0pt'><span style='mso-spacerun:yes'> </span></span><span style='font-size:
-16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>3. The Japt Repository<o:p></o:p></span></h1>
+12.0pt'><span style='mso-spacerun:yes'>Â </span></span><span style='font-size:
+16.0pt;mso-bidi-font-size:12.0pt;font-family:"Arial",sans-serif'>3. The Japt
+Repository<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-size:16.0pt;mso-bidi-font-size:12.0pt;
 font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The japt
 repository stores all classes and resources that are loaded by japt.<span
-style='mso-spacerun:yes'>  </span>It also holds the class path entry objects
+style='mso-spacerun:yes'>Â  </span>It also holds the class path entry objects
 from which more classes and resources may be loaded.<span
-style='mso-spacerun:yes'>  </span>The resources are stored in the resources
-vector.<span style='mso-spacerun:yes'>  </span>The classes are stored in the
-classes vector.<span style='mso-spacerun:yes'>  </span>Additionally, those
+style='mso-spacerun:yes'>Â  </span>The resources are stored in the resources
+vector.<span style='mso-spacerun:yes'>Â  </span>The classes are stored in the
+classes vector.<span style='mso-spacerun:yes'>Â  </span>Additionally, those
 classes which are internal classes are also stored in the internalClasses
 vector.<o:p></o:p></span></p>
 
@@ -1094,10 +1092,10 @@ Do Not Alter External Classes<o:p></o:p></span></h1>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>One of the
-rules for writing a japt extension is that only internal classes may be modified.<span
-style='mso-spacerun:yes'>  </span>There are methods in the JaptRepository
-object that will get all the internal classes or will determine whether a given
-class is internal or external.<o:p></o:p></span></p>
+rules for writing a japt extension is that only internal classes may be
+modified. <span style='mso-spacerun:yes'>Â </span>There are methods in the
+JaptRepository object that will get all the internal classes or will determine
+whether a given class is internal or external.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1110,7 +1108,7 @@ Do not Alter Identifying Characteristics of the Application Interface<o:p></o:p>
 interface consists of a set of classes, methods and fields that are identified
 as possible entry points into the set of internal classes, see <a
 href="documentation.htm#_2.4_Application_Interface">the Japt documentation</a>
-for details.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+for details.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1121,23 +1119,23 @@ identified and accessed.<o:p></o:p></span></p>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Their names
-cannot be changed.<span style='mso-spacerun:yes'>  </span>Their access
+cannot be changed.<span style='mso-spacerun:yes'>Â  </span>Their access
 permissions can be changed to make them more accessible, but not less
-accessible.<span style='mso-spacerun:yes'>  </span>They cannot be removed or
-relocated.<span style='mso-spacerun:yes'>  </span>They cannot be changed from
-static to non-static and vice-versa.<span style='mso-spacerun:yes'> 
+accessible.<span style='mso-spacerun:yes'>Â  </span>They cannot be removed or
+relocated.<span style='mso-spacerun:yes'>Â  </span>They cannot be changed from
+static to non-static and vice-versa.<span style='mso-spacerun:yes'>Â 
 </span>Method signatures and field types cannot be changed.<span
-style='mso-spacerun:yes'>  </span>Any other identifying characteristics cannot
-be changed.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â  </span>Any other identifying characteristics cannot
+be changed.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Characteristics
 that do not identify these items or affect how thet are accessed can be
 changed, such as whether they are synchronized, fp-strict, or abstract.<span
-style='mso-spacerun:yes'>  </span>Method bodies can be changed.<span
-style='mso-spacerun:yes'>  </span>Any non-identifying characteristic can be
-changed.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â  </span>Method bodies can be changed.<span
+style='mso-spacerun:yes'>Â  </span>Any non-identifying characteristic can be
+changed.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1152,7 +1150,7 @@ font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The
 BT_CodeAttribute object for a method stores the bytecode instruction vector and
 any associated attributes, such as the debug attributes used to debug that
-method.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+method.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1165,39 +1163,39 @@ Instructions<o:p></o:p></span></h1>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When inserting,
 removing, or replacing instructions in a code attribute, it is recommended that
 the programmer use the associated code attribute methods that being with
-“insertInstruction”, “removeInstruction” or “replaceInstruction”.<span
-style='mso-spacerun:yes'>  </span>This ensures that the instructions are linked
+â€œinsertInstructionâ€, â€œremoveInstructionâ€ or â€œreplaceInstructionâ€.<span
+style='mso-spacerun:yes'>Â  </span>This ensures that the instructions are linked
 and unlinked properly, and additionally the associated attributes such as the
-debug attributes will be updated as well.<span style='mso-spacerun:yes'> 
+debug attributes will be updated as well.<span style='mso-spacerun:yes'>Â 
 </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If the
 programmer chooses not to use the methods provided by the code attribute, then
-whenever an instruction is inserted into a code attribute’s vector, it should
-have its “</span><span style='font-family:"Courier New"'>link</span><span
-style='font-family:"Arial",sans-serif'>” method called.<span
-style='mso-spacerun:yes'>  </span>Also, whenever an instruction is removed from
-a code attribute’s instruction vector, it should have its “</span><span
-style='font-family:"Courier New"'>unlink</span><span style='font-family:"Arial",sans-serif'>”
-method called.<span style='mso-spacerun:yes'>   </span>This ensures that any
+whenever an instruction is inserted into a code attributeâ€™s vector, it should
+have its â€œ</span><span style='font-family:"Courier New"'>link</span><span
+style='font-family:"Arial",sans-serif'>â€ method called.<span
+style='mso-spacerun:yes'>Â  </span>Also, whenever an instruction is removed from
+a code attributeâ€™s instruction vector, it should have its â€œ</span><span
+style='font-family:"Courier New"'>unlink</span><span style='font-family:"Arial",sans-serif'>â€
+method called.<span style='mso-spacerun:yes'>Â Â  </span>This ensures that any
 relationships that have been created by the presence of that instruction are
-updated accordingly.<span style='mso-spacerun:yes'>  </span>The</span> <span
+updated accordingly.<span style='mso-spacerun:yes'>Â  </span>The</span> <span
 style='font-family:"Courier New"'>unlink</span> <span style='font-family:"Arial",sans-serif'>and</span>
 <span style='font-family:"Courier New"'>link</span> <span style='font-family:
 "Arial",sans-serif'>methods may be called more than once on the same
-instruction with no adverse affects.<span style='mso-spacerun:yes'> 
+instruction with no adverse affects.<span style='mso-spacerun:yes'>Â 
 </span>This means that you can add a few instructions to a method and then call
 link on all instructions the entire method to ensure all instructions have been
-linked at least once.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+linked at least once.<span style='mso-spacerun:yes'>Â  </span><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>Linking and
 unlinking code, methods, fields and classes in Japt/JikesBT ensures that any
 data structures containing those artifacts are updated.<span
-style='mso-spacerun:yes'>  </span>For instance, for a method invocation
+style='mso-spacerun:yes'>Â  </span>For instance, for a method invocation
 instruction, there is a data structure in the code attribute indicating the
 called methods from that code, as well as a data structure in the method object
 listing callers.<o:p></o:p></span></p>
@@ -1211,10 +1209,10 @@ listing callers.<o:p></o:p></span></p>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>When creating
-instructions it is recommended that the programmer use the associated “make”
-methods in BT_Ins.<span style='mso-spacerun:yes'>  </span>This ensures that the
+instructions it is recommended that the programmer use the associated â€œmakeâ€
+methods in BT_Ins.<span style='mso-spacerun:yes'>Â  </span>This ensures that the
 correct instruction object is created for each opcode.<span
-style='mso-spacerun:yes'>  </span>The instruction object hierarchy is
+style='mso-spacerun:yes'>Â  </span>The instruction object hierarchy is
 documented in the javadoc comments for the BT_Ins class.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
@@ -1226,7 +1224,7 @@ Copying Instructions<o:p></o:p></span></h1>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>The ideal way
 to copy instructions is to use the associated methods in BT_Inliner.<span
-style='mso-spacerun:yes'>  </span>This ensures that the code attributes which
+style='mso-spacerun:yes'>Â  </span>This ensures that the code attributes which
 reference the instructions are updated properly, and the instructions
 appropriate rules for creating the new instructions are followed.<o:p></o:p></span></p>
 
@@ -1240,18 +1238,18 @@ Visiting Instructions<o:p></o:p></span></h1>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>You may visit
 the instructions in the same order in which they are executed by creating a
 BT_CodeVisitor object and passing this object to the associated
-BT_CodeAttribute.visitReachableCode method.<span style='mso-spacerun:yes'> 
-</span>The code visitor object will generate information regarding which instructions
-were visited and a list of subroutines in the method.<o:p></o:p></span></p>
+BT_CodeAttribute.visitReachableCode method.<span style='mso-spacerun:yes'>Â 
+</span>The code visitor object will generate information regarding which
+instructions were visited and a list of subroutines in the method.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If you subclass
 BT_CodeVisitor, then there are key methods that you may override in order to
 analyze the instructions while they are being visited.<span
-style='mso-spacerun:yes'>  </span>There are existing subclasses of BT_CodeVisitor
-that verify instructions, analyze the operation stack, visit subroutines, and
-find method invocations on specific objects.<o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â  </span>There are existing subclasses of
+BT_CodeVisitor that verify instructions, analyze the operation stack, visit
+subroutines, and find method invocations on specific objects.<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
@@ -1268,14 +1266,14 @@ Running from the Command Line<o:p></o:p></span></h1>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>To run your
-extension from the command line, it must be a subclass of
-CommandLineExtension.<span style='mso-spacerun:yes'>  </span>Running it is
-easy.<span style='mso-spacerun:yes'>  </span>Just use:<o:p></o:p></span></p>
+extension from the command line, it must be a subclass of CommandLineExtension.<span
+style='mso-spacerun:yes'>Â  </span>Running it is easy.<span
+style='mso-spacerun:yes'>Â  </span>Just use:<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
-font-family:"Courier New"'>java –jar japt.jar –extension theExtensionClassName </span>&lt;your
+font-family:"Courier New"'>java â€“jar japt.jar â€“extension theExtensionClassName </span>&lt;your
 extension options&gt; <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
 font-family:"Courier New"'><o:p></o:p></span></p>
 
@@ -1283,15 +1281,16 @@ font-family:"Courier New"'><o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>If your
 extension does not load classes, this means that there will be nothing in the
-Japt repository for your extension to use.<span style='mso-spacerun:yes'> 
+Japt repository for your extension to use.<span style='mso-spacerun:yes'>Â 
 </span>However, japt automatically runs the built-in load extension first, so
-you can use this to load classes.<span style='mso-spacerun:yes'>  </span>You
-can then use one of japt’s output extensions to write to the file system:<o:p></o:p></span></p>
+you can use this to load classes.<span style='mso-spacerun:yes'>Â  </span>You
+can then use one of japtâ€™s output extensions to write to the file system:<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
-<p class=MsoBodyText>java –jar japt.jar –loadFile inputClasses.jar –extension theExtensionClassName
-&lt;your extension options&gt; –jarOutput –output outputClasses.jar</p>
+<p class=MsoBodyText>java â€“jar japt.jar â€“loadFile inputClasses.jar â€“extension
+theExtensionClassName &lt;your extension options&gt; â€“jarOutput â€“output
+outputClasses.jar</p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1301,7 +1300,7 @@ Running in Java<o:p></o:p></span></h1>
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'><o:p>&nbsp;</o:p></span></p>
 
 <p class=MsoNormal><span style='font-family:"Arial",sans-serif'>You may call on
-Japt from within your java application.<span style='mso-spacerun:yes'> 
+Japt from within your java application.<span style='mso-spacerun:yes'>Â 
 </span>To do so, you need to create a factory, a repository, and an instance of
 japt to run your extensions.<o:p></o:p></span></p>
 
@@ -1333,7 +1332,7 @@ font-family:"Courier New"'>japt.executeExtensions(new Extension[]
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:10.0pt;
 mso-bidi-font-size:12.0pt;font-family:"Courier New"'><span
-style='mso-spacerun:yes'> </span>outExtension}, logger);<o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â </span>outExtension}, logger);<o:p></o:p></span></p>
 
 <p class=MsoNormal><o:p>&nbsp;</o:p></p>
 
@@ -1378,7 +1377,7 @@ font-family:"Courier New"'>japt.executeExtensions(new Extension[]
 
 <p class=MsoNormal style='text-indent:.5in'><span style='font-size:10.0pt;
 mso-bidi-font-size:12.0pt;font-family:"Courier New"'><span
-style='mso-spacerun:yes'> </span>outExtension}, logger);<o:p></o:p></span></p>
+style='mso-spacerun:yes'>Â </span>outExtension}, logger);<o:p></o:p></span></p>
 
 <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
 font-family:"Courier New"'>rep.resetClassPath(); //close open jars in classpath</span></p>
