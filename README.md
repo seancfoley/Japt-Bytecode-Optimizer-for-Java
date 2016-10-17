@@ -13,3 +13,5 @@ The tool provides the following technologies:
 * obfuscation of class, field and method names
 * assembler and disassembler of bytecodes
 * others listed on the project pages
+
+Developed on Eclipse, it can be easily imported into an Eclipse workspace as the repository includes the project files for each project
